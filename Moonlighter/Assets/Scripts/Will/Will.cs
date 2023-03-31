@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Will : MonoBehaviour
@@ -11,6 +9,7 @@ public class Will : MonoBehaviour
         ROLL
     }
 
+    // IDLE => ROLL로 상태가 변할때 구를 방향을 정해주기 위한 Enum값.
     public enum IdleDirection
     {
         DOWN,

@@ -6,10 +6,8 @@ public class WillController : MonoBehaviour
     private Will _will;
     private Rigidbody2D _rigid;
     
-    // 구르기 상태를 나타내기위한 bool값
     private bool _rolling;
 
-    //Will Class에 있는 데이터를 가져오기 위한 프로퍼티.
     public Will.WillState CurrentState
     {
         get

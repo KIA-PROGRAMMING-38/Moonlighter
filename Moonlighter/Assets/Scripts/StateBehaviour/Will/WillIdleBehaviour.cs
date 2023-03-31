@@ -1,21 +1,34 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.PackageManager.Requests;
 using UnityEngine;
 
 public class WillIdleBehaviour : StateMachineBehaviour
 {
     private WillController _will;
 
-    // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
+    private bool _isNextActionRolling = false;
+
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         _will = animator.gameObject.GetComponent<WillController>();
         _will.CurrentState = Will.WillState.IDLE;
     }
 
-    // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    {
+        // 행동 체크.
+        CheckNextState(animator);
+    }
+
+    override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    {
+        // 다음 행동이 ROLL 이라면 방향을 정해주기.
+        if (_isNextActionRolling)
+        {
+            SetIdleDirection(animator);
+        }
+        _will.PrevState = _will.CurrentState;
+    }
+
+    void CheckNextState(Animator animator)
     {
         if (_will.MoveInput() != Vector2.zero)
         {
@@ -24,15 +37,9 @@ public class WillIdleBehaviour : StateMachineBehaviour
 
         if (_will.RollInput())
         {
+            _isNextActionRolling = true;
             animator.SetBool("Roll", true);
         }
-    }
-
-    // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
-    override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    {
-        SetIdleDirection(animator);
-        _will.PrevState = _will.CurrentState;
     }
 
     void SetIdleDirection(Animator animator)

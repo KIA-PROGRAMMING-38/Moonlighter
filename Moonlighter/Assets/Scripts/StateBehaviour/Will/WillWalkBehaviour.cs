@@ -6,32 +6,31 @@ public class WillWalkBehaviour : StateMachineBehaviour
 {
     private WillController _will;
 
-    // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         _will = animator.gameObject.GetComponent<WillController>();
         _will.CurrentState = Will.WillState.WALK;
     }
 
-    // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        // 플레이어의 입력이 없으면 IDLE로 변화.
         if (_will.MoveInput() == Vector2.zero)
         {
-            SetIdle(animator);
+            SetIdleState(animator);
         }
         else
         {
             Move(animator);
         }
 
+        // 플레이어의 ROLL 입력이 있으면 ROLL로 변화.
         if (_will.RollInput())
         {
-            SetRoll(animator);
+            SetRollState(animator);
         }
     }
 
-    // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         _will.PrevState = _will.CurrentState;
@@ -44,12 +43,12 @@ public class WillWalkBehaviour : StateMachineBehaviour
         _will.ApplyMovePosition();
     }
 
-    void SetIdle(Animator animator)
+    void SetIdleState(Animator animator)
     {
         animator.SetBool("Walk", false);
     }
 
-    void SetRoll(Animator animator)
+    void SetRollState(Animator animator)
     {
         animator.SetBool("Roll", true);
     }
