@@ -50,7 +50,6 @@ public class WillController : MonoBehaviour
     {
         _will = GetComponent<Will>();
         _rigid = GetComponent<Rigidbody2D>();
-        _anim = GetComponent<Animator>();
     }
 
     /// <summary>
