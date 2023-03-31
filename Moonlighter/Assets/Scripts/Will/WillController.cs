@@ -7,37 +7,37 @@ public class WillController : MonoBehaviour
 {
     private Will _will;
     private Rigidbody2D _rigid;
+    private Animator _anim;
 
     private void Awake()
     {
         _will = GetComponent<Will>();
         _rigid = GetComponent<Rigidbody2D>();
+        _anim = GetComponent<Animator>();
     }
 
-    private void Update()
-    {
-        CheckOnMove();
-    }
-
-    private void FixedUpdate()
+    public void ApplyMovePosition()
     {
         _rigid.MovePosition(_rigid.position + _will.MoveInput * (_will.MoveSpeed * Time.fixedDeltaTime));
+    }
+
+    public float AnimMoveX()
+    {
+        return _will.MoveInput.x;
+    }
+
+    public float AnimMoveY()
+    {
+        return _will.MoveInput.y;
+    }
+
+    public Vector2 MoveInput()
+    {
+        return _will.MoveInput;
     }
 
     void OnMove(InputValue value)
     {
         _will.MoveInput = value.Get<Vector2>();
-    }
-
-    void CheckOnMove()
-    {
-        if (_will.MoveInput != Vector2.zero)
-        {
-            _will.State = Will.WillState.RUN;
-        }
-        else
-        {
-            _will.State = Will.WillState.IDLE;
-        }
     }
 }

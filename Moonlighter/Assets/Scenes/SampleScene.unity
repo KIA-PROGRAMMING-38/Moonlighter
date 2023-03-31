@@ -319,6 +319,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MoveSpeed: 1
   MoveInput: {x: 0, y: 0}
+  State: 0
 --- !u!114 &282045461
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -359,7 +360,7 @@ Animator:
   m_GameObject: {fileID: 282045454}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 4babe0540ba7f0a4ebd1a71eb77581a5, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
