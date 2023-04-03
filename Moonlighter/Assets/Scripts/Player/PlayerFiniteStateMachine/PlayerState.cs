@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerState
@@ -7,6 +5,8 @@ public class PlayerState
     protected Player player;
     protected PlayerStateMachine stateMachine;
     protected PlayerData playerData;
+
+    protected Vector2 moveInput;
 
     protected float startTime;
 
@@ -25,7 +25,6 @@ public class PlayerState
         DoChecks();
         player.Anim.SetBool(_animBoolName, true);
         startTime = Time.time;
-        Debug.Log(_animBoolName);
     }
 
     public virtual void Exit()
@@ -33,7 +32,10 @@ public class PlayerState
         player.Anim.SetBool(_animBoolName, false);
     }
 
-    public virtual void LogicUpdate() { }
+    public virtual void LogicUpdate()
+    {
+        moveInput = player.InputHandler.MoveInput;
+    }
 
     public virtual void PhysicsUpdate()
     {
