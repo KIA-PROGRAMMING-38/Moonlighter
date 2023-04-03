@@ -1,9 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    #region State Variables
     public PlayerStateMachine StateMachine { get; private set; }
 
     public PlayerIdleState IdleState { get; private set; }
@@ -12,9 +11,22 @@ public class Player : MonoBehaviour
     [SerializeField]
     private PlayerData _playerData;
 
+    #endregion
 
+    #region Components
     public Animator Anim { get; private set; }
+    public Rigidbody2D RB { get; private set; }
+    public PlayerInputHandler InputHandler { get; private set; }
 
+    #endregion
+
+    #region Other Variables
+    public Vector2 CurrentVelocity { get; private set; }
+    private Vector2 workspace;
+
+    #endregion
+
+    #region Unity Callback Functions
     private void Awake()
     {
         StateMachine = new PlayerStateMachine();
@@ -23,6 +35,8 @@ public class Player : MonoBehaviour
         MoveState = new PlayerMoveState(this, StateMachine, _playerData, "Move");
 
         Anim = GetComponent<Animator>();
+        RB = GetComponent<Rigidbody2D>();
+        InputHandler = GetComponent<PlayerInputHandler>();
     }
 
     private void Start()
@@ -39,4 +53,16 @@ public class Player : MonoBehaviour
     {
         StateMachine.CurrentState.PhysicsUpdate();
     }
+
+    #endregion
+
+    #region Set Functions
+    public void SetVelocity(Vector2 velocity)
+    {
+        workspace = velocity;
+        RB.velocity = workspace;
+        CurrentVelocity = workspace;
+    }
+
+    #endregion
 }
