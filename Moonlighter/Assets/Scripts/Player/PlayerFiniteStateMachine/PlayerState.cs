@@ -6,9 +6,9 @@ public class PlayerState
     protected PlayerStateMachine stateMachine;
     protected PlayerData playerData;
 
-    protected Vector2 moveInput;
-
     protected float startTime;
+
+    protected bool isAnimationEnded;
 
     private string _animBoolName;
 
@@ -25,6 +25,7 @@ public class PlayerState
         DoChecks();
         player.Anim.SetBool(_animBoolName, true);
         startTime = Time.time;
+        isAnimationEnded = false;
     }
 
     public virtual void Exit()
@@ -34,7 +35,7 @@ public class PlayerState
 
     public virtual void LogicUpdate()
     {
-        moveInput = player.InputHandler.MoveInput;
+
     }
 
     public virtual void PhysicsUpdate()
@@ -43,5 +44,9 @@ public class PlayerState
     }
 
     public virtual void DoChecks() { }
+
+    public virtual void AnimationTrigger() { }
+
+    public virtual void AnimationFinishTrigger() => isAnimationEnded = true;
 
 }

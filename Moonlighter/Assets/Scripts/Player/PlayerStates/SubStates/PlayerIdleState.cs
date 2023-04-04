@@ -6,34 +6,24 @@ public class PlayerIdleState : PlayerGroundedState
     {
     }
 
-    public override void DoChecks()
-    {
-        base.DoChecks();
-    }
-
     public override void Enter()
     {
         base.Enter();
         player.SetVelocity(Vector2.zero);
     }
 
-    public override void Exit()
-    {
-        base.Exit();
-    }
-
     public override void LogicUpdate()
     {
         base.LogicUpdate();
 
-        if (moveInput != Vector2.zero)
+        if (false == player.InputHandler.RollInput && moveInput != Vector2.zero)
         {
             stateMachine.ChangeState(player.MoveState);
         }
-    }
-
-    public override void PhysicsUpdate()
-    {
-        base.PhysicsUpdate();
+        else if (player.InputHandler.RollInput)
+        {
+            player.InputHandler.UseRollInput();
+            stateMachine.ChangeState(player.RollState);
+        }
     }
 }

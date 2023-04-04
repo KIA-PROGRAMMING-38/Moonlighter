@@ -1,6 +1,7 @@
 public class PlayerStateMachine
 {
     public PlayerState CurrentState { get; private set; }
+    public PlayerState PrevState { get; private set; }
 
     public void Initialize(PlayerState startingState)
     {
@@ -11,6 +12,7 @@ public class PlayerStateMachine
     public void ChangeState(PlayerState newState)
     {
         CurrentState.Exit();
+        PrevState = CurrentState;
         CurrentState = newState;
         CurrentState.Enter();
     }
