@@ -16,10 +16,15 @@ public class PlayerMoveState : PlayerGroundedState
         {
             stateMachine.ChangeState(player.IdleState);
         }
-        else if(false == rollInput && moveInput != Vector2.zero)
+        else if(false == rollInput && moveInput != Vector2.zero && false == comboInput)
         {
             player.Anim.SetFloat("MoveX", moveInput.x);
             player.Anim.SetFloat("MoveY", moveInput.y);
+        }
+        else if(false == rollInput && moveInput != Vector2.zero && comboInput)
+        {
+            player.InputHandler.UseComboInput();
+            stateMachine.ChangeState(player.ComboAttackOne);
         }
         else if (rollInput)
         {

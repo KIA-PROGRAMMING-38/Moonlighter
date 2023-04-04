@@ -16,11 +16,16 @@ public class PlayerIdleState : PlayerGroundedState
     {
         base.LogicUpdate();
 
-        if (false == player.InputHandler.RollInput && moveInput != Vector2.zero)
+        if (false == rollInput && moveInput != Vector2.zero)
         {
             stateMachine.ChangeState(player.MoveState);
         }
-        else if (player.InputHandler.RollInput)
+        else if (false == rollInput && comboInput)
+        {
+            player.InputHandler.UseComboInput();
+            stateMachine.ChangeState(player.ComboAttackOne);
+        }
+        else if (rollInput && false == comboInput)
         {
             player.InputHandler.UseRollInput();
             stateMachine.ChangeState(player.RollState);

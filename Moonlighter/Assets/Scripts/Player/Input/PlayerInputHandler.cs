@@ -7,6 +7,8 @@ public class PlayerInputHandler : MonoBehaviour
 
     public bool RollInput { get; private set; }
 
+    public bool ComboInput { get; private set; }
+
     public void OnMove(InputAction.CallbackContext context)
     {
         MoveInput = context.ReadValue<Vector2>();
@@ -20,5 +22,15 @@ public class PlayerInputHandler : MonoBehaviour
         }
     }
 
+    public void OnComboAttack(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            ComboInput = true;
+        }
+    }
+
     public void UseRollInput() => RollInput = false;
+
+    public void UseComboInput() => ComboInput = false;
 }

@@ -55,6 +55,10 @@ public class PlayerRollState : PlayerAbilityState
             {
                 _rollDir = Vector2.down;
             }
+            else if (moveX == 0 && moveY == 0)
+            {
+                _rollDir = Vector2.down;
+            }
         }
         else if (stateMachine.PrevState == player.MoveState)
         {

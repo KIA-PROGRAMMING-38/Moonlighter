@@ -8,6 +8,9 @@ public class Player : MonoBehaviour
     public PlayerIdleState IdleState { get; private set; }
     public PlayerMoveState MoveState { get; private set; }
     public PlayerRollState RollState { get; private set; }
+    public PlayerComboAttackOne ComboAttackOne { get; private set; }
+    public PlayerComboAttackTwo ComboAttackTwo { get; private set; }
+    public PlayerComboAttackThree ComboAttackThree { get; private set; }
 
     [SerializeField]
     private PlayerData _playerData;
@@ -35,6 +38,9 @@ public class Player : MonoBehaviour
         IdleState = new PlayerIdleState(this, StateMachine, _playerData, "Idle");
         MoveState = new PlayerMoveState(this, StateMachine, _playerData, "Move");
         RollState = new PlayerRollState(this, StateMachine, _playerData, "Roll");
+        ComboAttackOne = new PlayerComboAttackOne(this, StateMachine, _playerData, "ComboAttackOne");
+        ComboAttackTwo = new PlayerComboAttackTwo(this, StateMachine, _playerData, "ComboAttackTwo");
+        ComboAttackThree = new PlayerComboAttackThree(this, StateMachine, _playerData, "ComboAttackThree");
 
         Anim = GetComponent<Animator>();
         RB = GetComponent<Rigidbody2D>();
