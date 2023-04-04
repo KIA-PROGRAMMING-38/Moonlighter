@@ -1,36 +1,40 @@
-using System.Collections;
-using System.Collections.Generic;
+using EnumValue;
 using UnityEngine;
 
-public class PlayerComboAttackOneState : StateMachineBehaviour
+public class PlayerComboAttackOneState : PlayerAbilityState
 {
-    // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
-    //override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    //{
-    //    
-    //}
+    private float _checkAttackTime;
 
-    // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
-    //override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    //{
-    //    
-    //}
+    override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    {
+        base.OnStateEnter(animator, stateInfo, layerIndex);
+        rigid.velocity = Vector2.zero;
+    }
 
-    // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
-    //override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    //{
-    //    
-    //}
+    override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    {
+        base.OnStateUpdate(animator, stateInfo, layerIndex);
 
-    // OnStateMove is called right after Animator.OnAnimatorMove()
-    //override public void OnStateMove(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    //{
-    //    // Implement code that processes and affects root motion
-    //}
+        CheckAttackTime(stateInfo);
 
-    // OnStateIK is called right after Animator.OnAnimatorIK()
-    //override public void OnStateIK(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    //{
-    //    // Implement code that sets up animation IK (inverse kinematics)
-    //}
+        if (isAnimationEnded)
+        {
+            ChangeState(animator, PlayerStates.ComboAttackOne, PlayerAnimParams.COMBOATTACKONE, PlayerAnimParams.IDLE);
+        }
+    }
+
+    #region ComboAttackOne State Functions
+
+    private void CheckAttackTime(AnimatorStateInfo stateInfo )
+    {
+        _checkAttackTime += Time.deltaTime;
+
+        if (_checkAttackTime >= stateInfo.length * 0.95f)
+        {
+            _checkAttackTime = 0;
+            isAnimationEnded = true;
+        }
+    }
+
+    #endregion
 }

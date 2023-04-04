@@ -5,4 +5,7 @@ public static class PlayerAnimParams
     public const string IDLE = "Idle";
     public const string MOVE = "Move";
     public const string ROLL = "Roll";
+    public const string COMBOATTACKONE = "ComboAttackOne";
+    public const string COMBOATTACKTWO = "ComboAttackTwo";
+    public const string COMBOATTACKTHREE = "ComboAttackThree";
 }

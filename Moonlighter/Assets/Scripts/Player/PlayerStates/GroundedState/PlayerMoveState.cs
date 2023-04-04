@@ -13,7 +13,7 @@ public class PlayerMoveState : PlayerGroundedState
     {
         base.OnStateUpdate(animator, stateInfo, layerIndex);
         
-        if (false == inputHandler.RollInput && inputHandler.MoveInput != Vector2.zero)
+        if (false == inputHandler.RollInput && inputHandler.MoveInput != Vector2.zero && false == inputHandler.ComboInput)
         {
             SetMoveVelocity(animator);
         }
@@ -25,6 +25,11 @@ public class PlayerMoveState : PlayerGroundedState
         {
             inputHandler.UseRollInput();
             ChangeState(animator, PlayerStates.Move, PlayerAnimParams.MOVE, PlayerAnimParams.ROLL);
+        }
+        else if (false == inputHandler.RollInput && inputHandler.ComboInput && inputHandler.MoveInput != Vector2.zero)
+        {
+            inputHandler.UseComboInput();
+            ChangeState(animator, PlayerStates.Move, PlayerAnimParams.MOVE, PlayerAnimParams.COMBOATTACKONE);
         }
     }
 
