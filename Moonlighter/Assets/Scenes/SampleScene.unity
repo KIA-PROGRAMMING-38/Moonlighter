@@ -474,8 +474,8 @@ GameObject:
   - component: {fileID: 1111704766}
   - component: {fileID: 1111704772}
   - component: {fileID: 1111704765}
-  - component: {fileID: 1111704771}
-  - component: {fileID: 1111704770}
+  - component: {fileID: 1111704774}
+  - component: {fileID: 1111704773}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -510,7 +510,7 @@ MonoBehaviour:
   m_ActionEvents:
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1111704770}
+      - m_Target: {fileID: 1111704774}
         m_TargetAssemblyTypeName: PlayerInputHandler, Assembly-CSharp
         m_MethodName: OnMove
         m_Mode: 0
@@ -526,7 +526,7 @@ MonoBehaviour:
     m_ActionName: PlayerAction/Move[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1111704770}
+      - m_Target: {fileID: 1111704774}
         m_TargetAssemblyTypeName: PlayerInputHandler, Assembly-CSharp
         m_MethodName: OnRoll
         m_Mode: 0
@@ -542,7 +542,7 @@ MonoBehaviour:
     m_ActionName: PlayerAction/Roll[/Keyboard/space]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1111704770}
+      - m_Target: {fileID: 1111704774}
         m_TargetAssemblyTypeName: PlayerInputHandler, Assembly-CSharp
         m_MethodName: OnComboAttack
         m_Mode: 0
@@ -676,31 +676,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1111704770
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1111704764}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8eeaa8fb93acb0146bea25889e4c50c1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1111704771
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1111704764}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4ec84799357b6da4885f94a965e0aa55, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _playerData: {fileID: 11400000, guid: f0352236d89af344f9049216140b10fa, type: 2}
 --- !u!95 &1111704772
 Animator:
   serializedVersion: 5
@@ -722,3 +697,28 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1111704773
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1111704764}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c2f40b2e53a0d24ba4c2fb2dfe782aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playerData: {fileID: 11400000, guid: f0352236d89af344f9049216140b10fa, type: 2}
+--- !u!114 &1111704774
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1111704764}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8eeaa8fb93acb0146bea25889e4c50c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
