@@ -6,40 +6,26 @@ public class PlayerMoveState : PlayerGroundedState
     {
     }
 
-    public override void DoChecks()
-    {
-        base.DoChecks();
-    }
-
-    public override void Enter()
-    {
-        base.Enter();
-    }
-
-    public override void Exit()
-    {
-        base.Exit();
-    }
-
     public override void LogicUpdate()
     {
         base.LogicUpdate();
 
-        player.SetVelocity(moveInput * playerData.movementVelocity);
+        player.SetVelocity(moveInput * playerData.MovementVelocity);
 
-        if (moveInput == Vector2.zero)
+        if (false == rollInput && moveInput == Vector2.zero)
         {
             stateMachine.ChangeState(player.IdleState);
         }
-        else
+        else if(false == rollInput && moveInput != Vector2.zero)
         {
             player.Anim.SetFloat("MoveX", moveInput.x);
             player.Anim.SetFloat("MoveY", moveInput.y);
         }
+        else if (rollInput)
+        {
+            player.InputHandler.UseRollInput();
+            stateMachine.ChangeState(player.RollState);
+        }
     }
 
-    public override void PhysicsUpdate()
-    {
-        base.PhysicsUpdate();
-    }
 }
