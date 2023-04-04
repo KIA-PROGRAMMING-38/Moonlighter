@@ -1,13 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerAbilityState : StateMachineBehaviour
+public class PlayerAbilityState : PlayerState
 {
-    protected PlayerInputHandler inputHandler;
+    protected Vector2 rollDir = Vector2.down;
 
-    public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    {
-        inputHandler = animator.gameObject.GetComponent<PlayerInputHandler>();
-    }
 }

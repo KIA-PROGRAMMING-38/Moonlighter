@@ -1,46 +1,40 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using EnumValue;
 
 public class PlayerMoveState : PlayerGroundedState
 {
-    // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
-    //override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    //{
-    //    
-    //}
+    public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    {
+        base.OnStateEnter(animator, stateInfo, layerIndex);
+        player.CurrentState = PlayerStates.Move;
+    }
 
-    // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        if (inputHandler.MoveInput != Vector2.zero)
+        base.OnStateUpdate(animator, stateInfo, layerIndex);
+        
+        if (false == inputHandler.RollInput && inputHandler.MoveInput != Vector2.zero)
         {
-            animator.SetFloat("MoveX", inputHandler.MoveInput.x);
-            animator.SetFloat("MoveY", inputHandler.MoveInput.y);
-            rigid.velocity = inputHandler.MoveInput * playerData.MovementVelocity;
+            SetMoveVelocity(animator);
         }
         else if (inputHandler.MoveInput == Vector2.zero)
         {
-            animator.SetBool("Move", false);
-            animator.SetBool("Idle", true);
+            ChangeState(animator, PlayerStates.Move, PlayerAnimParams.MOVE, PlayerAnimParams.IDLE);
+        }
+        else if (inputHandler.RollInput && inputHandler.MoveInput != Vector2.zero)
+        {
+            inputHandler.UseRollInput();
+            ChangeState(animator, PlayerStates.Move, PlayerAnimParams.MOVE, PlayerAnimParams.ROLL);
         }
     }
 
-    // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
-    //override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    //{
-    //    
-    //}
+    #region Move State Functions
+    private void SetMoveVelocity(Animator animator)
+    {
+        animator.SetFloat(PlayerAnimParams.MOVEX, inputHandler.MoveInput.x);
+        animator.SetFloat(PlayerAnimParams.MOVEY, inputHandler.MoveInput.y);
+        rigid.velocity = inputHandler.MoveInput * playerData.MovementVelocity;
+    }
 
-    // OnStateMove is called right after Animator.OnAnimatorMove()
-    //override public void OnStateMove(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    //{
-    //    // Implement code that processes and affects root motion
-    //}
-
-    // OnStateIK is called right after Animator.OnAnimatorIK()
-    //override public void OnStateIK(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    //{
-    //    // Implement code that sets up animation IK (inverse kinematics)
-    //}
+    #endregion
 }

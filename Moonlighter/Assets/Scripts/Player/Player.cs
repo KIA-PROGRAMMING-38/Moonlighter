@@ -1,11 +1,14 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using EnumValue;
 
 public class Player : MonoBehaviour
 {
+    private Animator _anim;
     [SerializeField]
     private PlayerData _playerData;
+
+    public PlayerStates CurrentState { get; set; }
+    public PlayerStates PrevState { get; set; }
 
     public PlayerData PlayerData
     {
@@ -14,8 +17,6 @@ public class Player : MonoBehaviour
             return _playerData;
         }
     }
-
-    private Animator _anim;
 
     private void Awake()
     {
