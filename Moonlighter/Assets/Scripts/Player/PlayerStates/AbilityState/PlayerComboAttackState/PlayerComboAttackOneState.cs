@@ -15,6 +15,8 @@ public class PlayerComboAttackOneState : PlayerAbilityState
         base.OnStateUpdate(animator, stateInfo, layerIndex);
         LockRoll();
 
+        AttackInputDelay(stateInfo);
+
         CheckAttackTime(stateInfo);
 
         CheckComboAttack();
@@ -29,5 +31,10 @@ public class PlayerComboAttackOneState : PlayerAbilityState
             comboAttack = false;
             ChangeState(animator, PlayerStates.ComboAttackOne, PlayerAnimParams.COMBOATTACKONE, PlayerAnimParams.COMBOATTACKTWO);
         }
+    }
+
+    public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    {
+        attackInputDelayTime = 0;
     }
 }
