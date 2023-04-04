@@ -540,6 +540,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 3862b10c-3a49-44f8-9f63-996c1a995bbc
     m_ActionName: PlayerAction/Roll[/Keyboard/space]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1111704770}
+        m_TargetAssemblyTypeName: PlayerInputHandler, Assembly-CSharp
+        m_MethodName: OnComboAttack
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 22972b0b-3f5e-49f1-9903-89155d3acbe1
+    m_ActionName: PlayerAction/ComboAttack[/Keyboard/j]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: PlayerAction
@@ -562,7 +578,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.24, y: 0.39}
+    oldSize: {x: 0.24, y: 0.41}
     newSize: {x: 0.24, y: 0.41}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
