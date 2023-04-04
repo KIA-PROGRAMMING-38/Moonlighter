@@ -3,10 +3,6 @@ using EnumValue;
 
 public class PlayerRollState : PlayerAbilityState
 {
-    private float _checkRollTime;
-    private float _moveX;
-    private float _moveY;
-
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         base.OnStateEnter(animator, stateInfo, layerIndex);
@@ -24,6 +20,8 @@ public class PlayerRollState : PlayerAbilityState
 
         CheckRollDuration(stateInfo);
 
+        LockAttack();
+        
         if (isAnimationEnded)
         {
             ChangeState(animator, PlayerStates.Roll, PlayerAnimParams.ROLL, PlayerAnimParams.IDLE);
@@ -31,52 +29,61 @@ public class PlayerRollState : PlayerAbilityState
     }
 
     #region Roll State Functions
+
+    private void LockAttack()
+    {
+        if (inputHandler.ComboInput)
+        {
+            inputHandler.UseComboInput();
+        }
+    }
+
     private void CheckRollDuration(AnimatorStateInfo stateInfo)
     {
-        _checkRollTime += Time.deltaTime;
+        checkRollTime += Time.deltaTime;
 
-        if (_checkRollTime >= stateInfo.length * 0.9f)
+        if (checkRollTime >= stateInfo.length * 0.9f)
         {
-            _checkRollTime = 0;
+            checkRollTime = 0;
             isAnimationEnded = true;
         }
     }
 
     private void SetRollDirection(Animator animator)
     {
-        _moveX = animator.GetFloat(PlayerAnimParams.MOVEX);
-        _moveY = animator.GetFloat(PlayerAnimParams.MOVEY);
+        moveX = animator.GetFloat(PlayerAnimParams.MOVEX);
+        moveY = animator.GetFloat(PlayerAnimParams.MOVEY);
 
         if (player.PrevState == PlayerStates.Idle)
         {
-            if (_moveX != 0 && _moveY > 0)
+            if (moveX != 0 && moveY > 0)
             {
                 rollDir = Vector2.up;
             }
-            else if (_moveX != 0 && _moveY < 0)
+            else if (moveX != 0 && moveY < 0)
             {
                 rollDir = Vector2.down;
             }
-            else if (_moveX == 0 && _moveY == 1)
+            else if (moveX == 0 && moveY == 1)
             {
                 rollDir = Vector2.up;
             }
-            else if (_moveX == 0 && _moveY == -1)
+            else if (moveX == 0 && moveY == -1)
             {
                 rollDir = Vector2.down;
             }
-            else if (_moveX == 1 && _moveY == 0)
+            else if (moveX == 1 && moveY == 0)
             {
                 rollDir = Vector2.right;
             }
-            else if (_moveX == -1 && _moveY == 0)
+            else if (moveX == -1 && moveY == 0)
             {
                 rollDir = Vector2.left;
             }
         }
         else if (player.PrevState == PlayerStates.Move)
         {
-            rollDir = new Vector2(_moveX, _moveY);
+            rollDir = new Vector2(moveX, moveY);
         }
     }
 

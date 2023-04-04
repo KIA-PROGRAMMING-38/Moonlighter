@@ -24,7 +24,7 @@ public class PlayerInputHandler : MonoBehaviour
 
     public void OnComboAttack(InputAction.CallbackContext context)
     {
-        if (context.performed)
+        if (context.started)
         {
             ComboInput = true;
         }

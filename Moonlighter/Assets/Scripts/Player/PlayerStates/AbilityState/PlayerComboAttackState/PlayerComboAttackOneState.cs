@@ -3,38 +3,31 @@ using UnityEngine;
 
 public class PlayerComboAttackOneState : PlayerAbilityState
 {
-    private float _checkAttackTime;
-
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         base.OnStateEnter(animator, stateInfo, layerIndex);
+        player.CurrentState = PlayerStates.ComboAttackOne;
         rigid.velocity = Vector2.zero;
     }
 
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         base.OnStateUpdate(animator, stateInfo, layerIndex);
+        LockRoll();
 
         CheckAttackTime(stateInfo);
 
-        if (isAnimationEnded)
+        CheckComboAttack();
+
+        if (isAnimationEnded && false == comboAttack)
         {
             ChangeState(animator, PlayerStates.ComboAttackOne, PlayerAnimParams.COMBOATTACKONE, PlayerAnimParams.IDLE);
         }
-    }
-
-    #region ComboAttackOne State Functions
-
-    private void CheckAttackTime(AnimatorStateInfo stateInfo )
-    {
-        _checkAttackTime += Time.deltaTime;
-
-        if (_checkAttackTime >= stateInfo.length * 0.95f)
+        else if (isAnimationEnded && comboAttack)
         {
-            _checkAttackTime = 0;
-            isAnimationEnded = true;
+            inputHandler.UseComboInput();
+            comboAttack = false;
+            ChangeState(animator, PlayerStates.ComboAttackOne, PlayerAnimParams.COMBOATTACKONE, PlayerAnimParams.COMBOATTACKTWO);
         }
     }
-
-    #endregion
 }
