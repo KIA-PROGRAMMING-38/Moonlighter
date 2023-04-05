@@ -7,6 +7,9 @@ namespace EnumValue
         Roll,
         ComboAttackOne,
         ComboAttackTwo,
-        ComboAttackThree
+        ComboAttackThree,
+        ReadySecondaryAction,
+        OnSecondaryAction,
+        SecondaryAction
     }
 }

@@ -9,6 +9,8 @@ public class PlayerInputHandler : MonoBehaviour
 
     public bool ComboInput { get; private set; }
 
+    public bool SecondaryActionInput { get; private set; }
+
     public void OnMove(InputAction.CallbackContext context)
     {
         MoveInput = context.ReadValue<Vector2>();
@@ -27,6 +29,21 @@ public class PlayerInputHandler : MonoBehaviour
         if (context.started)
         {
             ComboInput = true;
+        }
+    }
+
+    public void OnSecondaryAction(InputAction.CallbackContext context)
+    {
+        if (context.started)
+        {
+            Debug.Log("SecondaryAction Key started");
+            SecondaryActionInput = true;
+        }
+
+        if (context.canceled)
+        {
+            Debug.Log("SecondaryAction Key canceled");
+            SecondaryActionInput = false;
         }
     }
 
