@@ -6,6 +6,7 @@ public class PlayerComboAttackThreeState : PlayerAbilityState
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         base.OnStateEnter(animator, stateInfo, layerIndex);
+
         player.CurrentState = PlayerStates.ComboAttackThree;
         rigid.velocity = Vector2.zero;
     }

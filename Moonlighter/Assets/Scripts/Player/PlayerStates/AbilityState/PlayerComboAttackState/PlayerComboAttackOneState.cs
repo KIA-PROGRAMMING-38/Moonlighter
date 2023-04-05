@@ -13,6 +13,7 @@ public class PlayerComboAttackOneState : PlayerAbilityState
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         base.OnStateUpdate(animator, stateInfo, layerIndex);
+
         LockRoll();
 
         AttackInputDelay(stateInfo);

@@ -28,5 +28,9 @@ public class PlayerIdleState : PlayerGroundedState
             inputHandler.UseComboInput();
             ChangeState(animator, PlayerStates.Idle, PlayerAnimParams.IDLE, PlayerAnimParams.COMBOATTACKONE);
         }
+        else if (false == inputHandler.RollInput && false == inputHandler.ComboInput && inputHandler.SecondaryActionInput)
+        {
+            ChangeState(animator, PlayerStates.Idle, PlayerAnimParams.IDLE, PlayerAnimParams.READYSECONDARYACTION);
+        }
     }
 }

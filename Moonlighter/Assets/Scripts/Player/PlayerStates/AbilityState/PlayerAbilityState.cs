@@ -3,17 +3,30 @@ using UnityEngine;
 
 public class PlayerAbilityState : PlayerState
 {
+    #region Roll Variables
     protected Vector2 rollDir = Vector2.down;
-    protected float checkRollTime;
-    protected float moveX;
-    protected float moveY;
+    private float checkRollTime;
+    private float moveX;
+    private float moveY;
 
-    protected float checkAttackTime;
+    #endregion
+
+    #region ComboAttack Variables
     protected float attackInputDelayTime;
-    protected float attackCorrectionValue = 0.95f;
-    protected float attackInputCorrectionValue = 0.5f;
     protected bool comboAttack;
 
+    private float checkAttackTime;
+    private float attackCorrectionValue = 0.95f;
+    private float attackInputCorrectionValue = 0.4f;
+
+    #endregion
+
+    #region SecondaryAction Variables
+    protected float enoughChargeTime;
+    protected bool isChargeOn = false;
+    protected float checkChargeTime;
+
+    #endregion
 
     #region Roll State Functions
 
@@ -114,6 +127,22 @@ public class PlayerAbilityState : PlayerState
             {
                 inputHandler.UseComboInput();
             }
+        }
+    }
+
+    #endregion
+
+    #region Player SecondaryAction State Functions
+    protected void CheckEnoughChargeTime()
+    {
+        checkChargeTime += Time.deltaTime;
+        if (checkChargeTime >= enoughChargeTime)
+        {
+            isChargeOn = true;
+        }
+        else
+        {
+            isChargeOn = false;
         }
     }
 
