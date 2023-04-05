@@ -22,7 +22,9 @@ public class PlayerAbilityState : PlayerState
     #endregion
 
     #region SecondaryAction Variables
-
+    protected float enoughChargeTime;
+    protected bool isChargeOn = false;
+    protected float checkChargeTime;
 
     #endregion
 
@@ -125,6 +127,22 @@ public class PlayerAbilityState : PlayerState
             {
                 inputHandler.UseComboInput();
             }
+        }
+    }
+
+    #endregion
+
+    #region Player SecondaryAction State Functions
+    protected void CheckEnoughChargeTime()
+    {
+        checkChargeTime += Time.deltaTime;
+        if (checkChargeTime >= enoughChargeTime)
+        {
+            isChargeOn = true;
+        }
+        else
+        {
+            isChargeOn = false;
         }
     }
 

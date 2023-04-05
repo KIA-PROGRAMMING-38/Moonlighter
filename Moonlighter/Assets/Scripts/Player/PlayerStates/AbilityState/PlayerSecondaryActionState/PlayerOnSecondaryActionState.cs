@@ -12,6 +12,10 @@ public class PlayerOnSecondaryActionState : PlayerAbilityState
 
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        LockRoll();
+
+        LockAttack();
+
         if (false == inputHandler.SecondaryActionInput)
         {
             ChangeState(animator, PlayerStates.OnSecondaryAction, PlayerAnimParams.ONSECONDARYACTION, PlayerAnimParams.IDLE);

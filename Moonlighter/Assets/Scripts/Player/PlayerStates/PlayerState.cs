@@ -22,10 +22,10 @@ public class PlayerState : StateMachineBehaviour
 
     #region Player State Functions
 
-    protected void ChangeState(Animator animator, PlayerStates state, string prevState, string newState)
+    protected void ChangeState(Animator animator, PlayerStates state, string currentState, string newState)
     {
         player.PrevState = state;
-        animator.SetBool(prevState, false);
+        animator.SetBool(currentState, false);
         animator.SetBool(newState, true);
     }
 

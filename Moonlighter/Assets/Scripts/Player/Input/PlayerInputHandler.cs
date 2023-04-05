@@ -36,13 +36,11 @@ public class PlayerInputHandler : MonoBehaviour
     {
         if (context.started)
         {
-            Debug.Log("SecondaryAction Key started");
             SecondaryActionInput = true;
         }
 
         if (context.canceled)
         {
-            Debug.Log("SecondaryAction Key canceled");
             SecondaryActionInput = false;
         }
     }

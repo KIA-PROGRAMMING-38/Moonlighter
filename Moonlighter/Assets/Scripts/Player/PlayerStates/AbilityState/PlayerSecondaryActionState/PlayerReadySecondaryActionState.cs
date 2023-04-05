@@ -3,14 +3,11 @@ using UnityEngine;
 
 public class PlayerReadySecondaryActionState : PlayerAbilityState
 {
-    private float _enoughChargeTime;
-    private float _checkChargeTime;
-
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         base.OnStateEnter(animator, stateInfo, layerIndex);
 
-        _enoughChargeTime = stateInfo.length * 0.95f;
+        enoughChargeTime = stateInfo.length * 0.95f;
         player.CurrentState = PlayerStates.ReadySecondaryAction;
     }
 
@@ -18,13 +15,15 @@ public class PlayerReadySecondaryActionState : PlayerAbilityState
     {
         base.OnStateUpdate(animator, stateInfo, layerIndex);
 
-        _checkChargeTime += Time.deltaTime;
+        LockRoll();
 
-        if (_checkChargeTime >= _enoughChargeTime)
+        LockAttack();
+        CheckEnoughChargeTime();
+        if (isChargeOn)
         {
             if (inputHandler.SecondaryActionInput)
             {
-                _checkChargeTime = 0;
+                checkChargeTime = 0;
                 ChangeState(animator, PlayerStates.ReadySecondaryAction, PlayerAnimParams.READYSECONDARYACTION, PlayerAnimParams.ONSECONDARYACTION);
             }
         }
