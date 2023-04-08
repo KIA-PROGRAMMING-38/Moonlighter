@@ -40,7 +40,7 @@ public class PlayerAbilityState : PlayerState
 
     protected void CheckRollDuration(AnimatorStateInfo stateInfo)
     {
-        checkRollTime += Time.deltaTime;
+        checkRollTime += Time.fixedDeltaTime;
 
         if (checkRollTime >= stateInfo.length * 0.9f)
         {
@@ -92,7 +92,7 @@ public class PlayerAbilityState : PlayerState
     #region Player ComboAttack State Funcitons
     protected void CheckAttackTime(AnimatorStateInfo stateInfo)
     {
-        checkAttackTime += Time.deltaTime;
+        checkAttackTime += Time.fixedDeltaTime;
 
         if (checkAttackTime >= stateInfo.length * attackCorrectionValue)
         {
@@ -119,7 +119,7 @@ public class PlayerAbilityState : PlayerState
 
     protected void AttackInputDelay(AnimatorStateInfo stateInfo)
     {
-        attackInputDelayTime += Time.deltaTime;
+        attackInputDelayTime += Time.fixedDeltaTime;
 
         if (attackInputDelayTime <= stateInfo.length * attackInputCorrectionValue)
         {
@@ -135,7 +135,7 @@ public class PlayerAbilityState : PlayerState
     #region Player SecondaryAction State Functions
     protected void CheckEnoughChargeTime()
     {
-        checkChargeTime += Time.deltaTime;
+        checkChargeTime += Time.fixedDeltaTime;
         if (checkChargeTime >= enoughChargeTime)
         {
             isChargeOn = true;
