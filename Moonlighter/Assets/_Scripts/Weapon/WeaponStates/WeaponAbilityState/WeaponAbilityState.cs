@@ -1,19 +1,29 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class WeaponAbilityState : WeaponState
 {
-    protected float checkComboAttackOne;
+    protected float checkComboAttack;
     protected float attackCorrectionValue = 0.95f;
+
+    protected float checkSecondaryDuration;
 
     protected void CheckAttackTime(AnimatorStateInfo stateInfo)
     {
-        checkComboAttackOne += Time.fixedDeltaTime;
+        checkComboAttack += Time.deltaTime;
 
-        if (checkComboAttackOne >= stateInfo.length * attackCorrectionValue)
+        if (checkComboAttack >= stateInfo.length * attackCorrectionValue)
         {
-            checkComboAttackOne = 0;
+            checkComboAttack = 0;
+            isAnimationEnded = true;
+        }
+    }
+
+    protected void CheckSecondaryDuration(AnimatorStateInfo stateInfo)
+    {
+        checkSecondaryDuration += Time.deltaTime;
+        if (checkSecondaryDuration >= stateInfo.length * attackCorrectionValue)
+        {
+            checkSecondaryDuration = 0;
             isAnimationEnded = true;
         }
     }

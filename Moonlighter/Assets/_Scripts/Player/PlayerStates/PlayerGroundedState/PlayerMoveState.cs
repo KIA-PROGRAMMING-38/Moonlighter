@@ -12,6 +12,11 @@ public class PlayerMoveState : PlayerGroundedState
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         base.OnStateUpdate(animator, stateInfo, layerIndex);
+
+        if (inputHandler.SecondaryActionInput)
+        {
+            ChangeState(animator, PlayerStates.Move, PlayerAnimParams.MOVE, PlayerAnimParams.READYSECONDARYACTION);
+        }
         
         if (false == inputHandler.RollInput && inputHandler.MoveInput != Vector2.zero && false == inputHandler.ComboInput)
         {
@@ -31,6 +36,7 @@ public class PlayerMoveState : PlayerGroundedState
             inputHandler.UseComboInput();
             ChangeState(animator, PlayerStates.Move, PlayerAnimParams.MOVE, PlayerAnimParams.COMBOATTACKONE);
         }
+        
     }
 
     #region Move State Functions

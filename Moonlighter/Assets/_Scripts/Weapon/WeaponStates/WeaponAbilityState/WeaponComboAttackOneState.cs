@@ -1,7 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using EnumValue;
+using UnityEngine;
 
 public class WeaponComboAttackOneState : WeaponAbilityState
 {
@@ -18,5 +16,4 @@ public class WeaponComboAttackOneState : WeaponAbilityState
             ChangeState(animator, WeaponAnimParams.COMBOATTACKONE, WeaponAnimParams.COMBOATTACKTWO);
         }
     }
-
 }

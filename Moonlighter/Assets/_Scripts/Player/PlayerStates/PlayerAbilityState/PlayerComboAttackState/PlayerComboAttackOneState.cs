@@ -26,7 +26,8 @@ public class PlayerComboAttackOneState : PlayerAbilityState
         {
             ChangeState(animator, PlayerStates.ComboAttackOne, PlayerAnimParams.COMBOATTACKONE, PlayerAnimParams.IDLE);
         }
-        else if (isAnimationEnded && comboAttack)
+
+        if (isAnimationEnded && comboAttack)
         {
             inputHandler.UseComboInput();
             comboAttack = false;

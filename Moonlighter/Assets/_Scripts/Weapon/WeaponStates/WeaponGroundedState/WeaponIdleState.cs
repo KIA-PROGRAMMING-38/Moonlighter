@@ -19,6 +19,10 @@ public class WeaponIdleState : WeaponGroundedState
         {
             ChangeState(animator, WeaponAnimParams.IDLE, WeaponAnimParams.COMBOATTACKONE);
         }
+        else if (player.CurrentState == PlayerStates.ReadySecondaryAction)
+        {
+            ChangeState(animator, WeaponAnimParams.IDLE, WeaponAnimParams.READYSECONDARYACTION);
+        }
         
     }
 

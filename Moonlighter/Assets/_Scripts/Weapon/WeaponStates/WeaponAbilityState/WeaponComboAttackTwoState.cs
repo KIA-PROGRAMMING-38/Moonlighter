@@ -1,6 +1,4 @@
 using EnumValue;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class WeaponComboAttackTwoState : WeaponAbilityState
@@ -13,7 +11,7 @@ public class WeaponComboAttackTwoState : WeaponAbilityState
         {
             ChangeState(animator, WeaponAnimParams.COMBOATTACKTWO, WeaponAnimParams.IDLE);
         }
-        else if (isAnimationEnded && player.CurrentState == PlayerStates.ComboAttackThree)
+        if (isAnimationEnded && player.CurrentState == PlayerStates.ComboAttackThree)
         {
             ChangeState(animator, WeaponAnimParams.COMBOATTACKTWO, WeaponAnimParams.COMBOATTACKTHREE);
         }

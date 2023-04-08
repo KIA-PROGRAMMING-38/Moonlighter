@@ -1,4 +1,5 @@
 using EnumValue;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerReadySecondaryActionState : PlayerAbilityState
@@ -6,8 +7,8 @@ public class PlayerReadySecondaryActionState : PlayerAbilityState
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         base.OnStateEnter(animator, stateInfo, layerIndex);
-
-        enoughChargeTime = stateInfo.length * 0.95f;
+        enoughChargeTime = stateInfo.length;
+        rigid.velocity = Vector2.zero;
         player.CurrentState = PlayerStates.ReadySecondaryAction;
     }
 
@@ -18,12 +19,15 @@ public class PlayerReadySecondaryActionState : PlayerAbilityState
         LockRoll();
 
         LockAttack();
+
         CheckEnoughChargeTime();
+
         if (isChargeOn)
         {
             if (inputHandler.SecondaryActionInput)
             {
                 checkChargeTime = 0;
+                isChargeOn = false;
                 ChangeState(animator, PlayerStates.ReadySecondaryAction, PlayerAnimParams.READYSECONDARYACTION, PlayerAnimParams.ONSECONDARYACTION);
             }
         }
@@ -32,5 +36,6 @@ public class PlayerReadySecondaryActionState : PlayerAbilityState
         {
             ChangeState(animator, PlayerStates.ReadySecondaryAction, PlayerAnimParams.READYSECONDARYACTION, PlayerAnimParams.IDLE);
         }
+
     }
 }

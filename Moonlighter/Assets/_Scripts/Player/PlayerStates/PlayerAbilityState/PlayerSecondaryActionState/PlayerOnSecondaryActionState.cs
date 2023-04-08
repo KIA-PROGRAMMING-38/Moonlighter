@@ -8,6 +8,7 @@ public class PlayerOnSecondaryActionState : PlayerAbilityState
         base.OnStateEnter(animator, stateInfo, layerIndex);
 
         player.CurrentState = PlayerStates.OnSecondaryAction;
+        rigid.velocity = Vector2.zero;
     }
 
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)

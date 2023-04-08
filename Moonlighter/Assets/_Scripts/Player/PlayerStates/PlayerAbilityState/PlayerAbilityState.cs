@@ -19,6 +19,8 @@ public class PlayerAbilityState : PlayerState
     private float attackCorrectionValue = 0.95f;
     private float attackInputCorrectionValue = 0.4f;
 
+    protected Vector2 moveAttackDir = Vector2.zero;
+
     #endregion
 
     #region SecondaryAction Variables
@@ -40,7 +42,7 @@ public class PlayerAbilityState : PlayerState
 
     protected void CheckRollDuration(AnimatorStateInfo stateInfo)
     {
-        checkRollTime += Time.fixedDeltaTime;
+        checkRollTime += Time.deltaTime;
 
         if (checkRollTime >= stateInfo.length * 0.9f)
         {
@@ -92,7 +94,7 @@ public class PlayerAbilityState : PlayerState
     #region Player ComboAttack State Funcitons
     protected void CheckAttackTime(AnimatorStateInfo stateInfo)
     {
-        checkAttackTime += Time.fixedDeltaTime;
+        checkAttackTime += Time.deltaTime;
 
         if (checkAttackTime >= stateInfo.length * attackCorrectionValue)
         {
@@ -119,7 +121,7 @@ public class PlayerAbilityState : PlayerState
 
     protected void AttackInputDelay(AnimatorStateInfo stateInfo)
     {
-        attackInputDelayTime += Time.fixedDeltaTime;
+        attackInputDelayTime += Time.deltaTime;
 
         if (attackInputDelayTime <= stateInfo.length * attackInputCorrectionValue)
         {
@@ -130,19 +132,52 @@ public class PlayerAbilityState : PlayerState
         }
     }
 
+    protected void SetMoveAttackDirection()
+    {
+        if (inputHandler.MoveInput != Vector2.zero)
+        {
+            moveAttackDir = Vector2.zero;
+
+            float moveX = inputHandler.MoveInput.x;
+            float moveY = inputHandler.MoveInput.y;
+
+            if (moveX != 0 && moveY > 0)
+            {
+                moveAttackDir = Vector2.up;
+            }
+            else if (moveX != 0 && moveY < 0)
+            {
+                moveAttackDir = Vector2.down;
+            }
+            else if (moveX == 0 && moveY == 1)
+            {
+                moveAttackDir = Vector2.up;
+            }
+            else if (moveX == 0 && moveY == -1)
+            {
+                moveAttackDir = Vector2.down;
+            }
+            else if (moveX == 1 && moveY == 0)
+            {
+                moveAttackDir = Vector2.right;
+            }
+            else if (moveX == -1 && moveY == 0)
+            {
+                moveAttackDir = Vector2.left;
+            }
+            rigid.MovePosition((Vector2)rigid.transform.position + moveAttackDir * 0.08f);
+        }
+    }
+
     #endregion
 
     #region Player SecondaryAction State Functions
     protected void CheckEnoughChargeTime()
     {
-        checkChargeTime += Time.fixedDeltaTime;
+        checkChargeTime += Time.deltaTime;
         if (checkChargeTime >= enoughChargeTime)
         {
             isChargeOn = true;
-        }
-        else
-        {
-            isChargeOn = false;
         }
     }
 
