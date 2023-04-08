@@ -4,6 +4,7 @@ public class WeaponState : StateMachineBehaviour
 {
     protected Weapon weapon;
     protected PlayerInputHandler inputHandler;
+    protected Player player;
     protected bool isAnimationEnded;
 
 
@@ -11,6 +12,7 @@ public class WeaponState : StateMachineBehaviour
     {
         weapon = animator.gameObject.GetComponent<Weapon>();
         inputHandler = animator.gameObject.GetComponentInParent<PlayerInputHandler>();
+        player = animator.gameObject.GetComponentInParent<Player>();
     }
 
     protected void ChangeState(Animator animator, string currentState, string newState)

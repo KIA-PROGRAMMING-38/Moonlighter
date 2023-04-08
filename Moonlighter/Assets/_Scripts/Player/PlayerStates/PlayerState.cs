@@ -16,7 +16,6 @@ public class PlayerState : StateMachineBehaviour
         player = animator.gameObject.GetComponent<Player>();
         playerData = player.PlayerData;
         rigid = animator.gameObject.GetComponent<Rigidbody2D>();
-
         isAnimationEnded = false;
     }
 
