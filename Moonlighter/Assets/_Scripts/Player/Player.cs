@@ -4,8 +4,11 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     private Animator Anim { get; set; }
+    public BoxCollider2D PlayerCollider { get; private set; }
+
     [SerializeField]
     private PlayerData _playerData;
+
 
     public AnimationHandler AnimHandler { get; private set; }
 
@@ -25,6 +28,7 @@ public class Player : MonoBehaviour
     private void Awake()
     {
         Anim = GetComponent<Animator>();
+        PlayerCollider = GetComponent<BoxCollider2D>();
         AnimHandler = GetComponent<AnimationHandler>();
         CurrentPrimaryWeapon = Weapons.BigSword;
     }
@@ -33,5 +37,15 @@ public class Player : MonoBehaviour
     {
         Anim.SetBool("Idle", true);
         
+    }
+
+    private void SetRollInvincible()
+    {
+        PlayerCollider.enabled = false;
+    }
+
+    private void SetRollInvincibleFalse()
+    {
+        PlayerCollider.enabled = true;
     }
 }
