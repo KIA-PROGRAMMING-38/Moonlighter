@@ -27,9 +27,4 @@ public class PlayerComboAttackOneState : PlayerAbilityState
             ChangeState(animator, PlayerStates.ComboAttackOne, PlayerAnimParams.COMBOATTACKONE, PlayerAnimParams.COMBOATTACKTWO);
         }
     }
-
-    public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    {
-        attackInputDelayTime = 0;
-    }
 }

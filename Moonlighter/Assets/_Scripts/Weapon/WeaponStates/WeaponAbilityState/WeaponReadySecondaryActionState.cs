@@ -1,21 +1,21 @@
-using EnumValue;
 using UnityEngine;
 
 public class WeaponReadySecondaryActionState : WeaponAbilityState
 {
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        //CheckSecondaryDuration(stateInfo);
-
-        if (player.CurrentState == PlayerStates.Idle)
+        if (false == inputHandler.SecondaryActionInput)
         {
             ChangeState(animator, WeaponAnimParams.READYSECONDARYACTION, WeaponAnimParams.IDLE);
         }
 
-        if (player.CurrentState == PlayerStates.OnSecondaryAction)
+        if (animHandler.IsChargeOn)
         {
-            //isAnimationEnded = false;
-            ChangeState(animator, WeaponAnimParams.READYSECONDARYACTION, WeaponAnimParams.ONSECONDARYACTION);
+            if (inputHandler.SecondaryActionInput)
+            {
+                animHandler.ResetChargeTrigger();
+                ChangeState(animator, WeaponAnimParams.READYSECONDARYACTION, WeaponAnimParams.ONSECONDARYACTION);
+            }
         }
     }
 }

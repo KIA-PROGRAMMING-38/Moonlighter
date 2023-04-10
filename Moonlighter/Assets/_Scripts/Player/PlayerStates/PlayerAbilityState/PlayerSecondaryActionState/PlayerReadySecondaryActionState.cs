@@ -1,5 +1,4 @@
 using EnumValue;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerReadySecondaryActionState : PlayerAbilityState
@@ -7,7 +6,6 @@ public class PlayerReadySecondaryActionState : PlayerAbilityState
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         base.OnStateEnter(animator, stateInfo, layerIndex);
-        enoughChargeTime = stateInfo.length;
         rigid.velocity = Vector2.zero;
         player.CurrentState = PlayerStates.ReadySecondaryAction;
     }
@@ -22,17 +20,18 @@ public class PlayerReadySecondaryActionState : PlayerAbilityState
 
         if (animHandler.IsChargeOn)
         {
+            animHandler.ResetChargeTrigger();
             if (inputHandler.SecondaryActionInput)
             {
-                animHandler.ResetChargeTrigger();
+                //animHandler.ResetChargeTrigger();
                 ChangeState(animator, PlayerStates.ReadySecondaryAction, PlayerAnimParams.READYSECONDARYACTION, PlayerAnimParams.ONSECONDARYACTION);
             }
         }
 
         if (false == inputHandler.SecondaryActionInput)
         {
+            animHandler.ResetChargeTrigger();
             ChangeState(animator, PlayerStates.ReadySecondaryAction, PlayerAnimParams.READYSECONDARYACTION, PlayerAnimParams.IDLE);
         }
-
     }
 }

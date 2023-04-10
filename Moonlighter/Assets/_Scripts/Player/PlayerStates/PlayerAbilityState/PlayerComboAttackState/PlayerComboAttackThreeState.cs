@@ -23,9 +23,4 @@ public class PlayerComboAttackThreeState : PlayerAbilityState
             ChangeState(animator, PlayerStates.ComboAttackThree, PlayerAnimParams.COMBOATTACKTHREE, PlayerAnimParams.IDLE);
         }
     }
-
-    public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    {
-        attackInputDelayTime = 0;
-    }
 }

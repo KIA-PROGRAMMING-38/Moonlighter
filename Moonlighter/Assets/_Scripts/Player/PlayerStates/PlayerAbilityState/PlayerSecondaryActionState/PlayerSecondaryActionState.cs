@@ -33,10 +33,8 @@ public class PlayerSecondaryActionState : PlayerAbilityState
                 }
                 break;
             case Weapons.BigSword:
-                CheckAnimationFinished(stateInfo);
                 if (animHandler.IsAnimationEnded)
                 {
-                    //animHandler.IsAnimationEnded = false;
                     ChangeState(animator, PlayerStates.SecondaryAction, PlayerAnimParams.SECONDARYACTION, PlayerAnimParams.IDLE);
                 }
                 break;

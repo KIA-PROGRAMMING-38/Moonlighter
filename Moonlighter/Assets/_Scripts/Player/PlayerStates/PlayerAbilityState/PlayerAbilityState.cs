@@ -5,26 +5,14 @@ public class PlayerAbilityState : PlayerState
 {
     #region Roll Variables
     protected Vector2 rollDir = Vector2.down;
-    private float checkRollTime;
     private float moveX;
     private float moveY;
 
     #endregion
 
     #region ComboAttack Variables
-    protected float attackInputDelayTime;
-
-    private float attackInputCorrectionValue = 0.4f;
-
+    
     protected Vector2 moveAttackDir = Vector2.zero;
-
-    #endregion
-
-    #region SecondaryAction Variables
-    protected float enoughChargeTime;
-    protected bool isChargeOn = false;
-    protected float checkChargeTime;
-    protected float checkAnimTime;
 
     #endregion
 
@@ -93,19 +81,6 @@ public class PlayerAbilityState : PlayerState
         }
     }
 
-    protected void AttackInputDelay(AnimatorStateInfo stateInfo)
-    {
-        attackInputDelayTime += Time.deltaTime;
-
-        if (attackInputDelayTime <= stateInfo.length * attackInputCorrectionValue)
-        {
-            if (inputHandler.ComboInput)
-            {
-                inputHandler.UseComboInput();
-            }
-        }
-    }
-
     protected void SetMoveAttackDirection()
     {
         if (inputHandler.MoveInput != Vector2.zero)
@@ -145,24 +120,4 @@ public class PlayerAbilityState : PlayerState
 
     #endregion
 
-    #region Player SecondaryAction State Functions
-    protected void CheckEnoughChargeTime()
-    {
-        checkChargeTime += Time.deltaTime;
-        if (checkChargeTime >= enoughChargeTime)
-        {
-            isChargeOn = true;
-        }
-    }
-
-    protected void CheckAnimationFinished(AnimatorStateInfo stateInfo)
-    {
-        checkAnimTime += Time.deltaTime;
-        if (checkAnimTime >= stateInfo.length * 0.95f)
-        {
-            //isAnimationEnded = true;
-        }
-    }
-
-    #endregion
 }

@@ -3,30 +3,27 @@ using UnityEngine;
 
 public class WeaponSecondaryActionState : WeaponAbilityState
 {
-    float _checkTime;
-    bool isEnd = false;
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        _checkTime += Time.deltaTime;
-        if (_checkTime >= stateInfo.length * 0.95f)
+        switch (player.CurrentPrimaryWeapon)
         {
-            isEnd = true;
+            case Weapons.ShortSwordAndShield:
+                if (false == inputHandler.SecondaryActionInput)
+                {
+                    ChangeState(animator, WeaponAnimParams.SECONDARYACTION, WeaponAnimParams.IDLE);
+                }
+                if (inputHandler.MoveInput == Vector2.zero)
+                {
+                    ChangeState(animator, WeaponAnimParams.SECONDARYACTION, WeaponAnimParams.ONSECONDARYACTION);
+                }
+                break;
+            case Weapons.BigSword:
+                if (animHandler.IsAnimationEnded)
+                {
+                    ChangeState(animator, WeaponAnimParams.SECONDARYACTION, PlayerAnimParams.IDLE);
+                }
+                break;
         }
 
-        if (isEnd)
-        {
-            isEnd = false;
-            ChangeState(animator, WeaponAnimParams.SECONDARYACTION, WeaponAnimParams.IDLE);
-        }
-
-        //if (player.CurrentState == PlayerStates.Idle)
-        //{
-        //    ChangeState(animator, WeaponAnimParams.SECONDARYACTION, WeaponAnimParams.IDLE);
-        //}
-
-        //if (player.CurrentState == PlayerStates.OnSecondaryAction)
-        //{
-        //    ChangeState(animator, WeaponAnimParams.SECONDARYACTION, WeaponAnimParams.ONSECONDARYACTION);
-        //}
     }
 }
