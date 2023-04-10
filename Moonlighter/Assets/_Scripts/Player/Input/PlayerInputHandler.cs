@@ -9,6 +9,8 @@ public class PlayerInputHandler : MonoBehaviour
 
     public bool ComboInput { get; private set; }
 
+    public bool WeaponComboInput { get; private set; }
+
     public bool SecondaryActionInput { get; private set; }
 
     public void OnMove(InputAction.CallbackContext context)
@@ -29,6 +31,7 @@ public class PlayerInputHandler : MonoBehaviour
         if (context.started)
         {
             ComboInput = true;
+            WeaponComboInput = true;
         }
     }
 
@@ -48,4 +51,6 @@ public class PlayerInputHandler : MonoBehaviour
     public void UseRollInput() => RollInput = false;
 
     public void UseComboInput() => ComboInput = false;
+
+    public void UseWeaponComboInput() => WeaponComboInput = false;
 }

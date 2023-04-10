@@ -18,13 +18,12 @@ public class PlayerRollState : PlayerAbilityState
     {
         base.OnStateUpdate(animator, stateInfo, layerIndex);
 
-        CheckRollDuration(stateInfo);
+        LockRoll();
 
         LockAttack();
         
-        if (isAnimationEnded)
+        if (animHandler.IsAnimationEnded)
         {
-            inputHandler.UseRollInput();
             ChangeState(animator, PlayerStates.Roll, PlayerAnimParams.ROLL, PlayerAnimParams.IDLE);
         }
     }

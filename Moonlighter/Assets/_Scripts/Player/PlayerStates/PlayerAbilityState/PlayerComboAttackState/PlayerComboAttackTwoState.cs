@@ -6,6 +6,7 @@ public class PlayerComboAttackTwoState : PlayerAbilityState
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         base.OnStateEnter(animator, stateInfo, layerIndex);
+        SetMoveAttackDirection();
         player.CurrentState = PlayerStates.ComboAttackTwo;
         rigid.velocity = Vector2.zero;
     }
@@ -16,26 +17,14 @@ public class PlayerComboAttackTwoState : PlayerAbilityState
 
         LockRoll();
 
-        AttackInputDelay(stateInfo);
-
-        CheckAttackTime(stateInfo);
-
-        CheckComboAttack();
-
-        if (isAnimationEnded && false == comboAttack)
+        if (animHandler.IsAnimationEnded && false == inputHandler.ComboInput)
         {
             ChangeState(animator, PlayerStates.ComboAttackTwo, PlayerAnimParams.COMBOATTACKTWO, PlayerAnimParams.IDLE);
         }
-        else if (isAnimationEnded && comboAttack)
+        else if (animHandler.IsAnimationEnded && inputHandler.ComboInput)
         {
             inputHandler.UseComboInput();
-            comboAttack = false;
             ChangeState(animator, PlayerStates.ComboAttackTwo, PlayerAnimParams.COMBOATTACKTWO, PlayerAnimParams.COMBOATTACKTHREE);
         }
-    }
-
-    public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    {
-        attackInputDelayTime = 0;
     }
 }

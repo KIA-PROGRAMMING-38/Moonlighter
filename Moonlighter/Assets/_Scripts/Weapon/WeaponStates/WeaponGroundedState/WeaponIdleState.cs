@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+using EnumValue;
 using UnityEngine;
 
 public class WeaponIdleState : WeaponGroundedState
@@ -11,16 +10,19 @@ public class WeaponIdleState : WeaponGroundedState
 
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        if (inputHandler.MoveInput != Vector2.zero)
+        if (player.CurrentState != PlayerStates.Roll && inputHandler.MoveInput != Vector2.zero)
         {
-            animator.SetFloat(WeaponAnimParams.DIRX, inputHandler.MoveInput.x);
-            animator.SetFloat(WeaponAnimParams.DIRY, inputHandler.MoveInput.y);
+            SetDirection(animator);
         }
 
-        if (inputHandler.ComboInput)
+        if (player.CurrentState != PlayerStates.Roll && inputHandler.WeaponComboInput)
         {
-            inputHandler.UseComboInput();
+            inputHandler.UseWeaponComboInput();
             ChangeState(animator, WeaponAnimParams.IDLE, WeaponAnimParams.COMBOATTACKONE);
+        }
+        else if (player.CurrentState != PlayerStates.Roll && inputHandler.SecondaryActionInput)
+        {
+            ChangeState(animator, WeaponAnimParams.IDLE, WeaponAnimParams.READYSECONDARYACTION);
         }
         
     }

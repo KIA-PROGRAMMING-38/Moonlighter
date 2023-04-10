@@ -12,20 +12,35 @@ public class PlayerSecondaryActionState : PlayerAbilityState
 
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        rigid.velocity = inputHandler.MoveInput;
 
         LockRoll();
 
         LockAttack();
 
-        if (false == inputHandler.SecondaryActionInput)
+        switch (player.CurrentPrimaryWeapon)
         {
-            ChangeState(animator, PlayerStates.SecondaryAction, PlayerAnimParams.SECONDARYACTION, PlayerAnimParams.IDLE);
+            case Weapons.ShortSwordAndShield:
+                rigid.velocity = inputHandler.MoveInput;
+
+                if (false == inputHandler.SecondaryActionInput)
+                {
+                    ChangeState(animator, PlayerStates.SecondaryAction, PlayerAnimParams.SECONDARYACTION, PlayerAnimParams.IDLE);
+                }
+
+                if (inputHandler.MoveInput == Vector2.zero)
+                {
+                    ChangeState(animator, PlayerStates.SecondaryAction, PlayerAnimParams.SECONDARYACTION, PlayerAnimParams.ONSECONDARYACTION);
+                }
+                break;
+            case Weapons.BigSword:
+                if (animHandler.IsAnimationEnded)
+                {
+                    ChangeState(animator, PlayerStates.SecondaryAction, PlayerAnimParams.SECONDARYACTION, PlayerAnimParams.IDLE);
+                }
+                break;
         }
         
-        if (inputHandler.MoveInput == Vector2.zero)
-        {
-            ChangeState(animator, PlayerStates.SecondaryAction, PlayerAnimParams.SECONDARYACTION, PlayerAnimParams.ONSECONDARYACTION);
-        }
+        
+        
     }
 }

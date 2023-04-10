@@ -8,6 +8,7 @@ public class PlayerOnSecondaryActionState : PlayerAbilityState
         base.OnStateEnter(animator, stateInfo, layerIndex);
 
         player.CurrentState = PlayerStates.OnSecondaryAction;
+        rigid.velocity = Vector2.zero;
     }
 
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -16,17 +17,24 @@ public class PlayerOnSecondaryActionState : PlayerAbilityState
 
         LockAttack();
 
-        if (false == inputHandler.SecondaryActionInput)
+        switch (player.CurrentPrimaryWeapon)
         {
-            ChangeState(animator, PlayerStates.OnSecondaryAction, PlayerAnimParams.ONSECONDARYACTION, PlayerAnimParams.IDLE);
-        }
-
-        if (inputHandler.MoveInput != Vector2.zero)
-        {
-            ChangeState(animator, PlayerStates.OnSecondaryAction, PlayerAnimParams.ONSECONDARYACTION, PlayerAnimParams.SECONDARYACTION);
+            case Weapons.ShortSwordAndShield:
+                if (false == inputHandler.SecondaryActionInput)
+                {
+                    ChangeState(animator, PlayerStates.OnSecondaryAction, PlayerAnimParams.ONSECONDARYACTION, PlayerAnimParams.IDLE);
+                }
+                if (inputHandler.MoveInput != Vector2.zero)
+                {
+                    ChangeState(animator, PlayerStates.OnSecondaryAction, PlayerAnimParams.ONSECONDARYACTION, PlayerAnimParams.SECONDARYACTION);
+                }
+                break;
+            case Weapons.BigSword:
+                if (false == inputHandler.SecondaryActionInput)
+                {
+                    ChangeState(animator, PlayerStates.OnSecondaryAction, PlayerAnimParams.ONSECONDARYACTION, PlayerAnimParams.SECONDARYACTION);
+                }
+                break;
         }
     }
-
-
-
 }

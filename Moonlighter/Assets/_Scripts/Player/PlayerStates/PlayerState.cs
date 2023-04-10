@@ -4,29 +4,28 @@ using EnumValue;
 public class PlayerState : StateMachineBehaviour
 {
     protected PlayerInputHandler inputHandler;
+    protected AnimationHandler animHandler;
     protected Rigidbody2D rigid;
     protected Player player;
     protected PlayerData playerData;
-
-    protected bool isAnimationEnded;
 
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         inputHandler = animator.gameObject.GetComponent<PlayerInputHandler>();
         player = animator.gameObject.GetComponent<Player>();
+        animHandler = player.AnimHandler;
         playerData = player.PlayerData;
         rigid = animator.gameObject.GetComponent<Rigidbody2D>();
-
-        isAnimationEnded = false;
+        animHandler.AnimationTrigger();
     }
 
     #region Player State Functions
 
-    protected void ChangeState(Animator animator, PlayerStates state, string currentState, string newState)
+    protected void ChangeState(Animator animator, PlayerStates currentState, string currentStateParam, string newStateParam)
     {
-        player.PrevState = state;
-        animator.SetBool(currentState, false);
-        animator.SetBool(newState, true);
+        player.PrevState = currentState;
+        animator.SetBool(currentStateParam, false);
+        animator.SetBool(newStateParam, true);
     }
 
     #endregion

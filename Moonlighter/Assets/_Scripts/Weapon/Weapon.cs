@@ -5,10 +5,12 @@ using UnityEngine;
 public class Weapon : MonoBehaviour
 {
     public Animator Anim { get; private set; }
+    public AnimationHandler AnimHandler { get; private set; }
 
     private void Awake()
     {
         Anim = GetComponent<Animator>();
+        AnimHandler = GetComponent<AnimationHandler>();
     }
 
     // Start is called before the first frame update

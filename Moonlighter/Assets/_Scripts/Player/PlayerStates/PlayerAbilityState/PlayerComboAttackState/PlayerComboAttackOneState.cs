@@ -16,26 +16,15 @@ public class PlayerComboAttackOneState : PlayerAbilityState
 
         LockRoll();
 
-        AttackInputDelay(stateInfo);
-
-        CheckAttackTime(stateInfo);
-
-        CheckComboAttack();
-
-        if (isAnimationEnded && false == comboAttack)
+        if (animHandler.IsAnimationEnded && false == inputHandler.ComboInput)
         {
             ChangeState(animator, PlayerStates.ComboAttackOne, PlayerAnimParams.COMBOATTACKONE, PlayerAnimParams.IDLE);
         }
-        else if (isAnimationEnded && comboAttack)
+
+        if (animHandler.IsAnimationEnded && inputHandler.ComboInput)
         {
             inputHandler.UseComboInput();
-            comboAttack = false;
             ChangeState(animator, PlayerStates.ComboAttackOne, PlayerAnimParams.COMBOATTACKONE, PlayerAnimParams.COMBOATTACKTWO);
         }
-    }
-
-    public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    {
-        attackInputDelayTime = 0;
     }
 }

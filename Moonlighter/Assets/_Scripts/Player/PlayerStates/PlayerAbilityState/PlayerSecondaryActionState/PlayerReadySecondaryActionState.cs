@@ -6,8 +6,7 @@ public class PlayerReadySecondaryActionState : PlayerAbilityState
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         base.OnStateEnter(animator, stateInfo, layerIndex);
-
-        enoughChargeTime = stateInfo.length * 0.95f;
+        rigid.velocity = Vector2.zero;
         player.CurrentState = PlayerStates.ReadySecondaryAction;
     }
 
@@ -18,18 +17,20 @@ public class PlayerReadySecondaryActionState : PlayerAbilityState
         LockRoll();
 
         LockAttack();
-        CheckEnoughChargeTime();
-        if (isChargeOn)
+
+        if (animHandler.IsChargeOn)
         {
+            animHandler.ResetChargeTrigger();
             if (inputHandler.SecondaryActionInput)
             {
-                checkChargeTime = 0;
+                //animHandler.ResetChargeTrigger();
                 ChangeState(animator, PlayerStates.ReadySecondaryAction, PlayerAnimParams.READYSECONDARYACTION, PlayerAnimParams.ONSECONDARYACTION);
             }
         }
 
         if (false == inputHandler.SecondaryActionInput)
         {
+            animHandler.ResetChargeTrigger();
             ChangeState(animator, PlayerStates.ReadySecondaryAction, PlayerAnimParams.READYSECONDARYACTION, PlayerAnimParams.IDLE);
         }
     }
