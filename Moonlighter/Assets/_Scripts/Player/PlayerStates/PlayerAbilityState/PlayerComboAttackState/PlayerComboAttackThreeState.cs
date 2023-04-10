@@ -17,15 +17,10 @@ public class PlayerComboAttackThreeState : PlayerAbilityState
 
         LockRoll();
 
-        LockAttack();
-
-        CheckAttackTime(stateInfo);
-
-        if (isAnimationEnded)
+        if (animHandler.IsAnimationEnded)
         {
             inputHandler.UseComboInput();
             ChangeState(animator, PlayerStates.ComboAttackThree, PlayerAnimParams.COMBOATTACKTHREE, PlayerAnimParams.IDLE);
-            player.CurrentState = PlayerStates.Idle;
         }
     }
 

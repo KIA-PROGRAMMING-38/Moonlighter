@@ -4,10 +4,9 @@ public class WeaponComboAttackThreeState : WeaponAbilityState
 {
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        CheckAttackTime(stateInfo);
-
-        if (isAnimationEnded)
+        if (animHandler.IsAnimationEnded)
         {
+            inputHandler.UseWeaponComboInput();
             ChangeState(animator, WeaponAnimParams.COMBOATTACKTHREE, WeaponAnimParams.IDLE);
         }
     }

@@ -1,14 +1,18 @@
-using UnityEngine;
 using EnumValue;
+using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    private Animator _anim;
+    private Animator Anim { get; set; }
     [SerializeField]
     private PlayerData _playerData;
 
+    public AnimationHandler AnimHandler { get; private set; }
+
     public PlayerStates CurrentState { get; set; }
     public PlayerStates PrevState { get; set; }
+
+    public Weapons CurrentPrimaryWeapon { get; set; }
 
     public PlayerData PlayerData
     {
@@ -20,11 +24,14 @@ public class Player : MonoBehaviour
 
     private void Awake()
     {
-        _anim = GetComponent<Animator>();
+        Anim = GetComponent<Animator>();
+        AnimHandler = GetComponent<AnimationHandler>();
+        CurrentPrimaryWeapon = Weapons.BigSword;
     }
 
     private void Start()
     {
-        _anim.SetBool("Idle", true);
+        Anim.SetBool("Idle", true);
+        
     }
 }

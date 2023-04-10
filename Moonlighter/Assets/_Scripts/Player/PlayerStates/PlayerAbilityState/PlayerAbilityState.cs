@@ -13,10 +13,7 @@ public class PlayerAbilityState : PlayerState
 
     #region ComboAttack Variables
     protected float attackInputDelayTime;
-    protected bool comboAttack;
 
-    private float checkAttackTime;
-    private float attackCorrectionValue = 0.95f;
     private float attackInputCorrectionValue = 0.4f;
 
     protected Vector2 moveAttackDir = Vector2.zero;
@@ -27,6 +24,7 @@ public class PlayerAbilityState : PlayerState
     protected float enoughChargeTime;
     protected bool isChargeOn = false;
     protected float checkChargeTime;
+    protected float checkAnimTime;
 
     #endregion
 
@@ -38,16 +36,10 @@ public class PlayerAbilityState : PlayerState
         {
             inputHandler.UseComboInput();
         }
-    }
 
-    protected void CheckRollDuration(AnimatorStateInfo stateInfo)
-    {
-        checkRollTime += Time.deltaTime;
-
-        if (checkRollTime >= stateInfo.length * 0.9f)
+        if (inputHandler.WeaponComboInput)
         {
-            checkRollTime = 0;
-            isAnimationEnded = true;
+            inputHandler.UseWeaponComboInput();
         }
     }
 
@@ -92,24 +84,6 @@ public class PlayerAbilityState : PlayerState
     #endregion
 
     #region Player ComboAttack State Funcitons
-    protected void CheckAttackTime(AnimatorStateInfo stateInfo)
-    {
-        checkAttackTime += Time.deltaTime;
-
-        if (checkAttackTime >= stateInfo.length * attackCorrectionValue)
-        {
-            checkAttackTime = 0;
-            isAnimationEnded = true;
-        }
-    }
-
-    protected void CheckComboAttack()
-    {
-        if (inputHandler.ComboInput)
-        {
-            comboAttack = true;
-        }
-    }
 
     protected void LockRoll()
     {
@@ -178,6 +152,15 @@ public class PlayerAbilityState : PlayerState
         if (checkChargeTime >= enoughChargeTime)
         {
             isChargeOn = true;
+        }
+    }
+
+    protected void CheckAnimationFinished(AnimatorStateInfo stateInfo)
+    {
+        checkAnimTime += Time.deltaTime;
+        if (checkAnimTime >= stateInfo.length * 0.95f)
+        {
+            //isAnimationEnded = true;
         }
     }
 

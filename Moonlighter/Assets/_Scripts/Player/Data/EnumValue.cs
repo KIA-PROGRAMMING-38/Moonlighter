@@ -12,4 +12,10 @@ namespace EnumValue
         OnSecondaryAction,
         SecondaryAction
     }
+
+    public enum Weapons
+    {
+        ShortSwordAndShield,
+        BigSword
+    }
 }

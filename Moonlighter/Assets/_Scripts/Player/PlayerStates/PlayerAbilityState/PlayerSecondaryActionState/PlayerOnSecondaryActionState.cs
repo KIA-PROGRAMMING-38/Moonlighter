@@ -17,15 +17,28 @@ public class PlayerOnSecondaryActionState : PlayerAbilityState
 
         LockAttack();
 
-        if (false == inputHandler.SecondaryActionInput)
+        switch (player.CurrentPrimaryWeapon)
         {
-            ChangeState(animator, PlayerStates.OnSecondaryAction, PlayerAnimParams.ONSECONDARYACTION, PlayerAnimParams.IDLE);
+            case Weapons.ShortSwordAndShield:
+                if (false == inputHandler.SecondaryActionInput)
+                {
+                    ChangeState(animator, PlayerStates.OnSecondaryAction, PlayerAnimParams.ONSECONDARYACTION, PlayerAnimParams.IDLE);
+                }
+                if (inputHandler.MoveInput != Vector2.zero)
+                {
+                    ChangeState(animator, PlayerStates.OnSecondaryAction, PlayerAnimParams.ONSECONDARYACTION, PlayerAnimParams.SECONDARYACTION);
+                }
+                break;
+            case Weapons.BigSword:
+                if (false == inputHandler.SecondaryActionInput)
+                {
+                    ChangeState(animator, PlayerStates.OnSecondaryAction, PlayerAnimParams.ONSECONDARYACTION, PlayerAnimParams.SECONDARYACTION);
+                }
+                break;
         }
+        
 
-        if (inputHandler.MoveInput != Vector2.zero)
-        {
-            ChangeState(animator, PlayerStates.OnSecondaryAction, PlayerAnimParams.ONSECONDARYACTION, PlayerAnimParams.SECONDARYACTION);
-        }
+        
     }
 
 

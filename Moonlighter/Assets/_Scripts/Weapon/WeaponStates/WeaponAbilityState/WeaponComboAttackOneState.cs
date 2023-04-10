@@ -5,14 +5,13 @@ public class WeaponComboAttackOneState : WeaponAbilityState
 {
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        CheckAttackTime(stateInfo);
-
-        if (isAnimationEnded && player.CurrentState == PlayerStates.Idle)
+        if (animHandler.IsAnimationEnded && false == inputHandler.WeaponComboInput)
         {
             ChangeState(animator, WeaponAnimParams.COMBOATTACKONE, WeaponAnimParams.IDLE);
         }
-        else if (isAnimationEnded && player.CurrentState == PlayerStates.ComboAttackTwo)
+        else if (animHandler.IsAnimationEnded && inputHandler.WeaponComboInput)
         {
+            inputHandler.UseWeaponComboInput();
             ChangeState(animator, WeaponAnimParams.COMBOATTACKONE, WeaponAnimParams.COMBOATTACKTWO);
         }
     }

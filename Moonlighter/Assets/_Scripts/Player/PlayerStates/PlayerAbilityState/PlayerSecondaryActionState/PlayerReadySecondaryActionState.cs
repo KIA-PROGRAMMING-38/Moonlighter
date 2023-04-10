@@ -20,14 +20,11 @@ public class PlayerReadySecondaryActionState : PlayerAbilityState
 
         LockAttack();
 
-        CheckEnoughChargeTime();
-
-        if (isChargeOn)
+        if (animHandler.IsChargeOn)
         {
             if (inputHandler.SecondaryActionInput)
             {
-                checkChargeTime = 0;
-                isChargeOn = false;
+                animHandler.ResetChargeTrigger();
                 ChangeState(animator, PlayerStates.ReadySecondaryAction, PlayerAnimParams.READYSECONDARYACTION, PlayerAnimParams.ONSECONDARYACTION);
             }
         }

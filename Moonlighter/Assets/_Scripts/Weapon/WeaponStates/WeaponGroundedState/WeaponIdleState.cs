@@ -15,20 +15,15 @@ public class WeaponIdleState : WeaponGroundedState
             SetDirection(animator);
         }
 
-        if (player.CurrentState == PlayerStates.ComboAttackOne)
+        if (player.CurrentState != PlayerStates.Roll && inputHandler.WeaponComboInput)
         {
+            inputHandler.UseWeaponComboInput();
             ChangeState(animator, WeaponAnimParams.IDLE, WeaponAnimParams.COMBOATTACKONE);
         }
-        else if (player.CurrentState == PlayerStates.ReadySecondaryAction)
+        else if (player.CurrentState != PlayerStates.Roll && inputHandler.SecondaryActionInput)
         {
             ChangeState(animator, WeaponAnimParams.IDLE, WeaponAnimParams.READYSECONDARYACTION);
         }
         
-    }
-
-    private void SetDirection(Animator animator)
-    {
-        animator.SetFloat(WeaponAnimParams.DIRX, inputHandler.MoveInput.x);
-        animator.SetFloat(WeaponAnimParams.DIRY, inputHandler.MoveInput.y);
     }
 }

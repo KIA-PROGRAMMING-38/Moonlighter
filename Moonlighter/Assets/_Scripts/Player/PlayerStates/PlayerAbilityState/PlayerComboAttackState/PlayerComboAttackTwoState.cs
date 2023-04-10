@@ -17,20 +17,13 @@ public class PlayerComboAttackTwoState : PlayerAbilityState
 
         LockRoll();
 
-        AttackInputDelay(stateInfo);
-
-        CheckAttackTime(stateInfo);
-
-        CheckComboAttack();
-
-        if (isAnimationEnded && false == comboAttack)
+        if (animHandler.IsAnimationEnded && false == inputHandler.ComboInput)
         {
             ChangeState(animator, PlayerStates.ComboAttackTwo, PlayerAnimParams.COMBOATTACKTWO, PlayerAnimParams.IDLE);
         }
-        else if (isAnimationEnded && comboAttack)
+        else if (animHandler.IsAnimationEnded && inputHandler.ComboInput)
         {
             inputHandler.UseComboInput();
-            comboAttack = false;
             ChangeState(animator, PlayerStates.ComboAttackTwo, PlayerAnimParams.COMBOATTACKTWO, PlayerAnimParams.COMBOATTACKTHREE);
         }
     }
