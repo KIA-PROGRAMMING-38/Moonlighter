@@ -1,3 +1,5 @@
+using UnityEngine.InputSystem.Controls;
+
 public class MonsterAnimParams
 {
     public const string DIRX = "DirX";
@@ -6,4 +8,5 @@ public class MonsterAnimParams
     public const string TRACING = "Tracing";
     public const string ATTACK = "Attack";
     public const string AWAKE = "Awake";
+    public const string TRACE = "Trace";
 }

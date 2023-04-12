@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5774570601673041514}
   - component: {fileID: 5774570601673041515}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: DamageRange_Down
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -68,7 +68,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5774570602026077502}
   - component: {fileID: 5774570602026077503}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: DamageRange_Up
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -127,7 +127,7 @@ GameObject:
   - component: {fileID: 5774570602639614732}
   - component: {fileID: 5774570602639614733}
   - component: {fileID: 5774570602639614734}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: DetectRange
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -201,7 +201,7 @@ GameObject:
   - component: {fileID: 5774570602857559100}
   - component: {fileID: 5774570602857559089}
   - component: {fileID: 9039287718078821942}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: GolemSoldier
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -288,7 +288,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5774570602857559099}
-  m_BodyType: 1
+  m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -335,7 +335,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DetectRange: {fileID: 5774570602639614731}
-  AttackRange: {fileID: 0}
   DamageRange:
   - {fileID: 5774570601673041514}
   - {fileID: 5774570602978396647}
@@ -367,7 +366,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5774570602978396647}
   - component: {fileID: 5774570602978396632}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: DamageRange_Left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -425,7 +424,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5774570603352402880}
   - component: {fileID: 5774570603352402881}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: DamageRange_Right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
