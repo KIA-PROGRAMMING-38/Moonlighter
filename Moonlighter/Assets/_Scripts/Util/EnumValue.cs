@@ -26,4 +26,12 @@ namespace EnumValue
         Right,
         Up
     }
+
+    public enum GolemSoldierDirection
+    {
+        Down,
+        Left,
+        Right,
+        Up
+    }
 }

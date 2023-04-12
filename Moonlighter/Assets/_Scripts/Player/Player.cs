@@ -4,7 +4,8 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     private Animator Anim { get; set; }
-    public BoxCollider2D PlayerCollider { get; private set; }
+    public Rigidbody2D Rigid { get; private set; }
+    public CapsuleCollider2D PlayerCollider { get; private set; }
 
     [SerializeField]
     private PlayerData _playerData;
@@ -17,6 +18,8 @@ public class Player : MonoBehaviour
 
     public Weapons CurrentPrimaryWeapon { get; set; }
 
+    public Transform[] MonsterDestinationPos;
+
     public PlayerData PlayerData
     {
         get
@@ -28,7 +31,8 @@ public class Player : MonoBehaviour
     private void Awake()
     {
         Anim = GetComponent<Animator>();
-        PlayerCollider = GetComponent<BoxCollider2D>();
+        PlayerCollider = GetComponent<CapsuleCollider2D>();
+        Rigid = GetComponent<Rigidbody2D>();
         AnimHandler = GetComponent<AnimationHandler>();
         CurrentPrimaryWeapon = Weapons.BigSword;
     }
