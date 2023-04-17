@@ -31,6 +31,8 @@ public class GolemSoldier : MonoBehaviour
         {
             case GolemSoldierDirection.Down:
                 DamageRange[(int)GolemSoldierDirection.Down].gameObject.SetActive(true);
+                DamageRange[(int)GolemSoldierDirection.Down].gameObject.GetComponent<BoxCollider2D>().enabled = false;
+                DamageRange[(int)GolemSoldierDirection.Down].gameObject.GetComponent<BoxCollider2D>().enabled = true;
                 break;
             case GolemSoldierDirection.Left:
                 DamageRange[(int)GolemSoldierDirection.Left].gameObject.SetActive(true);
@@ -44,7 +46,7 @@ public class GolemSoldier : MonoBehaviour
         }
     }
 
-    private void InActiveDamageRange()
+    private void InactiveDamageRange()
     {
         switch (CurrentDir)
         {

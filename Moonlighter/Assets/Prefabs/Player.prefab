@@ -269,9 +269,9 @@ GameObject:
   - component: {fileID: 1844382630470744568}
   - component: {fileID: 1844382630470744463}
   - component: {fileID: 1844382630470744451}
+  - component: {fileID: 1844382630470744450}
   - component: {fileID: 1844382630470744570}
   - component: {fileID: 1844382630470744449}
-  - component: {fileID: 1844382630470744450}
   - component: {fileID: 1844382630470744448}
   m_Layer: 0
   m_Name: Player
@@ -340,7 +340,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 2
   m_Sprite: {fileID: -846999496, guid: c92b73a5fc0ade44bbeb46c076c3c588, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -364,7 +364,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 50
+  m_Mass: 100
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 0
@@ -386,8 +386,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.00000011920929, y: 0.13133065}
-  m_Size: {x: 0.15022969, y: 0.17870405}
+  m_Offset: {x: -0.0029537678, y: 0.18154538}
+  m_Size: {x: 0.17976761, y: 0.2791335}
   m_Direction: 0
 --- !u!95 &1844382630470744451
 Animator:
@@ -410,6 +410,26 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1844382630470744450
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1844382630470744571}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c2f40b2e53a0d24ba4c2fb2dfe782aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _hitMaterial: {fileID: 2100000, guid: 81340204143a3f049a88997daa6df5aa, type: 2}
+  _playerData: {fileID: 11400000, guid: f0352236d89af344f9049216140b10fa, type: 2}
+  MonsterDestinationPos:
+  - {fileID: 1844382629502603976}
+  - {fileID: 1844382630216011274}
+  - {fileID: 1844382629491099101}
+  - {fileID: 1844382629952456031}
+  _isRunningHitEvent: 0
 --- !u!114 &1844382630470744570
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -516,24 +536,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8eeaa8fb93acb0146bea25889e4c50c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1844382630470744450
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1844382630470744571}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6c2f40b2e53a0d24ba4c2fb2dfe782aa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _playerData: {fileID: 11400000, guid: f0352236d89af344f9049216140b10fa, type: 2}
-  MonsterDestinationPos:
-  - {fileID: 1844382629502603976}
-  - {fileID: 1844382630216011274}
-  - {fileID: 1844382629491099101}
-  - {fileID: 1844382629952456031}
 --- !u!114 &1844382630470744448
 MonoBehaviour:
   m_ObjectHideFlags: 0

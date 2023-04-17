@@ -3,7 +3,15 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Wall
+  - MonsterProjectile
+  - MonsterMeleeAttack
+  - Monster
+  - MonsterContactAttack
+  - BossStoneArmStamp
+  - BossRocketArmPunch
+  - BossWave
   layers:
   - Default
   - TransparentFX
@@ -12,7 +20,7 @@ TagManager:
   - Water
   - UI
   - Monster
-  - 
+  - MonsterWeapon
   - 
   - 
   - 

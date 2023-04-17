@@ -31,7 +31,7 @@ public class GolemTurretProjectile : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag(TagLiteral.FINISH) || collision.CompareTag(TagLiteral.PLAYER))
+        if (collision.CompareTag(TagLiteral.WALL) || collision.CompareTag(TagLiteral.PLAYER))
         {
             rigid.velocity = Vector2.zero;
             _anim.SetTrigger(MonsterAnimParams.ISCOLLISION);

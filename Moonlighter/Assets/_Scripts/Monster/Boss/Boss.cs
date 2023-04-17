@@ -5,6 +5,7 @@ using EnumValue;
 public class Boss : MonoBehaviour
 {
     public Transform Player { get; private set; }
+    public GameObject StoneArmAttack { get; private set; }
     public GameObject RocksGenerator { get; private set; }
 
     public bool RockStateEnd { get; set; }
@@ -14,6 +15,7 @@ public class Boss : MonoBehaviour
     private void Awake()
     {
         Player = GameObject.FindGameObjectWithTag(ObjectLiteral.PLAYER).transform;
+        StoneArmAttack = transform.GetChild(1).gameObject;
         RocksGenerator = transform.GetChild(4).gameObject;
         bossAttackState = new Queue<BossAttackAction>();
         bossAttackState.Enqueue(BossAttackAction.StoneArmPunch);
@@ -36,6 +38,16 @@ public class Boss : MonoBehaviour
     private void InactiveRocksGenerator()
     {
         RocksGenerator.SetActive(false);
+    }
+
+    private void ActiveStoneArmStamp()
+    {
+        StoneArmAttack.SetActive(true);
+    }
+
+    private void InactiveStoneArmStamp()
+    {
+        StoneArmAttack.SetActive(false);
     }
 
 }

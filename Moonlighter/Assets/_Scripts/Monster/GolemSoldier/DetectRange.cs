@@ -9,10 +9,11 @@ public class DetectRange : MonoBehaviour
         _anim = gameObject.transform.root.GetComponent<Animator>();
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        if (collision.CompareTag(TagLiteral.PLAYER))
+        if (other.CompareTag(TagLiteral.PLAYER))
         {
+            this.gameObject.SetActive(false);
             _anim.SetTrigger(MonsterAnimParams.TRACING);
         }
     }
