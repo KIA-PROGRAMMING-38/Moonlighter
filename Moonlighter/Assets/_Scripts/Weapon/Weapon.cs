@@ -16,7 +16,7 @@ public class Weapon : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Anim.SetBool(WeaponAnimParams.IDLE, true);
+        Anim.SetBool(WeaponAnimParamsToHash.IDLE, true);
     }
 
     // Update is called once per frame

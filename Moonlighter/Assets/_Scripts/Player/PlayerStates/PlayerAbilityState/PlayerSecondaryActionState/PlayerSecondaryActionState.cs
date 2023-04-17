@@ -24,18 +24,18 @@ public class PlayerSecondaryActionState : PlayerAbilityState
 
                 if (false == inputHandler.SecondaryActionInput)
                 {
-                    ChangeState(animator, PlayerStates.SecondaryAction, PlayerAnimParams.SECONDARYACTION, PlayerAnimParams.IDLE);
+                    ChangeState(animator, PlayerStates.SecondaryAction, PlayerAnimParamsToHash.SECONDARYACTION, PlayerAnimParamsToHash.IDLE);
                 }
 
                 if (inputHandler.MoveInput == Vector2.zero)
                 {
-                    ChangeState(animator, PlayerStates.SecondaryAction, PlayerAnimParams.SECONDARYACTION, PlayerAnimParams.ONSECONDARYACTION);
+                    ChangeState(animator, PlayerStates.SecondaryAction, PlayerAnimParamsToHash.SECONDARYACTION, PlayerAnimParamsToHash.ONSECONDARYACTION);
                 }
                 break;
             case Weapons.BigSword:
                 if (animHandler.IsAnimationEnded)
                 {
-                    ChangeState(animator, PlayerStates.SecondaryAction, PlayerAnimParams.SECONDARYACTION, PlayerAnimParams.IDLE);
+                    ChangeState(animator, PlayerStates.SecondaryAction, PlayerAnimParamsToHash.SECONDARYACTION, PlayerAnimParamsToHash.IDLE);
                 }
                 break;
         }

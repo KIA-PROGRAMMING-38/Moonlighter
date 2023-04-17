@@ -20,7 +20,7 @@ public class PlayerComboAttackThreeState : PlayerAbilityState
         if (animHandler.IsAnimationEnded)
         {
             inputHandler.UseComboInput();
-            ChangeState(animator, PlayerStates.ComboAttackThree, PlayerAnimParams.COMBOATTACKTHREE, PlayerAnimParams.IDLE);
+            ChangeState(animator, PlayerStates.ComboAttackThree, PlayerAnimParamsToHash.COMBOATTACKTHREE, PlayerAnimParamsToHash.IDLE);
         }
     }
 }

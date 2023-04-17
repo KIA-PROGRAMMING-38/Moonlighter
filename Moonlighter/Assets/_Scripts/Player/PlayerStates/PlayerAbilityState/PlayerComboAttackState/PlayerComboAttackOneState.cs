@@ -18,13 +18,13 @@ public class PlayerComboAttackOneState : PlayerAbilityState
 
         if (animHandler.IsAnimationEnded && false == inputHandler.ComboInput)
         {
-            ChangeState(animator, PlayerStates.ComboAttackOne, PlayerAnimParams.COMBOATTACKONE, PlayerAnimParams.IDLE);
+            ChangeState(animator, PlayerStates.ComboAttackOne, PlayerAnimParamsToHash.COMBOATTACKONE, PlayerAnimParamsToHash.IDLE);
         }
 
         if (animHandler.IsAnimationEnded && inputHandler.ComboInput)
         {
             inputHandler.UseComboInput();
-            ChangeState(animator, PlayerStates.ComboAttackOne, PlayerAnimParams.COMBOATTACKONE, PlayerAnimParams.COMBOATTACKTWO);
+            ChangeState(animator, PlayerStates.ComboAttackOne, PlayerAnimParamsToHash.COMBOATTACKONE, PlayerAnimParamsToHash.COMBOATTACKTWO);
         }
     }
 }

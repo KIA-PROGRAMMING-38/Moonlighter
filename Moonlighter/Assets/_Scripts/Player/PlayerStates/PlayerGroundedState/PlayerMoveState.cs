@@ -15,7 +15,7 @@ public class PlayerMoveState : PlayerGroundedState
 
         if (inputHandler.SecondaryActionInput)
         {
-            ChangeState(animator, PlayerStates.Move, PlayerAnimParams.MOVE, PlayerAnimParams.READYSECONDARYACTION);
+            ChangeState(animator, PlayerStates.Move, PlayerAnimParamsToHash.MOVE, PlayerAnimParamsToHash.READYSECONDARYACTION);
         }
         
         if (false == inputHandler.RollInput && inputHandler.MoveInput != Vector2.zero && false == inputHandler.ComboInput)
@@ -24,17 +24,17 @@ public class PlayerMoveState : PlayerGroundedState
         }
         else if (inputHandler.MoveInput == Vector2.zero)
         {
-            ChangeState(animator, PlayerStates.Move, PlayerAnimParams.MOVE, PlayerAnimParams.IDLE);
+            ChangeState(animator, PlayerStates.Move, PlayerAnimParamsToHash.MOVE, PlayerAnimParamsToHash.IDLE);
         }
         else if (inputHandler.RollInput && inputHandler.MoveInput != Vector2.zero)
         {
             inputHandler.UseRollInput();
-            ChangeState(animator, PlayerStates.Move, PlayerAnimParams.MOVE, PlayerAnimParams.ROLL);
+            ChangeState(animator, PlayerStates.Move, PlayerAnimParamsToHash.MOVE, PlayerAnimParamsToHash.ROLL);
         }
         else if (false == inputHandler.RollInput && inputHandler.ComboInput && inputHandler.MoveInput != Vector2.zero)
         {
             inputHandler.UseComboInput();
-            ChangeState(animator, PlayerStates.Move, PlayerAnimParams.MOVE, PlayerAnimParams.COMBOATTACKONE);
+            ChangeState(animator, PlayerStates.Move, PlayerAnimParamsToHash.MOVE, PlayerAnimParamsToHash.COMBOATTACKONE);
         }
         
     }
@@ -42,8 +42,8 @@ public class PlayerMoveState : PlayerGroundedState
     #region Move State Functions
     private void SetMoveVelocity(Animator animator)
     {
-        animator.SetFloat(PlayerAnimParams.MOVEX, inputHandler.MoveInput.x);
-        animator.SetFloat(PlayerAnimParams.MOVEY, inputHandler.MoveInput.y);
+        animator.SetFloat(PlayerAnimParamsToHash.MOVEX, inputHandler.MoveInput.x);
+        animator.SetFloat(PlayerAnimParamsToHash.MOVEY, inputHandler.MoveInput.y);
         rigid.velocity = inputHandler.MoveInput * playerData.MovementVelocity;
     }
 

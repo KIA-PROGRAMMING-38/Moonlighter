@@ -18,11 +18,11 @@ public class WeaponIdleState : WeaponGroundedState
         if (player.CurrentState != PlayerStates.Roll && inputHandler.WeaponComboInput)
         {
             inputHandler.UseWeaponComboInput();
-            ChangeState(animator, WeaponAnimParams.IDLE, WeaponAnimParams.COMBOATTACKONE);
+            ChangeState(animator, WeaponAnimParamsToHash.IDLE, WeaponAnimParamsToHash.COMBOATTACKONE);
         }
         else if (player.CurrentState != PlayerStates.Roll && inputHandler.SecondaryActionInput)
         {
-            ChangeState(animator, WeaponAnimParams.IDLE, WeaponAnimParams.READYSECONDARYACTION);
+            ChangeState(animator, WeaponAnimParamsToHash.IDLE, WeaponAnimParamsToHash.READYSECONDARYACTION);
         }
         
     }

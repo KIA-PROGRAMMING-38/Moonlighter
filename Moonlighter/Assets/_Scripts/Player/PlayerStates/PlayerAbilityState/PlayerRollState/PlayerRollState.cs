@@ -24,7 +24,7 @@ public class PlayerRollState : PlayerAbilityState
         
         if (animHandler.IsAnimationEnded)
         {
-            ChangeState(animator, PlayerStates.Roll, PlayerAnimParams.ROLL, PlayerAnimParams.IDLE);
+            ChangeState(animator, PlayerStates.Roll, PlayerAnimParamsToHash.ROLL, PlayerAnimParamsToHash.IDLE);
         }
     }
 }
