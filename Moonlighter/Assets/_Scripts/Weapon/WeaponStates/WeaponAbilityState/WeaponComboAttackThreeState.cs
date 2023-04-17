@@ -7,7 +7,7 @@ public class WeaponComboAttackThreeState : WeaponAbilityState
         if (animHandler.IsAnimationEnded)
         {
             inputHandler.UseWeaponComboInput();
-            ChangeState(animator, WeaponAnimParams.COMBOATTACKTHREE, WeaponAnimParams.IDLE);
+            ChangeState(animator, WeaponAnimParamsToHash.COMBOATTACKTHREE, WeaponAnimParamsToHash.IDLE);
         }
     }
 }

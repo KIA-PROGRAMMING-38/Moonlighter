@@ -33,8 +33,8 @@ public class PlayerAbilityState : PlayerState
 
     protected void SetRollDirection(Animator animator)
     {
-        moveX = animator.GetFloat(PlayerAnimParams.MOVEX);
-        moveY = animator.GetFloat(PlayerAnimParams.MOVEY);
+        moveX = animator.GetFloat(PlayerAnimParamsToHash.MOVEX);
+        moveY = animator.GetFloat(PlayerAnimParamsToHash.MOVEY);
 
         if (player.PrevState == PlayerStates.Idle)
         {

@@ -34,4 +34,12 @@ namespace EnumValue
         Right,
         Up
     }
+
+    public enum BossAttackAction
+    {
+        Wave,
+        StoneArmPunch,
+        StoneArmStamp,
+        StickyArmAction
+    }
 }

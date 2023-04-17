@@ -6,7 +6,7 @@ public class WeaponReadySecondaryActionState : WeaponAbilityState
     {
         if (false == inputHandler.SecondaryActionInput)
         {
-            ChangeState(animator, WeaponAnimParams.READYSECONDARYACTION, WeaponAnimParams.IDLE);
+            ChangeState(animator, WeaponAnimParamsToHash.READYSECONDARYACTION, WeaponAnimParamsToHash.IDLE);
         }
 
         if (animHandler.IsChargeOn)
@@ -14,7 +14,7 @@ public class WeaponReadySecondaryActionState : WeaponAbilityState
             if (inputHandler.SecondaryActionInput)
             {
                 animHandler.ResetChargeTrigger();
-                ChangeState(animator, WeaponAnimParams.READYSECONDARYACTION, WeaponAnimParams.ONSECONDARYACTION);
+                ChangeState(animator, WeaponAnimParamsToHash.READYSECONDARYACTION, WeaponAnimParamsToHash.ONSECONDARYACTION);
             }
         }
     }

@@ -10,17 +10,17 @@ public class WeaponOnSecondaryActionState : WeaponAbilityState
             case Weapons.ShortSwordAndShield:
                 if (false == inputHandler.SecondaryActionInput)
                 {
-                    ChangeState(animator, WeaponAnimParams.ONSECONDARYACTION, WeaponAnimParams.IDLE);
+                    ChangeState(animator, WeaponAnimParamsToHash.ONSECONDARYACTION, WeaponAnimParamsToHash.IDLE);
                 }
                 if (inputHandler.MoveInput != Vector2.zero)
                 {
-                    ChangeState(animator, WeaponAnimParams.ONSECONDARYACTION, WeaponAnimParams.SECONDARYACTION);
+                    ChangeState(animator, WeaponAnimParamsToHash.ONSECONDARYACTION, WeaponAnimParamsToHash.SECONDARYACTION);
                 }
                 break;
             case Weapons.BigSword:
                 if (false == inputHandler.SecondaryActionInput)
                 {
-                    ChangeState(animator, WeaponAnimParams.ONSECONDARYACTION, WeaponAnimParams.SECONDARYACTION);
+                    ChangeState(animator, WeaponAnimParamsToHash.ONSECONDARYACTION, WeaponAnimParamsToHash.SECONDARYACTION);
                 }
                 break;
         }

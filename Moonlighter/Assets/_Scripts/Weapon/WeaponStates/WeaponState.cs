@@ -18,7 +18,7 @@ public class WeaponState : StateMachineBehaviour
         animHandler.AnimationTrigger();
     }
 
-    protected void ChangeState(Animator animator, string currentState, string newState)
+    protected void ChangeState(Animator animator, int currentState, int newState)
     {
         animator.SetBool(currentState, false);
         animator.SetBool(newState, true);
@@ -26,7 +26,7 @@ public class WeaponState : StateMachineBehaviour
 
     protected void SetDirection(Animator animator)
     {
-        animator.SetFloat(WeaponAnimParams.DIRX, inputHandler.MoveInput.x);
-        animator.SetFloat(WeaponAnimParams.DIRY, inputHandler.MoveInput.y);
+        animator.SetFloat(WeaponAnimParamsToHash.DIRX, inputHandler.MoveInput.x);
+        animator.SetFloat(WeaponAnimParamsToHash.DIRY, inputHandler.MoveInput.y);
     }
 }

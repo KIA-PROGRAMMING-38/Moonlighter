@@ -6,11 +6,11 @@ public class WeaponComboAttackTwoState : WeaponAbilityState
     {
         if (animHandler.IsAnimationEnded && false == inputHandler.WeaponComboInput)
         {
-            ChangeState(animator, WeaponAnimParams.COMBOATTACKTWO, WeaponAnimParams.IDLE);
+            ChangeState(animator, WeaponAnimParamsToHash.COMBOATTACKTWO, WeaponAnimParamsToHash.IDLE);
         }
         if (animHandler.IsAnimationEnded && inputHandler.WeaponComboInput)
         {
-            ChangeState(animator, WeaponAnimParams.COMBOATTACKTWO, WeaponAnimParams.COMBOATTACKTHREE);
+            ChangeState(animator, WeaponAnimParamsToHash.COMBOATTACKTWO, WeaponAnimParamsToHash.COMBOATTACKTHREE);
         }
     }
 }

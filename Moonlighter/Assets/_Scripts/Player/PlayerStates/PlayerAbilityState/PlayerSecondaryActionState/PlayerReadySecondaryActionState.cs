@@ -23,15 +23,14 @@ public class PlayerReadySecondaryActionState : PlayerAbilityState
             animHandler.ResetChargeTrigger();
             if (inputHandler.SecondaryActionInput)
             {
-                //animHandler.ResetChargeTrigger();
-                ChangeState(animator, PlayerStates.ReadySecondaryAction, PlayerAnimParams.READYSECONDARYACTION, PlayerAnimParams.ONSECONDARYACTION);
+                ChangeState(animator, PlayerStates.ReadySecondaryAction, PlayerAnimParamsToHash.READYSECONDARYACTION, PlayerAnimParamsToHash.ONSECONDARYACTION);
             }
         }
 
         if (false == inputHandler.SecondaryActionInput)
         {
             animHandler.ResetChargeTrigger();
-            ChangeState(animator, PlayerStates.ReadySecondaryAction, PlayerAnimParams.READYSECONDARYACTION, PlayerAnimParams.IDLE);
+            ChangeState(animator, PlayerStates.ReadySecondaryAction, PlayerAnimParamsToHash.READYSECONDARYACTION, PlayerAnimParamsToHash.IDLE);
         }
     }
 }
