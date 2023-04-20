@@ -12,6 +12,7 @@ TagManager:
   - BossStoneArmStamp
   - BossRocketArmPunch
   - BossWave
+  - PlayerWeapon
   layers:
   - Default
   - TransparentFX
@@ -21,8 +22,8 @@ TagManager:
   - UI
   - Monster
   - MonsterWeapon
-  - 
-  - 
+  - PlayerWeapon
+  - Player
   - 
   - 
   - 
