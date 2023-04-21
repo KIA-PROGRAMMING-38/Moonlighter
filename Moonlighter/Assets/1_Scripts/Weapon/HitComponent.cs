@@ -6,12 +6,15 @@ public class HitComponent : MonoBehaviour
 {
     public PlayerAttackEffect Effect;
 
+    private Weapon _weapon;
+
     public CameraEffect CamEffect;
 
     private ObjectPool<PlayerAttackEffect> _playerAttackEffectPool;
 
     private void Awake()
     {
+        _weapon = transform.parent.GetComponent<Weapon>();
         _playerAttackEffectPool = new ObjectPool<PlayerAttackEffect>(GeneratePlayerAttackEffect);
     }
 

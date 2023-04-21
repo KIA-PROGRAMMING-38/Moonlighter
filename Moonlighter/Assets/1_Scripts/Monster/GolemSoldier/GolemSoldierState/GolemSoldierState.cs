@@ -4,6 +4,7 @@ using EnumValue;
 public class GolemSoldierState : StateMachineBehaviour
 {
     protected Rigidbody2D rigid;
+    protected SpriteRenderer spriteRenderer;
     protected Rigidbody2D target;
     protected Player player;
     protected GolemSoldier golemSoldier;
@@ -22,6 +23,7 @@ public class GolemSoldierState : StateMachineBehaviour
         target = animator.gameObject.GetComponent<GolemSoldier>().Target.Rigid;
         player = target.gameObject.GetComponent<Player>();
         golemSoldier = animator.gameObject.GetComponent<GolemSoldier>();
+        spriteRenderer = animator.gameObject.GetComponent<SpriteRenderer>();
     }
 
     protected void SetDirection(Animator animator)
@@ -57,7 +59,7 @@ public class GolemSoldierState : StateMachineBehaviour
         minDistance = 214700f;
         for (int i = 0; i < player.MonsterDestinationPos.Length; ++i)
         {
-            float distance = Vector2.Distance(rigid.position, player.MonsterDestinationPos[i].position);
+            float distance = Vector2.Distance(spriteRenderer.bounds.center, player.MonsterDestinationPos[i].position);
             if (distance < minDistance)
             {
                 minDistance = distance;
