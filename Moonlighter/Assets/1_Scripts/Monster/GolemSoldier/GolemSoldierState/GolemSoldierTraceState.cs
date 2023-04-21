@@ -10,7 +10,7 @@ public class GolemSoldierTraceState : GolemSoldierState
 
         moveVelocity = (target.position - rigid.position).normalized;
 
-        if (Mathf.Abs(Vector2.Distance(rigid.position, destination)) < canAttackRange)
+        if (Mathf.Abs(Vector2.Distance(spriteRenderer.bounds.center, destination)) < canAttackRange)
         {
             animator.SetTrigger(MonsterAnimParams.ATTACK);
         }

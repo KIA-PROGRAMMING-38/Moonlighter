@@ -5,6 +5,9 @@ using EnumValue;
 
 public class Weapon : MonoBehaviour
 {
+    [SerializeField]
+    private BigSwordData _bigSwordData;
+
     public Animator Anim { get; private set; }
     public AnimationHandler AnimHandler { get; private set; }
     public GameObject[] AttackRange;
@@ -12,11 +15,23 @@ public class Weapon : MonoBehaviour
     private WeaponAttackDir _nowAttackDir;
     private float _dirX;
     private float _dirY;
+    
+    public BigSwordData BigSwordData
+    {
+        get
+        {
+            return _bigSwordData;
+        }
+    }
 
     private void Awake()
     {
         Anim = GetComponent<Animator>();
         AnimHandler = GetComponent<AnimationHandler>();
+        _bigSwordData.ComboAttackOneDamage = 20;
+        _bigSwordData.ComboAttackTwoDamage = 30;
+        _bigSwordData.ComboAttackThreeDamage = 60;
+        _bigSwordData.SecondaryActionDamage = 60;
     }
 
     void Start()

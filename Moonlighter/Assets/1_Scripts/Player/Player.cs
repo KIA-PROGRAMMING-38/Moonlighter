@@ -1,7 +1,5 @@
 using EnumValue;
 using System.Collections;
-using System.Runtime.CompilerServices;
-using System.Runtime.InteropServices;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -53,6 +51,8 @@ public class Player : MonoBehaviour
         Rigid = GetComponent<Rigidbody2D>();
         AnimHandler = GetComponent<AnimationHandler>();
         PlayerSpriteRenderer = GetComponent<SpriteRenderer>();
+        _playerData.CurHp = _playerData.MaxHp;
+
         _originMaterial = PlayerSpriteRenderer.material;
         CurrentPrimaryWeapon = Weapons.BigSword;
         _originColor = PlayerSpriteRenderer.color;
@@ -84,6 +84,25 @@ public class Player : MonoBehaviour
             StartCoroutine(_OnHitCoroutine);
         }
     }
+
+    private void GetDamaged(int damage)
+    {
+        _playerData.CurHp -= damage;
+        if (_playerData.CurHp < 0)
+        {
+            _playerData.CurHp = 0;
+        }
+    }
+
+    IEnumerator DecreaseHp()
+    {
+        while(true)
+        {
+
+            yield return null;
+        }
+    }
+
 
     int id = Shader.PropertyToID("_HitBlend");
     IEnumerator OnHitState()
@@ -134,8 +153,12 @@ public class Player : MonoBehaviour
     {
         if (other.CompareTag(TagLiteral.MONSTER_PROJECTILE) || other.CompareTag(TagLiteral.MONSTER_MELEEATTACK) || other.CompareTag(TagLiteral.BOSS_STONEARM_STAMP) || other.CompareTag(TagLiteral.BOSS_ROCKETARM_PUNCH))
         {
+            Monster monster = other.transform.root.GetComponent<Monster>();
+
             if (false == _isInvincible)
             {
+                GetDamaged(monster.GetNormalDamageValue());
+                PlayerPresenter.ModifyPlayerHPRatio(_playerData.MaxHp, _playerData.CurHp);
                 OnHit();
             }
         }

@@ -9,6 +9,8 @@ public class Monster : MonoBehaviour
     private float _hitTweenTime = 0.3f;
     private SpriteRenderer _spriteRenderer;
     private Rigidbody2D _rigid;
+    [SerializeField]
+    protected MonsterData monsterData;
 
     [SerializeField]
     private Material _hitMaterial;
@@ -24,6 +26,11 @@ public class Monster : MonoBehaviour
         _OnHitCoroutine = OnHitState();
     }
 
+    public int GetNormalDamageValue()
+    {
+        return monsterData.normalDamage;
+    }
+
     private void OnHit()
     {
         if(false == _isRunningHitEvent)
@@ -31,6 +38,7 @@ public class Monster : MonoBehaviour
             StartCoroutine(_OnHitCoroutine);
         }
     }
+
 
     IEnumerator OnHitState()
     {

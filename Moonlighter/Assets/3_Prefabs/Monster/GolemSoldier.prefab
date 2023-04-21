@@ -337,7 +337,7 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 0
+  m_LinearDrag: 1
   m_AngularDrag: 0.05
   m_GravityScale: 0
   m_Material: {fileID: 0}
@@ -385,6 +385,7 @@ MonoBehaviour:
   - {fileID: 5774570602978396647}
   - {fileID: 5774570603352402880}
   - {fileID: 5774570602026077502}
+  _golemSoldierData: {fileID: 11400000, guid: c18cd834c3cc46042b3daf7488810004, type: 2}
 --- !u!70 &9039287718078821942
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
