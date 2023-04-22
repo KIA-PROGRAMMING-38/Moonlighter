@@ -28,7 +28,7 @@ public class Monster : MonoBehaviour
 
     public int GetNormalDamageValue()
     {
-        return monsterData.normalDamage;
+        return monsterData.NormalDamage;
     }
 
     private void OnHit()
@@ -36,6 +36,15 @@ public class Monster : MonoBehaviour
         if(false == _isRunningHitEvent)
         {
             StartCoroutine(_OnHitCoroutine);
+        }
+    }
+
+    public void GetDamaged(int damage)
+    {
+        monsterData.CurHp -= damage;
+        if(monsterData.CurHp < 0)
+        {
+            monsterData.CurHp = 0;
         }
     }
 
@@ -61,6 +70,9 @@ public class Monster : MonoBehaviour
         if (other.CompareTag(TagLiteral.PLAYER_WEAPON))
         {
             SpriteRenderer weaponSprite = other.transform.parent.GetComponent<SpriteRenderer>();
+            Weapon playerWeapon = other.transform.parent.GetComponent<Weapon>();
+            GetDamaged(playerWeapon.GetDamageValue());
+            MonsterPresenter.ModifyPlayerHPRatio(monsterData.Maxhp, monsterData.CurHp);
             OnHit();
             _rigid.velocity = Vector2.zero;
             _rigid.AddForce(((Vector2)_spriteRenderer.bounds.center - (Vector2)weaponSprite.bounds.center).normalized * 0.5f, ForceMode2D.Impulse);
