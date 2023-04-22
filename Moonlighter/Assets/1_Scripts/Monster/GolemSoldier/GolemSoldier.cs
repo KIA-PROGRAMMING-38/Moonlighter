@@ -18,8 +18,9 @@ public class GolemSoldier : Monster
         Target = GameObject.Find(ObjectLiteral.PLAYER).GetComponent<Player>();
         _anim = GetComponent<Animator>();
         CurrentDir = GolemSoldierDirection.Down;
-        monsterData.hp = 100;
-        monsterData.normalDamage = 15;
+        monsterData.Maxhp = 100;
+        monsterData.CurHp = monsterData.Maxhp;
+        monsterData.NormalDamage = 15;
     }
 
     private void Start()

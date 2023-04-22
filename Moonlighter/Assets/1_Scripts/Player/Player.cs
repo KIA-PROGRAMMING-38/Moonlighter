@@ -4,13 +4,33 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    #region BaseComponent
     private Animator Anim { get; set; }
     public Rigidbody2D Rigid { get; private set; }
     public CapsuleCollider2D PlayerCollider { get; private set; }
     public SpriteRenderer PlayerSpriteRenderer { get; private set; }
+
+    #endregion
+
+    #region Hit Component
     private Material _originMaterial;
     [SerializeField]
     private Material _hitMaterial;
+
+    private IEnumerator _OnHitCoroutine;
+    private bool _isRunningHitEvent = false;
+    private float _hitTweenTime = 0.3f;
+
+    private IEnumerator _OnDecreasePlayerHp;
+
+    private IEnumerator _OnInvincibleCoroutine;
+    private bool _isInvincible = false;
+    private float _invincivleTweenTime = 0.1f;
+    private int _invincibleTweenCount;
+    private Color _originColor;
+    private Color _invincibleColor;
+
+    #endregion
 
 
     [SerializeField]
@@ -24,17 +44,6 @@ public class Player : MonoBehaviour
     public Weapons CurrentPrimaryWeapon { get; set; }
 
     public Transform[] MonsterDestinationPos;
-
-    private IEnumerator _OnHitCoroutine;
-    private bool _isRunningHitEvent = false;
-    private float _hitTweenTime = 0.3f;
-
-    private IEnumerator _OnInvincibleCoroutine;
-    private bool _isInvincible = false;
-    private float _invincivleTweenTime = 0.1f;
-    private int _invincibleTweenCount;
-    private Color _originColor;
-    private Color _invincibleColor;
 
     public PlayerData PlayerData
     {
@@ -88,23 +97,12 @@ public class Player : MonoBehaviour
     private void GetDamaged(int damage)
     {
         _playerData.CurHp -= damage;
-        if (_playerData.CurHp < 0)
+        if(_playerData.CurHp < 0)
         {
             _playerData.CurHp = 0;
         }
     }
 
-    IEnumerator DecreaseHp()
-    {
-        while(true)
-        {
-
-            yield return null;
-        }
-    }
-
-
-    int id = Shader.PropertyToID("_HitBlend");
     IEnumerator OnHitState()
     {
         while (true)
@@ -116,7 +114,7 @@ public class Player : MonoBehaviour
             {
                 t += Time.deltaTime;
                 float sinVal = Mathf.Sin(Mathf.Lerp(0, Mathf.PI, t / _hitTweenTime));
-                _hitMaterial.SetFloat(id, sinVal);
+                _hitMaterial.SetFloat(ShaderPropertyToHash.HIT_BLEND, sinVal);
                 yield return null;
             }
             PlayerSpriteRenderer.material = _originMaterial;

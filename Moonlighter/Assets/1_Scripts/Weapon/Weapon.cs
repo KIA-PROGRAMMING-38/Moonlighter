@@ -39,6 +39,11 @@ public class Weapon : MonoBehaviour
         Anim.SetBool(WeaponAnimParamsToHash.IDLE, true);
     }
 
+    public int GetDamageValue()
+    {
+        return _bigSwordData.ComboAttackOneDamage;
+    }
+
     private void ActiveSecondaryAction()
     {
         for (int i = 0; i < AttackRange.Length; ++i)
