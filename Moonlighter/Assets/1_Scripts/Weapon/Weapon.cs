@@ -8,6 +8,11 @@ public class Weapon : MonoBehaviour
     [SerializeField]
     private BigSwordData _bigSwordData;
 
+    [SerializeField]
+    private ShortSwordAndShieldData _shortSwordAndShield;
+
+    private Player _player;
+    
     public Animator Anim { get; private set; }
     public AnimationHandler AnimHandler { get; private set; }
     public GameObject[] AttackRange;
@@ -28,15 +33,38 @@ public class Weapon : MonoBehaviour
     {
         Anim = GetComponent<Animator>();
         AnimHandler = GetComponent<AnimationHandler>();
-        _bigSwordData.ComboAttackOneDamage = 20;
-        _bigSwordData.ComboAttackTwoDamage = 30;
-        _bigSwordData.ComboAttackThreeDamage = 60;
-        _bigSwordData.SecondaryActionDamage = 60;
+        _player = transform.root.GetComponent<Player>();
+        Anim.runtimeAnimatorController = BigSwordData.WeaponController;
+
+        WeaponPresenter.OnChangeWeapon -= ChangePrimaryWeapon;
+        WeaponPresenter.OnChangeWeapon += ChangePrimaryWeapon;
     }
 
     void Start()
     {
         Anim.SetBool(WeaponAnimParamsToHash.IDLE, true);
+    }
+
+    private void ChangePrimaryWeapon()
+    {
+        Weapons tmp = _player.PrimaryWeapon;
+        _player.PrimaryWeapon = _player.SecondaryWeapon;
+        _player.SecondaryWeapon = tmp;
+        switch(_player.PrimaryWeapon)
+        {
+            case Weapons.BigSword:
+                Anim.runtimeAnimatorController = _bigSwordData.WeaponController;
+                _player.Anim.runtimeAnimatorController = _bigSwordData.PlayerController;
+                Anim.SetBool(WeaponAnimParamsToHash.IDLE, true);
+                _player.Anim.SetBool(PlayerAnimParamsToHash.IDLE, true);
+                break;
+            case Weapons.ShortSwordAndShield:
+                Anim.runtimeAnimatorController = _shortSwordAndShield.WeaponController;
+                _player.Anim.runtimeAnimatorController = _shortSwordAndShield.PlayerController;
+                Anim.SetBool(WeaponAnimParamsToHash.IDLE, true);
+                _player.Anim.SetBool(PlayerAnimParamsToHash.IDLE, true);
+                break;
+        }
     }
 
     public int GetDamageValue()

@@ -5,7 +5,7 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     #region BaseComponent
-    private Animator Anim { get; set; }
+    public Animator Anim { get; set; }
     public Rigidbody2D Rigid { get; private set; }
     public CapsuleCollider2D PlayerCollider { get; private set; }
     public SpriteRenderer PlayerSpriteRenderer { get; private set; }
@@ -41,7 +41,8 @@ public class Player : MonoBehaviour
     public PlayerStates CurrentState { get; set; }
     public PlayerStates PrevState { get; set; }
 
-    public Weapons CurrentPrimaryWeapon { get; set; }
+    public Weapons PrimaryWeapon { get; set; }
+    public Weapons SecondaryWeapon { get; set; }
 
     public Transform[] MonsterDestinationPos;
 
@@ -61,9 +62,10 @@ public class Player : MonoBehaviour
         AnimHandler = GetComponent<AnimationHandler>();
         PlayerSpriteRenderer = GetComponent<SpriteRenderer>();
         _playerData.CurHp = _playerData.MaxHp;
-
+        
         _originMaterial = PlayerSpriteRenderer.material;
-        CurrentPrimaryWeapon = Weapons.BigSword;
+        PrimaryWeapon = Weapons.BigSword;
+        SecondaryWeapon = Weapons.ShortSwordAndShield;
         _originColor = PlayerSpriteRenderer.color;
         _invincibleColor = PlayerSpriteRenderer.color;
         _invincibleColor.a = 0f;

@@ -17,7 +17,7 @@ public class PlayerSecondaryActionState : PlayerAbilityState
 
         LockAttack();
 
-        switch (player.CurrentPrimaryWeapon)
+        switch (player.PrimaryWeapon)
         {
             case Weapons.ShortSwordAndShield:
                 rigid.velocity = inputHandler.MoveInput;

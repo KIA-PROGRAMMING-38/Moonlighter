@@ -5,7 +5,7 @@ public class WeaponSecondaryActionState : WeaponAbilityState
 {
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        switch (player.CurrentPrimaryWeapon)
+        switch (player.PrimaryWeapon)
         {
             case Weapons.ShortSwordAndShield:
                 if (false == inputHandler.SecondaryActionInput)

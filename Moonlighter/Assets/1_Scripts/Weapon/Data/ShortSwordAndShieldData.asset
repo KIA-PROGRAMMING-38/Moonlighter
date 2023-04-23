@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12c6b9192a8d1c447b870213649b86cd, type: 3}
+  m_Name: ShortSwordAndShieldData
+  m_EditorClassIdentifier: 
+  ComboAttackOneDamage: 25
+  ComboAttackTwoDamage: 25
+  ComboAttackThreeDamage: 50
+  SecondaryActionDamage: 0
+  PlayerController: {fileID: 9100000, guid: 84b4d1a88ac7caa4e851f04f33f15dbb, type: 2}
+  WeaponController: {fileID: 9100000, guid: 082ef1c24525e8d45b7a2ca42cbc3125, type: 2}

@@ -17,7 +17,7 @@ public class PlayerOnSecondaryActionState : PlayerAbilityState
 
         LockAttack();
 
-        switch (player.CurrentPrimaryWeapon)
+        switch (player.PrimaryWeapon)
         {
             case Weapons.ShortSwordAndShield:
                 if (false == inputHandler.SecondaryActionInput)

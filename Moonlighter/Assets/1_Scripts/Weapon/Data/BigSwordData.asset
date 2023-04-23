@@ -12,7 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa73918d413cba143b67518409a5344a, type: 3}
   m_Name: BigSwordData
   m_EditorClassIdentifier: 
-  ComboAttackOneDamage: 0
-  ComboAttackTwoDamage: 0
-  ComboAttackThreeDamage: 0
-  SecondaryActionDamage: 0
+  ComboAttackOneDamage: 30
+  ComboAttackTwoDamage: 30
+  ComboAttackThreeDamage: 60
+  SecondaryActionDamage: 80
+  PlayerController: {fileID: 9100000, guid: 4fb893af0d8aa7d4a9bbad68d4b44547, type: 2}
+  WeaponController: {fileID: 9100000, guid: 8c752194121e37041a7d1d216d0d766c, type: 2}

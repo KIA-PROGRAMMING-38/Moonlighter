@@ -12,7 +12,7 @@ public class PlayerInputHandler : MonoBehaviour
     public bool WeaponComboInput { get; private set; }
 
     public bool SecondaryActionInput { get; private set; }
-
+    
     public void OnMove(InputAction.CallbackContext context)
     {
         MoveInput = context.ReadValue<Vector2>();
@@ -45,6 +45,14 @@ public class PlayerInputHandler : MonoBehaviour
         if (context.canceled)
         {
             SecondaryActionInput = false;
+        }
+    }
+
+    public void OnWeaponChange(InputAction.CallbackContext context)
+    {
+        if(context.performed)
+        {
+            WeaponPresenter.ChangeWeapon();
         }
     }
 

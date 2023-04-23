@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Animations;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "WeaponData", menuName = "Data/Weapon Data/Base Data")]
@@ -12,4 +13,8 @@ public class WeaponData : ScriptableObject
 
     [Header("SecondaryAction State")]
     public int SecondaryActionDamage;
+
+    [Header("Animator")]
+    public RuntimeAnimatorController PlayerController;
+    public RuntimeAnimatorController WeaponController;
 }
