@@ -5,6 +5,7 @@ public class HUDController : MonoBehaviour
 {
     private UIInputHandler _uiInputHandler;
 
+    #region Inventory 관련 변수들
     public RectTransform InventoryIcon;
     public RectTransform InventoryAndStatusWindow;
 
@@ -24,6 +25,8 @@ public class HUDController : MonoBehaviour
     private IEnumerator _fadeOutIcon;
     private IEnumerator _fadeInWindow;
     private IEnumerator _fadeOutWindow;
+
+    #endregion
 
     private void Awake()
     {
@@ -48,6 +51,9 @@ public class HUDController : MonoBehaviour
         HUDPresenter.OnInventoryWindow += ActionInventoryKey;
     }
 
+    /// <summary>
+    /// 인벤토리키 입력이 들어왔을 때 실행될 함수.
+    /// </summary>
     private void ActionInventoryKey()
     {
         if(false == _isFading)
@@ -64,6 +70,9 @@ public class HUDController : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// 인벤토리 아이콘이 들어오고 인벤토리 창이 내려가는 함수.
+    /// </summary>
     private void FadeOutIconFadeInWindow()
     {
         StopCoroutine(_fadeInIcon);
@@ -72,6 +81,9 @@ public class HUDController : MonoBehaviour
         StartCoroutine(_fadeInWindow);
     }
 
+    /// <summary>
+    /// 인벤토리 아이콘이 사라지고 인벤토리 창이 올라오는 함수.
+    /// </summary>
     private void FadeInIconFadeOutWindow()
     {
         StopCoroutine(_fadeOutIcon);
