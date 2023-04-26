@@ -12,7 +12,7 @@ public class Weapon : MonoBehaviour
     private ShortSwordAndShieldData _shortSwordAndShield;
 
     private Player _player;
-    
+
     public Animator Anim { get; private set; }
     public AnimationHandler AnimHandler { get; private set; }
     public GameObject[] AttackRange;
@@ -20,7 +20,7 @@ public class Weapon : MonoBehaviour
     private WeaponAttackDir _nowAttackDir;
     private float _dirX;
     private float _dirY;
-    
+
     public BigSwordData BigSwordData
     {
         get
@@ -50,7 +50,7 @@ public class Weapon : MonoBehaviour
         Weapons tmp = _player.PrimaryWeapon;
         _player.PrimaryWeapon = _player.SecondaryWeapon;
         _player.SecondaryWeapon = tmp;
-        switch(_player.PrimaryWeapon)
+        switch (_player.PrimaryWeapon)
         {
             case Weapons.BigSword:
                 Anim.runtimeAnimatorController = _bigSwordData.WeaponController;
@@ -65,6 +65,7 @@ public class Weapon : MonoBehaviour
                 _player.Anim.SetBool(PlayerAnimParamsToHash.IDLE, true);
                 break;
         }
+
     }
 
     public int GetDamageValue()
@@ -98,27 +99,27 @@ public class Weapon : MonoBehaviour
             _nowAttackDir = WeaponAttackDir.Up;
             AttackRange[(int)WeaponAttackDir.Up].SetActive(true);
         }
-        else if(_dirX != 0 && _dirY < 0)
+        else if (_dirX != 0 && _dirY < 0)
         {
             _nowAttackDir = WeaponAttackDir.Down;
             AttackRange[(int)WeaponAttackDir.Down].SetActive(true);
         }
-        else if(_dirX == 1 && _dirY == 0)
+        else if (_dirX == 1 && _dirY == 0)
         {
             _nowAttackDir = WeaponAttackDir.Right;
             AttackRange[(int)WeaponAttackDir.Right].SetActive(true);
         }
-        else if(_dirX == -1 && _dirY == 0)
+        else if (_dirX == -1 && _dirY == 0)
         {
             _nowAttackDir = WeaponAttackDir.Left;
             AttackRange[(int)WeaponAttackDir.Left].SetActive(true);
         }
-        else if(_dirX == 0 && _dirY == 1)
+        else if (_dirX == 0 && _dirY == 1)
         {
             _nowAttackDir = WeaponAttackDir.Up;
             AttackRange[(int)WeaponAttackDir.Up].SetActive(true);
         }
-        else if(_dirX == 0 && _dirY == -1)
+        else if (_dirX == 0 && _dirY == -1)
         {
             _nowAttackDir = WeaponAttackDir.Down;
             AttackRange[(int)WeaponAttackDir.Down].SetActive(true);
