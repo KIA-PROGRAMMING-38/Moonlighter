@@ -7,6 +7,8 @@ public class UIInputHandler : MonoBehaviour
 {
     public bool OnInventoryWindow { get; private set; }
 
+    public Vector2 CursorInput { get; private set; }
+
     public void OnInventoryKey(InputAction.CallbackContext context)
     {
         if(context.performed)
@@ -15,4 +17,11 @@ public class UIInputHandler : MonoBehaviour
             OnInventoryWindow = !OnInventoryWindow;
         }
     }
+
+    public void OnCursorMove(InputAction.CallbackContext context)
+    {
+        CursorInput = context.ReadValue<Vector2>();
+    }
+
+
 }

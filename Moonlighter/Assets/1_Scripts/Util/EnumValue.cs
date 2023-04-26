@@ -50,4 +50,10 @@ namespace EnumValue
         StoneArmStamp,
         StickyArmAction
     }
+
+    public enum ItemType
+    {
+        Potion,
+        Weapon
+    }
 }
