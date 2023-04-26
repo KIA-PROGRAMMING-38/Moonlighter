@@ -10,11 +10,11 @@ public class WeaponStatus : MonoBehaviour
 
     private void Awake()
     {
-        WeaponPresenter.OnChangeWeapon -= SwapWeapon;
-        WeaponPresenter.OnChangeWeapon += SwapWeapon;
+        WeaponPresenter.OnChangeWeapon -= SwapWeaponIcon;
+        WeaponPresenter.OnChangeWeapon += SwapWeaponIcon;
     }
 
-    private void SwapWeapon()
+    private void SwapWeaponIcon()
     {
         Sprite TmpWeapon = PrimaryWeapon.sprite;
         PrimaryWeapon.sprite = SecondaryWeapon.sprite;

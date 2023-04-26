@@ -10,8 +10,6 @@ public class MonsterHealthBar : MonoBehaviour
     private Image _baseImage;
     [SerializeField] private Transform _owner;
 
-    Monster _monster;
-
     private float _currentHealthRatio;
     private float _decreaseHealthTime = 1.0f;
 
@@ -21,7 +19,6 @@ public class MonsterHealthBar : MonoBehaviour
 
     private void Awake()
     {
-        _monster = _owner.GetComponent<Monster>();
         _backgroundImage = transform.GetChild(0).GetComponent<Image>();
         _instanceImage = transform.GetChild(1).GetComponent<Image>();
         _baseImage = transform.GetChild(2).GetComponent<Image>();
