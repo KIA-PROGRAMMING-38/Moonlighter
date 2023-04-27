@@ -778,7 +778,7 @@ GameObject:
   - component: {fileID: 102800276}
   - component: {fileID: 102800275}
   m_Layer: 5
-  m_Name: Weapon
+  m_Name: PotionBase
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1006,7 +1006,7 @@ GameObject:
   - component: {fileID: 147728183}
   - component: {fileID: 147728182}
   m_Layer: 5
-  m_Name: Weapon
+  m_Name: NoneSlot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1801,7 +1801,7 @@ GameObject:
   - component: {fileID: 392210835}
   - component: {fileID: 392210834}
   m_Layer: 5
-  m_Name: Weapon
+  m_Name: NoneSlot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2994,6 +2994,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cca3f7a81689626469dd367f6d9f46c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Cursor: {fileID: 1418228782}
   InventoryIcon: {fileID: 1332910163}
   InventoryAndStatusWindow: {fileID: 1212048201}
 --- !u!114 &673325989
@@ -3058,7 +3059,19 @@ MonoBehaviour:
     m_ActionId: 123a8525-21e7-4694-80dc-b0ad8d9c0cda
     m_ActionName: UI/InventoryKey[/Keyboard/i]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 673325986}
+        m_TargetAssemblyTypeName: UIInputHandler, Assembly-CSharp
+        m_MethodName: OnCursorMove
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 21595056-abc5-440b-943c-21d0a71da134
     m_ActionName: UI/CursorMove[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]
   m_NeverAutoSwitchControlSchemes: 0
@@ -5108,7 +5121,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1418228779
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5116,7 +5129,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1418228778}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -5124,10 +5137,10 @@ RectTransform:
   m_Father: {fileID: 1409243404}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -572, y: 242.1}
-  m_SizeDelta: {x: -1400, y: -702}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -259, y: 242.5}
+  m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1418228780
 MonoBehaviour:
@@ -5223,37 +5236,38 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89120b4fbd190614c8df64a266dbdc11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  StartPos: {fileID: 657765499}
   FirstLineSlotPos:
   - {fileID: 657765499}
   - {fileID: 2081839201}
   - {fileID: 1861604662}
   - {fileID: 2030432848}
   - {fileID: 866978435}
-  - {fileID: 1848645432}
-  - {fileID: 875069969}
+  - {fileID: 920021784}
+  - {fileID: 1835333332}
   SecondLineSlotPos:
   - {fileID: 294431646}
   - {fileID: 1912830755}
   - {fileID: 2011051661}
   - {fileID: 1832169774}
   - {fileID: 364829262}
-  - {fileID: 28799919}
+  - {fileID: 392210833}
   ThirdLineSlotPos:
   - {fileID: 310573919}
   - {fileID: 48431726}
   - {fileID: 464288717}
   - {fileID: 1765658828}
   - {fileID: 24260712}
-  - {fileID: 198437834}
-  - {fileID: 406861428}
+  - {fileID: 147728181}
+  - {fileID: 102800274}
   FourthLineSlotPos:
   - {fileID: 909507689}
   - {fileID: 353168870}
   - {fileID: 123596614}
   - {fileID: 778248820}
   - {fileID: 437727670}
-  - {fileID: 1212924236}
+  - {fileID: 1879934048}
+  PlayerBelonging: {fileID: 1272569022}
+  InBag: {fileID: 1693580199}
 --- !u!114 &1418228783
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7214,7 +7228,7 @@ GameObject:
   - component: {fileID: 1879934050}
   - component: {fileID: 1879934049}
   m_Layer: 5
-  m_Name: Weapon
+  m_Name: NoneSlot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

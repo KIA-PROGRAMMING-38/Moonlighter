@@ -20,7 +20,14 @@ public class UIInputHandler : MonoBehaviour
 
     public void OnCursorMove(InputAction.CallbackContext context)
     {
-        CursorInput = context.ReadValue<Vector2>();
+        if(Time.timeScale == 0f)
+        {
+            if(context.performed)
+            {
+                CursorInput = context.ReadValue<Vector2>();
+                InventoryPresenter.ModifyCursorPosition();
+            }
+        }
     }
 
 
