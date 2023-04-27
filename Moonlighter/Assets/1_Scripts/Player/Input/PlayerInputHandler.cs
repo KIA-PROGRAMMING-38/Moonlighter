@@ -15,12 +15,15 @@ public class PlayerInputHandler : MonoBehaviour
     
     public void OnMove(InputAction.CallbackContext context)
     {
-        MoveInput = context.ReadValue<Vector2>();
+        if(Time.timeScale != 0)
+        {
+            MoveInput = context.ReadValue<Vector2>();
+        }
     }
 
     public void OnRoll(InputAction.CallbackContext context)
     {
-        if (context.started)
+        if (context.started && Time.timeScale != 0)
         {
             RollInput = true;
         }
@@ -28,7 +31,7 @@ public class PlayerInputHandler : MonoBehaviour
 
     public void OnComboAttack(InputAction.CallbackContext context)
     {
-        if (context.started)
+        if (context.started && Time.timeScale != 0)
         {
             ComboInput = true;
             WeaponComboInput = true;
@@ -37,7 +40,7 @@ public class PlayerInputHandler : MonoBehaviour
 
     public void OnSecondaryAction(InputAction.CallbackContext context)
     {
-        if (context.started)
+        if (context.started && Time.timeScale != 0)
         {
             SecondaryActionInput = true;
         }
@@ -50,7 +53,7 @@ public class PlayerInputHandler : MonoBehaviour
 
     public void OnWeaponChange(InputAction.CallbackContext context)
     {
-        if(context.performed)
+        if(context.performed && Time.timeScale != 0)
         {
             WeaponPresenter.ChangeWeapon();
         }

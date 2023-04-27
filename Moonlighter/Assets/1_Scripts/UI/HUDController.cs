@@ -5,6 +5,8 @@ public class HUDController : MonoBehaviour
 {
     private UIInputHandler _uiInputHandler;
 
+    public CursorController Cursor;
+
     #region Inventory 관련 변수들
     public RectTransform InventoryIcon;
     public RectTransform InventoryAndStatusWindow;
@@ -30,6 +32,8 @@ public class HUDController : MonoBehaviour
 
     private void Awake()
     {
+        DontDestroyOnLoad(this);
+
         _uiInputHandler = GetComponent<UIInputHandler>();
 
         _inventoryIconInPosition = InventoryIcon.position;
@@ -100,7 +104,7 @@ public class HUDController : MonoBehaviour
             _isFading = true;
             while (elapsedTime / _iconFadeTime < 1.0f)
             {
-                elapsedTime += Time.deltaTime;
+                elapsedTime += Time.unscaledDeltaTime;
                 InventoryIcon.position = Vector3.Lerp(InventoryIcon.position, _inventoryIconInPosition,
                     elapsedTime / _iconFadeTime);
                 yield return null;
@@ -119,7 +123,7 @@ public class HUDController : MonoBehaviour
             _isFading = true;
             while (elapsedTime / _iconFadeTime < 1.0f)
             {
-                elapsedTime += Time.deltaTime;
+                elapsedTime += Time.unscaledDeltaTime;
                 InventoryIcon.position = Vector3.Lerp(InventoryIcon.position, _inventoryIconOutPosition,
                     elapsedTime / _iconFadeTime);
                 yield return null;
@@ -134,15 +138,17 @@ public class HUDController : MonoBehaviour
     {
         while (true)
         {
+            Cursor.gameObject.SetActive(true);
             float elapsedTime = 0f;
             _isFading = true;
             while (elapsedTime / _windowFadeTime < 1.0f)
             {
-                elapsedTime += Time.deltaTime;
+                elapsedTime += Time.unscaledDeltaTime;
                 InventoryAndStatusWindow.position = Vector3.Lerp(InventoryAndStatusWindow.position, _inventoryAndStatusWindowInPosition, elapsedTime / _windowFadeTime);
                 yield return null;
             }
             _isFading = false;
+            Time.timeScale = 0f;
             StopCoroutine(_fadeInWindow);
             yield return null;
         }
@@ -156,11 +162,13 @@ public class HUDController : MonoBehaviour
             _isFading = true;
             while (elapsedTime / _windowFadeTime < 1.0f)
             {
-                elapsedTime += Time.deltaTime;
+                elapsedTime += Time.unscaledDeltaTime;
                 InventoryAndStatusWindow.position = Vector3.Lerp(InventoryAndStatusWindow.position, _inventoryAndStatusWindowOutPosition, elapsedTime / _windowFadeTime);
                 yield return null;
             }
             _isFading = false;
+            Time.timeScale = 1f;
+            Cursor.gameObject.SetActive(false);
             StopCoroutine(_fadeOutWindow);
             yield return null;
         }
