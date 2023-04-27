@@ -1,10 +1,13 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
 
 public class MonsterHealthBar : MonoBehaviour
 {
+    private MonsterPresenter _monsterPresenter;
+
     private Image _backgroundImage;
     private Image _instanceImage;
     private Image _baseImage;
@@ -15,10 +18,12 @@ public class MonsterHealthBar : MonoBehaviour
 
     IEnumerator _OnHealthBarFadeCoroutine;
 
+    [SerializeField]
     private Vector3 _uiPos;
 
     private void Awake()
     {
+        
         _backgroundImage = transform.GetChild(0).GetComponent<Image>();
         _instanceImage = transform.GetChild(1).GetComponent<Image>();
         _baseImage = transform.GetChild(2).GetComponent<Image>();
@@ -26,15 +31,19 @@ public class MonsterHealthBar : MonoBehaviour
 
     private void Start()
     {
-        _baseImage.enabled = false;
-        _instanceImage.enabled = false;
-        _backgroundImage.enabled = false;
+        _monsterPresenter = transform.root.GetComponent<Monster>().MonsterPresenter;
+        _monsterPresenter.OnChangedMonsterHPRatio -= UpdateHealthBar;
+        _monsterPresenter.OnChangedMonsterHPRatio += UpdateHealthBar;
+    }
+
+    private void OnEnable()
+    {
+        FadeOutProgressBarImage();
         _OnHealthBarFadeCoroutine = HealthBarChangeCoroutine();
-        _uiPos = Vector3.up * 0.01f;
         _backgroundImage.fillAmount = 1f;
+        _instanceImage.fillAmount = 1f;
         _currentHealthRatio = 1f;
         _baseImage.fillAmount = _currentHealthRatio;
-        FadeOutProgressBarImage();
     }
 
     private void Update()
@@ -82,12 +91,6 @@ public class MonsterHealthBar : MonoBehaviour
         _baseImage.enabled = true;
         _instanceImage.enabled = true;
         _backgroundImage.enabled = true;
-    }
-
-    private void OnEnable()
-    {
-        MonsterPresenter.OnChangedMonsterHPRatio -= UpdateHealthBar;
-        MonsterPresenter.OnChangedMonsterHPRatio += UpdateHealthBar;
     }
 
     public void UpdateHealthBar(int max, int cur)

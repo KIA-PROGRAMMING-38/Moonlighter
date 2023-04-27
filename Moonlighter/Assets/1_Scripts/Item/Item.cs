@@ -47,5 +47,4 @@ public class Item : MonoBehaviour
             yield return null;
         }
     }
-
 }

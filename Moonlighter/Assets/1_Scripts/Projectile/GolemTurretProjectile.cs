@@ -21,6 +21,7 @@ public class GolemTurretProjectile : MonoBehaviour
         rigid = GetComponent<Rigidbody2D>();
         _anim = GetComponent<Animator>();
         _base = GameObject.Find(ObjectLiteral.GOLEMTURRET).GetComponentInParent<GolemTurretBroken>();
+        transform.parent = _base.transform;
     }
 
     private void OnEnable()

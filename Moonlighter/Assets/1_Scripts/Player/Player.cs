@@ -1,5 +1,6 @@
 using EnumValue;
 using System.Collections;
+using System.Threading;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -183,7 +184,9 @@ public class Player : MonoBehaviour
                     Vector2 knockBack = (contactPoint - this.Rigid.position).normalized;
                     other.transform.root.GetComponent<Rigidbody2D>().AddForce(knockBack * 5f, ForceMode2D.Impulse);
                 }
-
+                Monster monster = other.transform.root.GetComponent<Monster>();
+                GetDamaged(monster.GetNormalDamageValue());
+                PlayerPresenter.ModifyPlayerHPRatio(_playerData.MaxHp, _playerData.CurHp);
                 OnHit();
             }
         }

@@ -11,5 +11,10 @@ public class TangleTraceState : TangleState
             rigid.velocity = (target.position - animator.transform.position).normalized * speed;
         }
 
+        if (false == tangle.IsCollision && false == tangle.IsDie)
+        {
+            rigid.velocity = (target.position - animator.transform.position).normalized * speed;
+        }
+
     }
 }
