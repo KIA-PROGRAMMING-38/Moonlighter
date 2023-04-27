@@ -1,11 +1,17 @@
 using System;
 
-public static class MonsterPresenter
+public class MonsterPresenter
 {
-    public static event Action<int, int> OnChangedMonsterHPRatio;
+    public event Action<int, int> OnChangedMonsterHPRatio;
+    public event Action OnDie;
 
-    public static void ModifyPlayerHPRatio(int maxHp, int curHp)
+    public void ModifyMonsterHPRatio(int maxHp, int curHp)
     {
         OnChangedMonsterHPRatio?.Invoke(maxHp, curHp);
+    }
+
+    public void NotifyMonsterDie()
+    {
+        OnDie?.Invoke();
     }
 }

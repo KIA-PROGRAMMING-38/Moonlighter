@@ -10,24 +10,22 @@ public class GolemSoldier : Monster
 
     public Player Target { get; private set; }
 
-    private Animator _anim;
-
     public override void Awake()
     {
         base.Awake();
         Target = GameObject.Find(ObjectLiteral.PLAYER).GetComponent<Player>();
-        _anim = GetComponent<Animator>();
         CurrentDir = GolemSoldierDirection.Down;
+        
+    }
+
+    public override void OnEnable()
+    {
+        base.OnEnable();
+        DetectRange.SetActive(true);
         monsterData.Maxhp = 100;
         monsterData.CurHp = monsterData.Maxhp;
         monsterData.NormalDamage = 15;
     }
-
-    private void Start()
-    {
-        _anim.SetTrigger(MonsterAnimParams.AWAKE);
-    }
-
 
     private void SetActiveDamageRange()
     {

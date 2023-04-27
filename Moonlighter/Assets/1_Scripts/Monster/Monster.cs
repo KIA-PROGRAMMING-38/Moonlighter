@@ -4,11 +4,20 @@ using UnityEngine;
 
 public class Monster : MonoBehaviour
 {
+    public MonsterPresenter MonsterPresenter { get; private set; }
+
     private IEnumerator _OnHitCoroutine;
+    private IEnumerator _OnDieCoroutine;
+
+    [SerializeField]
+    private Potion _item;
+
     private bool _isRunningHitEvent = false;
     private float _hitTweenTime = 0.3f;
     private SpriteRenderer _spriteRenderer;
     private Rigidbody2D _rigid;
+    public Animator Anim { get; private set; }
+
     [SerializeField]
     protected MonsterData monsterData;
 
@@ -17,13 +26,25 @@ public class Monster : MonoBehaviour
     private Material _originMaterial;
 
     public bool IsHit { get; private set; }
+    public bool IsDie { get; private set; }
 
     public virtual void Awake()
     {
+        MonsterPresenter = new MonsterPresenter();
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _rigid = GetComponent<Rigidbody2D>();
+        Anim = GetComponent<Animator>();
         _originMaterial = _spriteRenderer.material;
+        
+    }
+
+    public virtual void OnEnable()
+    {
+        IsDie = false;
+        monsterData.CurHp = monsterData.Maxhp;
+        _spriteRenderer.material = _originMaterial;
         _OnHitCoroutine = OnHitState();
+        _OnDieCoroutine = OnDieState();
     }
 
     public int GetNormalDamageValue()
@@ -42,9 +63,13 @@ public class Monster : MonoBehaviour
     public void GetDamaged(int damage)
     {
         monsterData.CurHp -= damage;
-        if(monsterData.CurHp < 0)
+        if(monsterData.CurHp <= 0)
         {
+            IsDie = true;
             monsterData.CurHp = 0;
+            _spriteRenderer.material = _hitMaterial;
+            Anim.SetTrigger(MonsterAnimParamsToHash.DIE);
+            StartCoroutine(_OnDieCoroutine);
         }
     }
 
@@ -57,11 +82,25 @@ public class Monster : MonoBehaviour
             _isRunningHitEvent = true;
             _spriteRenderer.material = _hitMaterial;
             yield return TimeStore.GetWaitForSeconds(_hitTweenTime);
-            _spriteRenderer.material = _originMaterial;
+            if(false == IsDie)
+            {
+                _spriteRenderer.material = _originMaterial;
+            }
             _isRunningHitEvent = false;
             IsHit = false;
             StopCoroutine(_OnHitCoroutine);
             yield return null;
+        }
+    }
+
+    IEnumerator OnDieState()
+    {
+        while(true)
+        {
+            yield return TimeStore.GetWaitForSeconds(0.667f);
+            gameObject.SetActive(false);
+            Instantiate(_item, this.transform.position, Quaternion.identity);
+            StopCoroutine(_OnDieCoroutine);
         }
     }
 
@@ -72,7 +111,7 @@ public class Monster : MonoBehaviour
             SpriteRenderer weaponSprite = other.transform.parent.GetComponent<SpriteRenderer>();
             Weapon playerWeapon = other.transform.parent.GetComponent<Weapon>();
             GetDamaged(playerWeapon.GetDamageValue());
-            MonsterPresenter.ModifyPlayerHPRatio(monsterData.Maxhp, monsterData.CurHp);
+            MonsterPresenter.ModifyMonsterHPRatio(monsterData.Maxhp, monsterData.CurHp);
             OnHit();
             _rigid.velocity = Vector2.zero;
             _rigid.AddForce(((Vector2)_spriteRenderer.bounds.center - (Vector2)weaponSprite.bounds.center).normalized * 0.5f, ForceMode2D.Impulse);

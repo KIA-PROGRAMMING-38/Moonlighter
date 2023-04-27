@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class MonsterAnimParamsToHash 
 {
+    public static readonly int DIE = Animator.StringToHash(MonsterAnimParams.DIE);
     public static readonly int DIRX = Animator.StringToHash(MonsterAnimParams.DIRX);
     public static readonly int DIRY = Animator.StringToHash(MonsterAnimParams.DIRY);
     public static readonly int ISCOLLISION = Animator.StringToHash(MonsterAnimParams.ISCOLLISION);
