@@ -16,6 +16,7 @@ public class Weapon : MonoBehaviour
     public Animator Anim { get; private set; }
     public AnimationHandler AnimHandler { get; private set; }
     public GameObject[] AttackRange;
+    public GameObject BigSwordSecondaryAction;
 
     private WeaponAttackDir _nowAttackDir;
     private float _dirX;
@@ -26,6 +27,14 @@ public class Weapon : MonoBehaviour
         get
         {
             return _bigSwordData;
+        }
+    }
+
+    public ShortSwordAndShieldData ShortSwordAndShieldData
+    {
+        get
+        {
+            return _shortSwordAndShield;
         }
     }
 
@@ -75,18 +84,12 @@ public class Weapon : MonoBehaviour
 
     private void ActiveSecondaryAction()
     {
-        for (int i = 0; i < AttackRange.Length; ++i)
-        {
-            AttackRange[i].SetActive(true);
-        }
+        BigSwordSecondaryAction.SetActive(true);
     }
 
     private void InactiveSecondaryAction()
     {
-        for (int i = 0; i < AttackRange.Length; ++i)
-        {
-            AttackRange[i].SetActive(false);
-        }
+        BigSwordSecondaryAction.SetActive(false);
     }
 
     private void ActiveAttack()

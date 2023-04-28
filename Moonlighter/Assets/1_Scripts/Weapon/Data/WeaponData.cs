@@ -1,10 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.Animations;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "WeaponData", menuName = "Data/Weapon Data/Base Data")]
-public class WeaponData : ScriptableObject
+[CreateAssetMenu(fileName = "WeaponData", menuName = "Data/Item Data/Weapon Data/Base Data")]
+public class WeaponData : ItemData
 {
     [Header("Combo State")]
     public int ComboAttackOneDamage;

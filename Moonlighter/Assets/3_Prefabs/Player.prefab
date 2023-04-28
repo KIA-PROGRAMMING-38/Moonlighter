@@ -1,5 +1,68 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2137644344
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2137644345}
+  - component: {fileID: 2137644346}
+  - component: {fileID: 2137644347}
+  m_Layer: 8
+  m_Name: BIgSwordSecondaryActionRange
+  m_TagString: PlayerWeapon
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &2137644345
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2137644344}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.104, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1844382630179294691}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!58 &2137644346
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2137644344}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.6
+--- !u!114 &2137644347
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2137644344}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59f10b2cbc4d3e345bf52492eae81cfc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Effect: {fileID: -7061464665371533075, guid: 8c105eec025a25743b30c8c490c4ac14, type: 3}
+  CamEffect: {fileID: 0}
 --- !u!1 &355124582564670759
 GameObject:
   m_ObjectHideFlags: 0
@@ -319,6 +382,7 @@ Transform:
   - {fileID: 5495381045723503032}
   - {fileID: 4133770109548459647}
   - {fileID: 8143948334659109592}
+  - {fileID: 2137644345}
   m_Father: {fileID: 1844382630470744454}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -384,7 +448,7 @@ Animator:
   m_GameObject: {fileID: 1844382630179294692}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 8c752194121e37041a7d1d216d0d766c, type: 2}
+  m_Controller: {fileID: 0}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -407,11 +471,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b99661129b0b9014f8e7db4837e82951, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _bigSwordData: {fileID: 11400000, guid: 9cd133073999c5c41a0a25381de7325b, type: 2}
+  _shortSwordAndShield: {fileID: 11400000, guid: bf4b0f1504a4ad24ab3c96c333fe8214, type: 2}
   AttackRange:
   - {fileID: 7270234786388670733}
   - {fileID: 2265598144648983044}
   - {fileID: 847048196757016631}
   - {fileID: 355124582564670759}
+  BigSwordSecondaryAction: {fileID: 2137644344}
 --- !u!114 &1844382630179294703
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -563,7 +630,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 100
+  m_Mass: 1
   m_LinearDrag: 15
   m_AngularDrag: 0.05
   m_GravityScale: 0
@@ -717,6 +784,30 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: bdf54075-fe58-4c3e-8635-fc445be6806d
     m_ActionName: PlayerAction/SecondaryAction[/Keyboard/k]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1844382630470744449}
+        m_TargetAssemblyTypeName: PlayerInputHandler, Assembly-CSharp
+        m_MethodName: OnWeaponChange
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 3647a440-ad42-43fe-b8ba-6bdaf0391dbf
+    m_ActionName: PlayerAction/WeaponChange[/Keyboard/z]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 123a8525-21e7-4694-80dc-b0ad8d9c0cda
+    m_ActionName: UI/InventoryKey[/Keyboard/i]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 21595056-abc5-440b-943c-21d0a71da134
+    m_ActionName: UI/CursorMove[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: PlayerAction

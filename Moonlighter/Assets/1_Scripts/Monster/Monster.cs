@@ -54,7 +54,7 @@ public class Monster : MonoBehaviour
 
     private void OnHit()
     {
-        if(false == _isRunningHitEvent)
+        if(false == _isRunningHitEvent && false == IsDie)
         {
             StartCoroutine(_OnHitCoroutine);
         }
@@ -98,9 +98,9 @@ public class Monster : MonoBehaviour
         while(true)
         {
             yield return TimeStore.GetWaitForSeconds(0.667f);
+            StopCoroutine(_OnDieCoroutine);
             gameObject.SetActive(false);
             Instantiate(_item, this.transform.position, Quaternion.identity);
-            StopCoroutine(_OnDieCoroutine);
         }
     }
 
