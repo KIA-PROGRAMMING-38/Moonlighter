@@ -174,6 +174,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "PickingKey",
+                    "type": "Button",
+                    "id": "246741dc-55b0-4f25-bfc2-002fc76fa01b",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -242,6 +251,17 @@
                     "action": "CursorMove",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "4f029683-ddfa-4d49-bc1a-f36bf01d638c",
+                    "path": "<Keyboard>/j",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "PickingKey",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         }

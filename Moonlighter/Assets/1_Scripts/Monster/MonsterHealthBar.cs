@@ -11,10 +11,11 @@ public class MonsterHealthBar : MonoBehaviour
     private Image _backgroundImage;
     private Image _instanceImage;
     private Image _baseImage;
-    [SerializeField] private Transform _owner;
+    [SerializeField] 
+    private Transform _owner;
 
     private float _currentHealthRatio;
-    private float _decreaseHealthTime = 1.0f;
+    private float _decreaseHealthTime = 0.5f;
 
     IEnumerator _OnHealthBarFadeCoroutine;
 
@@ -23,7 +24,7 @@ public class MonsterHealthBar : MonoBehaviour
 
     private void Awake()
     {
-        
+        _OnHealthBarFadeCoroutine = HealthBarChangeCoroutine();
         _backgroundImage = transform.GetChild(0).GetComponent<Image>();
         _instanceImage = transform.GetChild(1).GetComponent<Image>();
         _baseImage = transform.GetChild(2).GetComponent<Image>();
@@ -39,7 +40,7 @@ public class MonsterHealthBar : MonoBehaviour
     private void OnEnable()
     {
         FadeOutProgressBarImage();
-        _OnHealthBarFadeCoroutine = HealthBarChangeCoroutine();
+        
         _backgroundImage.fillAmount = 1f;
         _instanceImage.fillAmount = 1f;
         _currentHealthRatio = 1f;
@@ -60,7 +61,7 @@ public class MonsterHealthBar : MonoBehaviour
             float progressFillAmount = _instanceImage.fillAmount;
             _instanceImage.fillAmount = _currentHealthRatio;
 
-            while (t - 0.1f < _decreaseHealthTime)
+            while (t < _decreaseHealthTime)
             {
                 if (startRatio != _currentHealthRatio)
                 {
@@ -69,6 +70,7 @@ public class MonsterHealthBar : MonoBehaviour
                     _instanceImage.fillAmount = _currentHealthRatio;
                     progressFillAmount = _instanceImage.fillAmount;
                 }
+                
                 t += Time.deltaTime;
                 _instanceImage.fillAmount = Mathf.Lerp(progressFillAmount, _currentHealthRatio, t / _decreaseHealthTime);
                 yield return null;
@@ -98,7 +100,10 @@ public class MonsterHealthBar : MonoBehaviour
         FadeInProgressBarImage();
         _currentHealthRatio = Mathf.Clamp01(cur / (float)max);
         _baseImage.fillAmount = _currentHealthRatio;
-        StartCoroutine(_OnHealthBarFadeCoroutine);
+        if (false == _owner.GetComponent<Monster>().IsDie)
+        {
+            StartCoroutine(_OnHealthBarFadeCoroutine);
+        }
     }
 
 }

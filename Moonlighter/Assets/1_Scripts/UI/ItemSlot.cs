@@ -1,20 +1,21 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
+[Serializable]
 public class ItemSlot : MonoBehaviour
 {
-    private ItemData _item;
+    public ItemData ItemData;
 
-    private Image _itemImage;
-    private Color _itemColor = new Color(1, 1, 1, 1);
+    public Image ItemImage;
+    public Text CountText;
 
-    private int Count;
-
+    public int Count;
 
     private void Awake()
     {
-        _itemImage = transform.GetChild(0).GetComponent<Image>();
-        _itemImage.sprite = _item.ItemImage;
-        _itemImage.color = _itemColor;
+        ItemImage = transform.GetChild(0).GetComponent<Image>();
+        CountText = transform.GetChild(1).GetComponent<Text>();
     }
+
 }

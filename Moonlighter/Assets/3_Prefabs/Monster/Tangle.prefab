@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1880139808}
   - component: {fileID: 1880139809}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: AttackRange
   m_TagString: MonsterContactAttack
   m_Icon: {fileID: 0}
@@ -318,8 +318,8 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 10
-  m_LinearDrag: 0.5
+  m_Mass: 1
+  m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 0
   m_Material: {fileID: 0}
@@ -360,8 +360,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91d4b5fc11b5c0f41b5985af230fc71c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _item: {fileID: 0}
-  monsterData: {fileID: 0}
+  _item: {fileID: 7437134985554496240, guid: 5616884f6fd984e428bf94f2b8c68d7c, type: 3}
+  monsterData: {fileID: 11400000, guid: e6a2032f230d3f04d8f756a1119b8979, type: 2}
   _hitMaterial: {fileID: 2100000, guid: a6ff9b35b0f84884eb0e4c7a5a091447, type: 2}
 --- !u!1 &7995157131650220316
 GameObject:
@@ -480,6 +480,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _owner: {fileID: 3570339872970507802}
+  _uiPos: {x: 0, y: -0.361, z: 0}
 --- !u!1 &8530435743315188838
 GameObject:
   m_ObjectHideFlags: 0

@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12c6b9192a8d1c447b870213649b86cd, type: 3}
   m_Name: ShortSwordAndShieldData
   m_EditorClassIdentifier: 
+  ItemImage: {fileID: 21300000, guid: c1f7849956d6c8b4aabbd15b7b6212c0, type: 3}
+  ItemType: 1
   ComboAttackOneDamage: 25
   ComboAttackTwoDamage: 25
   ComboAttackThreeDamage: 50
