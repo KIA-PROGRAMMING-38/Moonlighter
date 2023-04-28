@@ -7,6 +7,8 @@ public class HUDController : MonoBehaviour
 
     public CursorController Cursor;
 
+    public ItemSlot PickedItemSlot;
+
     #region Inventory 관련 변수들
     public RectTransform InventoryIcon;
     public RectTransform InventoryAndStatusWindow;
@@ -53,7 +55,12 @@ public class HUDController : MonoBehaviour
     {
         HUDPresenter.OnInventoryWindow -= ActionInventoryKey;
         HUDPresenter.OnInventoryWindow += ActionInventoryKey;
+        
     }
+
+    
+
+    
 
     /// <summary>
     /// 인벤토리키 입력이 들어왔을 때 실행될 함수.

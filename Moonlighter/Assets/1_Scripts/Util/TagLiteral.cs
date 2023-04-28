@@ -11,4 +11,5 @@ public class TagLiteral
     public const string BOSS_ROCKETARM_PUNCH = "BossRocketArmPunch";
     public const string BOSS_WAVE = "BossWave";
     public const string PLAYER_WEAPON = "PlayerWeapon";
+    public const string NEXT_LEVEL = "NextLevel";
 }

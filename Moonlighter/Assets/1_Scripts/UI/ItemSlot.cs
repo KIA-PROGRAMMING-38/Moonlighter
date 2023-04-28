@@ -18,4 +18,19 @@ public class ItemSlot : MonoBehaviour
         CountText = transform.GetChild(1).GetComponent<Text>();
     }
 
+    public static void SwapItemSlot(ItemSlot origin, ItemSlot clone)
+    {
+        ItemSlot tmp = Instantiate(clone);
+        clone.ItemData = origin.ItemData;
+        clone.ItemImage.sprite = origin.ItemImage.sprite;
+        clone.Count = origin.Count;
+        clone.CountText.text = origin.CountText.text;
+        origin.ItemData = tmp.ItemData;
+        origin.ItemImage.sprite = tmp.ItemImage.sprite;
+        origin.Count = tmp.Count;
+        origin.CountText.text = tmp.CountText.text;
+        Destroy(tmp);
+    }
+
+
 }
