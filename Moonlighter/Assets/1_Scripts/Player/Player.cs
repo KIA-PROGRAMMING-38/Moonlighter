@@ -57,6 +57,7 @@ public class Player : MonoBehaviour
 
     private void Awake()
     {
+        DontDestroyOnLoad(this);
         Anim = GetComponent<Animator>();
         PlayerCollider = GetComponent<CapsuleCollider2D>();
         Rigid = GetComponent<Rigidbody2D>();

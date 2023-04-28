@@ -13,6 +13,7 @@ TagManager:
   - BossRocketArmPunch
   - BossWave
   - PlayerWeapon
+  - NextLevel
   layers:
   - Default
   - TransparentFX

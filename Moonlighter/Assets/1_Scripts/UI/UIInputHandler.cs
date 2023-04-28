@@ -30,5 +30,29 @@ public class UIInputHandler : MonoBehaviour
         }
     }
 
+    public void OnPickingKey(InputAction.CallbackContext context)
+    {
+        if(Time.timeScale == 0f)
+        {
+            if(context.performed)
+            {
+                InventoryPresenter.ActicePickedItemSlot();
+            }
+        }
+    }
+
+    public void OnQuickEquipKey(InputAction.CallbackContext context)
+    {
+        if(Time.timeScale == 0f)
+        {
+            if (context.performed)
+            {
+                InventoryPresenter.RegisterQuickSlot();
+            }
+        }
+    }
+
+
+
 
 }
