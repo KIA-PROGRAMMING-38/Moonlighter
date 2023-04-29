@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2ed56ee73ae92b143b9c20807281ee54, type: 3}
-  m_Name: PotionData
+  m_Script: {fileID: 11500000, guid: 428e42e32199d8a438e71b9b8eae6cd2, type: 3}
+  m_Name: EmptyItemData
   m_EditorClassIdentifier: 
-  ItemImage: {fileID: 21300000, guid: 6e2dfa1bdfc3b3a4ea07cb2852d5cb8a, type: 3}
-  ItemType: 1
+  ItemImage: {fileID: 0}
+  ItemType: 0

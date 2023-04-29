@@ -53,6 +53,7 @@ namespace EnumValue
 
     public enum ItemType
     {
+        Empty,
         Potion,
         Weapon
     }

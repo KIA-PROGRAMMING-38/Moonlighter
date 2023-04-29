@@ -1,13 +1,15 @@
-using System;
 using System.Collections;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class CursorController : MonoBehaviour
 {
+    public Player PlayerRef;
+
     public ItemSlot[][] InventorySlot;
-    public ItemSlot EmptySlot;
     public ItemSlot PotionQuickSlot;
+    public QuickSlot QuickSlot;
+
+    public ItemData EmptyItemData;
 
     public Sprite EmptySprite;
 
@@ -47,7 +49,45 @@ public class CursorController : MonoBehaviour
         InventoryPresenter.OnMoveCursor += MoveCursor;
         InventoryPresenter.OnGoToQuickSlot -= RegisterOnStatusWindow;
         InventoryPresenter.OnGoToQuickSlot += RegisterOnStatusWindow;
+        InventoryPresenter.OnUseQuickSlot -= UseQuickSlot;
+        InventoryPresenter.OnUseQuickSlot += UseQuickSlot;
+
         SetDefaultPosition();
+    }
+
+    private void UseQuickSlot()
+    {
+        if(QuickSlot.gameObject.activeSelf)
+        {
+            PlayerRef.UsePotion(50);
+            --QuickSlot.Count;
+            --PotionQuickSlot.Count;
+            QuickSlot.PotionCount.text = QuickSlot.Count.ToString();
+            PotionQuickSlot.CountText.text = PotionQuickSlot.Count.ToString();
+            if(QuickSlot.Count <= 0)
+            {
+                UnRegistPotionOnQuickSlot();
+                PotionQuickSlot.ItemData = EmptyItemData;
+                PotionQuickSlot.ItemImage.sprite = EmptySprite;
+                PotionQuickSlot.CountText.text = string.Empty;
+            }
+
+        }
+    }
+
+    private void RegistPotionOnQuickSlot(ItemSlot item)
+    {
+        QuickSlot.gameObject.SetActive(true);
+        QuickSlot.PotionImage.sprite = item.ItemImage.sprite;
+        QuickSlot.Count = item.Count;
+        QuickSlot.PotionCount.text = item.CountText.text;
+    }
+
+    private void UnRegistPotionOnQuickSlot()
+    {
+        QuickSlot.PotionImage.sprite = EmptySprite;
+        QuickSlot.PotionCount.text = string.Empty;
+        QuickSlot.gameObject.SetActive(false);
     }
 
     private void RegisterOnStatusWindow()
@@ -55,7 +95,7 @@ public class CursorController : MonoBehaviour
         if (InventorySlot[YPos][XPos] != PotionQuickSlot && InventorySlot[YPos][XPos].ItemData != null && InventorySlot[YPos][XPos].ItemData.ItemType == EnumValue.ItemType.Potion)
         {
             _goToQuickSlot = GoToQuickSlot(InventorySlot[YPos][XPos], PotionQuickSlot, PotionQuickSlot.transform.position, 3000f);
-            
+            RegistPotionOnQuickSlot(InventorySlot[YPos][XPos]);
             StartCoroutine(_goToQuickSlot);
         }
 
@@ -68,6 +108,7 @@ public class CursorController : MonoBehaviour
                 {
                     isFindEmpty = true;
                     _goToQuickSlot = GoToQuickSlot(InventorySlot[YPos][XPos], NonStatusSlot[i], NonStatusSlot[i].transform.position, 3000f);
+                    UnRegistPotionOnQuickSlot();
                     StartCoroutine(_goToQuickSlot);
                 }
             }

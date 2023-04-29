@@ -107,6 +107,16 @@ public class Player : MonoBehaviour
         }
     }
 
+    public void UsePotion(int healValue)
+    {
+        _playerData.CurHp += healValue;
+        if(_playerData.CurHp >= 100)
+        {
+            _playerData.CurHp = 100;
+        }
+        PlayerPresenter.ModifyPlayerHPRatio(_playerData.MaxHp, _playerData.CurHp);
+    }
+
     IEnumerator OnHitState()
     {
         while (true)
