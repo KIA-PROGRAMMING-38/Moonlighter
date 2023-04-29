@@ -58,10 +58,6 @@ public class HUDController : MonoBehaviour
         
     }
 
-    
-
-    
-
     /// <summary>
     /// 인벤토리키 입력이 들어왔을 때 실행될 함수.
     /// </summary>

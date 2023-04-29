@@ -59,6 +59,14 @@ public class PlayerInputHandler : MonoBehaviour
         }
     }
 
+    public void OnQuickSlot(InputAction.CallbackContext context)
+    {
+        if(context.performed && Time.timeScale != 0)
+        {
+            InventoryPresenter.UseQuickSlot();
+        }
+    }
+
     public void UseRollInput() => RollInput = false;
 
     public void UseComboInput() => ComboInput = false;

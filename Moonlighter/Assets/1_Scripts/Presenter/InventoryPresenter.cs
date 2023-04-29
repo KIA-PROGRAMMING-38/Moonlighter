@@ -12,6 +12,8 @@ public static class InventoryPresenter
 
     public static event Action OnPickedDownItemSlot;
 
+    public static event Action OnUseQuickSlot;
+
     public static void ModifyCursorPosition()
     {
         OnMoveCursor?.Invoke();
@@ -35,5 +37,10 @@ public static class InventoryPresenter
     public static void InActivePickedItemSlot()
     {
         OnPickedDownItemSlot?.Invoke();
+    }
+
+    public static void UseQuickSlot()
+    {
+        OnUseQuickSlot?.Invoke();
     }
 }

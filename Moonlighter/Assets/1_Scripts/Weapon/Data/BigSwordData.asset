@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: BigSwordData
   m_EditorClassIdentifier: 
   ItemImage: {fileID: 21300000, guid: 3b62f8357dc695a4f8385e442fa734af, type: 3}
-  ItemType: 1
+  ItemType: 2
   ComboAttackOneDamage: 30
   ComboAttackTwoDamage: 30
   ComboAttackThreeDamage: 60
