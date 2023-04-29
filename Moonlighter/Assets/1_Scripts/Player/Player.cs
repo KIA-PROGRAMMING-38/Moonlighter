@@ -1,10 +1,18 @@
+using Cinemachine;
 using EnumValue;
 using System.Collections;
-using System.Threading;
 using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    public CinemachineVirtualCamera VirtualCamera;
+
+    public RoomManager RoomManager;
+
+    public RoomType NowRoomType;
+
+    private IEnumerator _moveVirtualCamera;
+
     #region BaseComponent
     public Animator Anim { get; set; }
     public Rigidbody2D Rigid { get; private set; }
@@ -21,8 +29,6 @@ public class Player : MonoBehaviour
     private IEnumerator _OnHitCoroutine;
     private bool _isRunningHitEvent = false;
     private float _hitTweenTime = 0.3f;
-
-    private IEnumerator _OnDecreasePlayerHp;
 
     private IEnumerator _OnInvincibleCoroutine;
     private bool _isInvincible = false;
@@ -78,6 +84,7 @@ public class Player : MonoBehaviour
         Anim.SetBool(PlayerAnimParamsToHash.IDLE, true);
         _OnHitCoroutine = OnHitState();
         _OnInvincibleCoroutine = OnInvincibleState();
+        _moveVirtualCamera = MoveVirtualCamera();
     }
 
     private void SetRollInvincible()
@@ -161,6 +168,56 @@ public class Player : MonoBehaviour
         }
     }
 
+    IEnumerator MoveVirtualCamera()
+    {
+        while (true)
+        {
+            float elapsedTime = 0f;
+
+            while (elapsedTime <= 1.0f)
+            {
+                Vector3 cameraPos = VirtualCamera.transform.position;
+                cameraPos = Vector3.Lerp(VirtualCamera.transform.position, RoomManager.Rooms[(int)NowRoomType].transform.position, elapsedTime * 2f);
+                cameraPos.z = -10;
+                VirtualCamera.transform.position = cameraPos;
+                elapsedTime += Time.deltaTime;
+                yield return null;
+            }
+
+            StopCoroutine(_moveVirtualCamera);
+            yield return null;
+
+        }
+    }
+
+    private void MoveVirtualCameraToNextRoom()
+    {
+        StartCoroutine(_moveVirtualCamera);
+    }
+
+    private void MoveToNextLevel()
+    {
+        switch(NowRoomType)
+        {
+            case RoomType.RoomOne:
+                transform.position = RoomManager.Rooms[(int)RoomType.RoomTwo].StartPosition.position;
+                NowRoomType = RoomType.RoomTwo;
+                MoveVirtualCameraToNextRoom();
+                break;
+            case RoomType.RoomTwo:
+                transform.position = RoomManager.Rooms[(int)RoomType.RoomThree].StartPosition.position;
+                NowRoomType = RoomType.RoomThree;
+                MoveVirtualCameraToNextRoom();
+                break;
+            case RoomType.RoomThree:
+                transform.position = RoomManager.Rooms[(int)RoomType.BossRoom].StartPosition.position;
+                NowRoomType = RoomType.BossRoom;
+                VirtualCamera.GetComponent<FollowCam>().enabled = true;
+                break;
+            
+        }
+    }
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag(TagLiteral.MONSTER_PROJECTILE) || other.CompareTag(TagLiteral.MONSTER_MELEEATTACK) || other.CompareTag(TagLiteral.BOSS_STONEARM_STAMP) || other.CompareTag(TagLiteral.BOSS_ROCKETARM_PUNCH))
@@ -200,6 +257,11 @@ public class Player : MonoBehaviour
                 PlayerPresenter.ModifyPlayerHPRatio(_playerData.MaxHp, _playerData.CurHp);
                 OnHit();
             }
+        }
+
+        if(other.CompareTag(TagLiteral.NEXT_LEVEL))
+        {
+            MoveToNextLevel();
         }
     }
 }
