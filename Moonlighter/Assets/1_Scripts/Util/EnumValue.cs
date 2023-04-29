@@ -57,4 +57,12 @@ namespace EnumValue
         Potion,
         Weapon
     }
+
+    public enum RoomType
+    {
+        RoomOne,
+        RoomTwo,
+        RoomThree,
+        BossRoom
+    }
 }

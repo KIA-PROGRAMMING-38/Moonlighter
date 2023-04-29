@@ -11,11 +11,11 @@ public class PlayerState : StateMachineBehaviour
 
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        inputHandler = animator.gameObject.GetComponent<PlayerInputHandler>();
-        player = animator.gameObject.GetComponent<Player>();
+        inputHandler = animator.transform.root.gameObject.GetComponent<PlayerInputHandler>();
+        player = animator.transform.root.gameObject.GetComponent<Player>();
         animHandler = player.AnimHandler;
         playerData = player.PlayerData;
-        rigid = animator.gameObject.GetComponent<Rigidbody2D>();
+        rigid = animator.transform.root.gameObject.GetComponent<Rigidbody2D>();
         animHandler.AnimationTrigger();
     }
 
