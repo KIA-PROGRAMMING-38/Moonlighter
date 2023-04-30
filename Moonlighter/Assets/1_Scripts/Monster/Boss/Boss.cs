@@ -26,6 +26,14 @@ public class Boss : Monster
         bossAttackState.Enqueue(BossAttackAction.Wave);
     }
 
+    private void Update()
+    {
+        if(IsDie)
+        {
+            _spriteRenderer.material = _originMaterial;
+        }
+    }
+
     private void ActiveRocksGenerator()
     {
         RocksGenerator.SetActive(true);

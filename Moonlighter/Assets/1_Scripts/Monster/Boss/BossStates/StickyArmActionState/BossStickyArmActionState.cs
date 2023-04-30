@@ -6,7 +6,7 @@ public class BossStickyArmActionState : BossState
     protected Animator stickyArmAnimator;
 
 
-    protected float stickyArmLength = 5.0f;
+    protected float stickyArmLength = 2.0f;
     protected float speed;
     protected LineRenderer lineRenderer;
     protected float angle;
