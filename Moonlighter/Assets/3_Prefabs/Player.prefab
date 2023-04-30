@@ -69,6 +69,7 @@ GameObject:
   - component: {fileID: 2137644345}
   - component: {fileID: 2137644346}
   - component: {fileID: 2137644347}
+  - component: {fileID: 1903831299}
   m_Layer: 8
   m_Name: BIgSwordSecondaryActionRange
   m_TagString: PlayerWeapon
@@ -121,6 +122,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Effect: {fileID: -7061464665371533075, guid: 8c105eec025a25743b30c8c490c4ac14, type: 3}
   CamEffect: {fileID: 0}
+--- !u!50 &1903831299
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2137644344}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 7
 --- !u!1 &355124582564670759
 GameObject:
   m_ObjectHideFlags: 0
@@ -664,8 +686,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 472196869
-  m_SortingLayer: 1
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 2
   m_Sprite: {fileID: -846999496, guid: c92b73a5fc0ade44bbeb46c076c3c588, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -727,7 +749,7 @@ Animator:
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 4fb893af0d8aa7d4a9bbad68d4b44547, type: 2}
   m_CullingMode: 0
-  m_UpdateMode: 0
+  m_UpdateMode: 2
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
@@ -748,6 +770,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c2f40b2e53a0d24ba4c2fb2dfe782aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  VirtualCamera: {fileID: 0}
+  RoomManager: {fileID: 0}
+  NowRoomType: 0
   _hitMaterial: {fileID: 2100000, guid: 81340204143a3f049a88997daa6df5aa, type: 2}
   _playerData: {fileID: 11400000, guid: f0352236d89af344f9049216140b10fa, type: 2}
   MonsterDestinationPos:

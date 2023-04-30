@@ -14,7 +14,7 @@ public class Monster : MonoBehaviour
 
     private bool _isRunningHitEvent = false;
     private float _hitTweenTime = 0.3f;
-    private SpriteRenderer _spriteRenderer;
+    protected SpriteRenderer _spriteRenderer;
     private Rigidbody2D _rigid;
     public Animator Anim { get; private set; }
 
@@ -23,7 +23,7 @@ public class Monster : MonoBehaviour
 
     [SerializeField]
     private Material _hitMaterial;
-    private Material _originMaterial;
+    protected Material _originMaterial;
 
     public bool IsHit { get; private set; }
     public bool IsDie { get; private set; }
@@ -66,10 +66,14 @@ public class Monster : MonoBehaviour
         if(monsterData.CurHp <= 0)
         {
             IsDie = true;
+            StopCoroutine(_OnHitCoroutine);
             monsterData.CurHp = 0;
             _spriteRenderer.material = _hitMaterial;
             Anim.SetTrigger(MonsterAnimParamsToHash.DIE);
-            StartCoroutine(_OnDieCoroutine);
+            if(monsterData.MonsterType == EnumValue.MonsterType.Normal)
+            {
+                StartCoroutine(_OnDieCoroutine);
+            }
         }
     }
 

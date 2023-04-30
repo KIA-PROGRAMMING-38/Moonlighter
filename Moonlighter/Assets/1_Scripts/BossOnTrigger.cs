@@ -6,6 +6,9 @@ public class BossOnTrigger : MonoBehaviour
 {
     public Boss BossRef;
 
+    public GameObject BossHealthBar;
+    public GameObject BossScroll;
+
     private BoxCollider2D _bossSpawnTrigger;
 
     private void Awake()
@@ -18,6 +21,8 @@ public class BossOnTrigger : MonoBehaviour
         if(collision.gameObject.CompareTag(TagLiteral.PLAYER))
         {
             BossRef.gameObject.SetActive(true);
+            BossHealthBar.SetActive(true);
+            BossScroll.SetActive(true);
             _bossSpawnTrigger.enabled = false;
         }
     }

@@ -9,10 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1a8900e6298ebc449aafac98c5075ee0, type: 3}
-  m_Name: GolemSoldierData
+  m_Script: {fileID: 11500000, guid: ea50c921bd8b28e4f9db599a58eaa833, type: 3}
+  m_Name: BossData
   m_EditorClassIdentifier: 
-  MonsterType: 0
-  Maxhp: 100
+  MonsterType: 1
+  Maxhp: 1000
   CurHp: 0
-  NormalDamage: 10
+  NormalDamage: 15

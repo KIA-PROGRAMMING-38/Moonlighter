@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ItemImage: {fileID: 21300000, guid: 3b62f8357dc695a4f8385e442fa734af, type: 3}
   ItemType: 2
-  ComboAttackOneDamage: 30
-  ComboAttackTwoDamage: 30
-  ComboAttackThreeDamage: 60
-  SecondaryActionDamage: 80
+  ComboAttackOneDamage: 100
+  ComboAttackTwoDamage: 100
+  ComboAttackThreeDamage: 600
+  SecondaryActionDamage: 200
   PlayerController: {fileID: 9100000, guid: 4fb893af0d8aa7d4a9bbad68d4b44547, type: 2}
   WeaponController: {fileID: 9100000, guid: 8c752194121e37041a7d1d216d0d766c, type: 2}

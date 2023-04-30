@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4047f799c20cfa74ba104c3fd02582fa, type: 3}
   m_Name: TangleData
   m_EditorClassIdentifier: 
-  Maxhp: 60
-  CurHp: 40
+  MonsterType: 0
+  Maxhp: 40
+  CurHp: 0
   NormalDamage: 5

@@ -27,6 +27,12 @@ namespace EnumValue
         BigSword
     }
 
+    public enum MonsterType
+    {
+        Normal,
+        Boss
+    }
+
     public enum GolemTurretFirePositions
     {
         Down,

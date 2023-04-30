@@ -236,7 +236,7 @@ public class Player : MonoBehaviour
         {
             if (false == _isInvincible)
             {
-                Rigid.AddForce((transform.position - other.transform.position).normalized * 100f, ForceMode2D.Impulse);
+                Rigid.AddForce((transform.position - other.transform.position).normalized * 10f, ForceMode2D.Impulse);
                 OnHit();
             }
         }
