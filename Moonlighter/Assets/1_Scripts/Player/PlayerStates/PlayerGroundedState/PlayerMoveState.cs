@@ -13,6 +13,7 @@ public class PlayerMoveState : PlayerGroundedState
     {
         base.OnStateUpdate(animator, stateInfo, layerIndex);
 
+
         if (inputHandler.SecondaryActionInput)
         {
             ChangeState(animator, PlayerStates.Move, PlayerAnimParamsToHash.MOVE, PlayerAnimParamsToHash.READYSECONDARYACTION);

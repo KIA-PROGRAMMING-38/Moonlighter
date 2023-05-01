@@ -484,12 +484,13 @@ GameObject:
   - component: {fileID: 8974889159923252220}
   - component: {fileID: 494732856}
   - component: {fileID: 6486245096927768109}
+  - component: {fileID: 552976451}
   m_Layer: 0
   m_Name: GolemTurretBroken
   m_TagString: Monster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &8974889159923252221
 Transform:
@@ -622,8 +623,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6df6578b8665de4ea00c638bb7fab11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _item: {fileID: 0}
-  monsterData: {fileID: 0}
+  MonsterAudioSource: {fileID: 0}
+  MonsterHealthBar: {fileID: 3683686008747549770}
+  HitSound: {fileID: 8300000, guid: a136cef232648ca4f97d57c6e62eb35c, type: 3}
+  _item: {fileID: 7437134985554496240, guid: 5616884f6fd984e428bf94f2b8c68d7c, type: 3}
+  monsterData: {fileID: 11400000, guid: 0beec8bd970b55946b0746796032ed1b, type: 2}
   _hitMaterial: {fileID: 2100000, guid: a6ff9b35b0f84884eb0e4c7a5a091447, type: 2}
   _projectile: {fileID: 2009639315, guid: d18bf8397c1006f488603c88013499ff, type: 3}
   _target: {fileID: 0}
@@ -632,6 +636,7 @@ MonoBehaviour:
   - {fileID: 8250380508626261435}
   - {fileID: 7155812110694357164}
   - {fileID: 8401525472464532896}
+  ShootSound: {fileID: 8300000, guid: bc20b5e49101ad745974b60badde2e9b, type: 3}
 --- !u!50 &6486245096927768109
 Rigidbody2D:
   serializedVersion: 4
@@ -653,3 +658,99 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 7
+--- !u!82 &552976451
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8974889159923252216}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4

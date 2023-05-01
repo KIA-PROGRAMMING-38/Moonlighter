@@ -6,4 +6,7 @@ public class RoomManager : MonoBehaviour
 
     public Player PlayerRef;
 
+    public GameObject RoomTwoMonsters;
+    public GameObject RoomThreeMonsters;
+
 }

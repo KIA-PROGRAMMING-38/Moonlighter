@@ -79,7 +79,17 @@ public class Weapon : MonoBehaviour
 
     public int GetDamageValue()
     {
-        return _bigSwordData.ComboAttackOneDamage;
+        int Damage = 0;
+        switch(_player.PrimaryWeapon)
+        {
+            case Weapons.ShortSwordAndShield:
+                Damage = _shortSwordAndShield.ComboAttackOneDamage;
+                break;
+            case Weapons.BigSword:
+                Damage = _bigSwordData.ComboAttackOneDamage;
+                break;
+        }
+        return Damage;
     }
 
     private void ActiveSecondaryAction()

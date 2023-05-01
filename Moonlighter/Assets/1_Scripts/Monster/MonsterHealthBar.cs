@@ -1,5 +1,4 @@
 using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -32,7 +31,12 @@ public class MonsterHealthBar : MonoBehaviour
 
     private void Start()
     {
-        _monsterPresenter = transform.root.GetComponent<Monster>().MonsterPresenter;
+        
+    }
+
+    public void Initialized()
+    {
+        _monsterPresenter = transform.parent.GetComponent<Monster>().MonsterPresenter;
         _monsterPresenter.OnChangedMonsterHPRatio -= UpdateHealthBar;
         _monsterPresenter.OnChangedMonsterHPRatio += UpdateHealthBar;
     }
@@ -40,7 +44,6 @@ public class MonsterHealthBar : MonoBehaviour
     private void OnEnable()
     {
         FadeOutProgressBarImage();
-        
         _backgroundImage.fillAmount = 1f;
         _instanceImage.fillAmount = 1f;
         _currentHealthRatio = 1f;

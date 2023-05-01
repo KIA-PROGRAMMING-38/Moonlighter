@@ -6,7 +6,7 @@ public class DetectRange : MonoBehaviour
 
     private void Awake()
     {
-        _anim = gameObject.transform.root.GetComponent<Animator>();
+        _anim = gameObject.transform.parent.GetComponent<Animator>();
     }
 
     private void OnTriggerEnter2D(Collider2D other)
