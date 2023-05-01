@@ -192,10 +192,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc1a92d1f62f2a24dbd2f999838562bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _baseImage: {fileID: 792355736}
-  _instanceImage: {fileID: 6627788788506144978}
-  _backgroundImage: {fileID: 214766447}
   _owner: {fileID: 5774570602857559088}
+  _uiPos: {x: 0, y: 0, z: 0}
 --- !u!1 &792355734
 GameObject:
   m_ObjectHideFlags: 0
@@ -593,6 +591,7 @@ GameObject:
   - component: {fileID: 5774570602857559100}
   - component: {fileID: 5774570602857559089}
   - component: {fileID: 9039287718078821942}
+  - component: {fileID: 1840261659}
   m_Layer: 6
   m_Name: GolemSoldier
   m_TagString: Monster
@@ -727,6 +726,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8040a7d322bc93b4d94f90886662bbd2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MonsterAudioSource: {fileID: 0}
+  MonsterHealthBar: {fileID: 655966668}
+  HitSound: {fileID: 8300000, guid: a136cef232648ca4f97d57c6e62eb35c, type: 3}
+  _item: {fileID: 7437134985554496240, guid: 5616884f6fd984e428bf94f2b8c68d7c, type: 3}
   monsterData: {fileID: 11400000, guid: c18cd834c3cc46042b3daf7488810004, type: 2}
   _hitMaterial: {fileID: 2100000, guid: a6ff9b35b0f84884eb0e4c7a5a091447, type: 2}
   DetectRange: {fileID: 5774570602639614731}
@@ -751,6 +754,102 @@ CapsuleCollider2D:
   m_Offset: {x: -0.001510337, y: 0.25667757}
   m_Size: {x: 0.21765354, y: 0.26278257}
   m_Direction: 0
+--- !u!82 &1840261659
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5774570602857559099}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &5774570602978396646
 GameObject:
   m_ObjectHideFlags: 0

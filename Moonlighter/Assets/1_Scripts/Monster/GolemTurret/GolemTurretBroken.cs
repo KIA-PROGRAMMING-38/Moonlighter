@@ -17,11 +17,15 @@ public class GolemTurretBroken : Monster
 
     public Vector2 Dir { get; private set; }
 
+    public AudioClip ShootSound;
+
     public override void Awake()
     {
         base.Awake();
         _projectilePool = new ObjectPool<GolemTurretProjectile>(GenerateProjectile, SetActiveTrue);
         _anim = GetComponent<Animator>();
+
+
         _target = GameObject.Find(ObjectLiteral.PLAYER).gameObject;
     }
 
@@ -30,16 +34,28 @@ public class GolemTurretBroken : Monster
         GetProjectileFromPool();
     }
 
-    GolemTurretProjectile GetProjectileFromPool() => _projectilePool.Get();
+    GolemTurretProjectile GetProjectileFromPool()
+    {
+        GolemTurretProjectile projectile = _projectilePool.Get();
+        projectile.Init();
+        return projectile;
+    }
 
     GolemTurretProjectile GenerateProjectile()
     {
         GolemTurretProjectile projectile = Instantiate(_projectile);
         projectile.Pool = _projectilePool;
+        projectile._base = this;
+        projectile.transform.parent = this.transform;
         return projectile;
     }
 
     private void SetActiveTrue(GolemTurretProjectile projectile) => projectile.gameObject.SetActive(true);
+
+    private void PlayShootSound()
+    {
+        MonsterAudioSource.PlayOneShot(ShootSound);
+    }
 
     private void SetDirection()
     {

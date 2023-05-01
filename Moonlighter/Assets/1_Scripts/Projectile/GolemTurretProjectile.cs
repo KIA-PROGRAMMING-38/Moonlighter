@@ -1,12 +1,12 @@
+using EnumValue;
 using UnityEngine;
 using UnityEngine.Pool;
-using EnumValue;
 
 public class GolemTurretProjectile : MonoBehaviour
 {
     private Rigidbody2D rigid;
     private Animator _anim;
-    private GolemTurretBroken _base;
+    public GolemTurretBroken _base;
 
     private readonly Vector3 _turnDownDirection = new Vector3(0, 0, 0);
     private readonly Vector3 _turnLeftDirection = new Vector3(0, 0, -90);
@@ -20,13 +20,17 @@ public class GolemTurretProjectile : MonoBehaviour
     {
         rigid = GetComponent<Rigidbody2D>();
         _anim = GetComponent<Animator>();
-        _base = GameObject.Find(ObjectLiteral.GOLEMTURRET).GetComponentInParent<GolemTurretBroken>();
-        transform.parent = _base.transform;
     }
 
     private void OnEnable()
     {
+        
+    }
+
+    public void Init()
+    {
         SetFireDirection();
+
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

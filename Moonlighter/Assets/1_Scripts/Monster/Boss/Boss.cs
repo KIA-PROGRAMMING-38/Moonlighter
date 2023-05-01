@@ -12,6 +12,9 @@ public class Boss : Monster
 
     public Queue<BossAttackAction> bossAttackState;
 
+    public AudioClip BossAwakeSound;
+    public AudioClip BossDeathSound;
+
     public override void Awake()
     {
         base.Awake();
@@ -19,10 +22,11 @@ public class Boss : Monster
         StoneArmAttack = transform.GetChild(1).gameObject;
         RocksGenerator = transform.GetChild(4).gameObject;
         bossAttackState = new Queue<BossAttackAction>();
+        bossAttackState.Enqueue(BossAttackAction.StickyArmAction);
+        bossAttackState.Enqueue(BossAttackAction.Wave);
         bossAttackState.Enqueue(BossAttackAction.StoneArmPunch);
         bossAttackState.Enqueue(BossAttackAction.Wave);
         bossAttackState.Enqueue(BossAttackAction.StoneArmStamp);
-        bossAttackState.Enqueue(BossAttackAction.StickyArmAction);
         bossAttackState.Enqueue(BossAttackAction.Wave);
     }
 
@@ -32,6 +36,16 @@ public class Boss : Monster
         {
             _spriteRenderer.material = _originMaterial;
         }
+    }
+
+    private void PlayBossAwakeSound()
+    {
+        MonsterAudioSource.PlayOneShot(BossAwakeSound);
+    }
+
+    private void PlayBossDeathSound()
+    {
+        MonsterAudioSource.PlayOneShot(BossDeathSound);
     }
 
     private void ActiveRocksGenerator()

@@ -1,3 +1,4 @@
+using Cinemachine;
 using System.Collections;
 using UnityEngine;
 
@@ -7,18 +8,24 @@ public class Item : MonoBehaviour
     protected ItemData itemData;
 
     [SerializeField]
-    protected Vector3 bagIconPos;
+    protected GameObject bagIconPos;
+
+    public Camera cam;
 
     private Vector3 _startPos;
     private Vector3 _midPos;
+    private Vector3 _targetPos;
 
-    private float _moveSpeed = 7.0f; 
+    private float _moveSpeed = 14.0f; 
 
     IEnumerator _goToBag;
 
     private void Awake()
     {
-        _goToBag = GoToBag(bagIconPos, _moveSpeed);
+        cam = GameObject.Find("Camera").GetComponent<Camera>();
+        bagIconPos = GameObject.Find("HUD").transform.GetChild(4).gameObject;
+        _targetPos = cam.ScreenToWorldPoint(bagIconPos.transform.position);
+        _goToBag = GoToBag(_targetPos, _moveSpeed);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

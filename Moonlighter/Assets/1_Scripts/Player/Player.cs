@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    PlayerSoundManager _playerSoundManager;
+
     public CinemachineVirtualCamera VirtualCamera;
 
     public RoomManager RoomManager;
@@ -64,6 +66,7 @@ public class Player : MonoBehaviour
     private void Awake()
     {
         DontDestroyOnLoad(this);
+        _playerSoundManager = GetComponent<PlayerSoundManager>();
         Anim = GetComponent<Animator>();
         PlayerCollider = GetComponent<CapsuleCollider2D>();
         Rigid = GetComponent<Rigidbody2D>();
@@ -77,6 +80,7 @@ public class Player : MonoBehaviour
         _originColor = PlayerSpriteRenderer.color;
         _invincibleColor = PlayerSpriteRenderer.color;
         _invincibleColor.a = 0f;
+        Cursor.visible = false;
     }
 
     private void Start()
@@ -117,6 +121,7 @@ public class Player : MonoBehaviour
     public void UsePotion(int healValue)
     {
         _playerData.CurHp += healValue;
+        _playerSoundManager.PlayerUsePotionSound();
         if(_playerData.CurHp >= 100)
         {
             _playerData.CurHp = 100;
@@ -202,11 +207,13 @@ public class Player : MonoBehaviour
             case RoomType.RoomOne:
                 transform.position = RoomManager.Rooms[(int)RoomType.RoomTwo].StartPosition.position;
                 NowRoomType = RoomType.RoomTwo;
+                RoomManager.RoomTwoMonsters.SetActive(true);
                 MoveVirtualCameraToNextRoom();
                 break;
             case RoomType.RoomTwo:
                 transform.position = RoomManager.Rooms[(int)RoomType.RoomThree].StartPosition.position;
                 NowRoomType = RoomType.RoomThree;
+                RoomManager.RoomThreeMonsters.SetActive(true);
                 MoveVirtualCameraToNextRoom();
                 break;
             case RoomType.RoomThree:
@@ -220,7 +227,20 @@ public class Player : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag(TagLiteral.MONSTER_PROJECTILE) || other.CompareTag(TagLiteral.MONSTER_MELEEATTACK) || other.CompareTag(TagLiteral.BOSS_STONEARM_STAMP) || other.CompareTag(TagLiteral.BOSS_ROCKETARM_PUNCH))
+        if (other.CompareTag(TagLiteral.MONSTER_PROJECTILE) || other.CompareTag(TagLiteral.MONSTER_MELEEATTACK))
+        {
+            Monster monster = other.transform.parent.GetComponent<Monster>();
+
+            if (false == _isInvincible)
+            {
+                GetDamaged(monster.GetNormalDamageValue());
+                PlayerPresenter.ModifyPlayerHPRatio(_playerData.MaxHp, _playerData.CurHp);
+                _playerSoundManager.PlayHitSound();
+                OnHit();
+            }
+        }
+
+        if(other.CompareTag(TagLiteral.BOSS_STONEARM_STAMP) || other.CompareTag(TagLiteral.BOSS_ROCKETARM_PUNCH))
         {
             Monster monster = other.transform.root.GetComponent<Monster>();
 
@@ -228,6 +248,7 @@ public class Player : MonoBehaviour
             {
                 GetDamaged(monster.GetNormalDamageValue());
                 PlayerPresenter.ModifyPlayerHPRatio(_playerData.MaxHp, _playerData.CurHp);
+                _playerSoundManager.PlayHitSound();
                 OnHit();
             }
         }
@@ -237,7 +258,6 @@ public class Player : MonoBehaviour
             if (false == _isInvincible)
             {
                 Rigid.AddForce((transform.position - other.transform.position).normalized * 10f, ForceMode2D.Impulse);
-                OnHit();
             }
         }
 
@@ -250,11 +270,12 @@ public class Player : MonoBehaviour
                 {
                     Vector2 contactPoint = other.ClosestPoint(this.Rigid.position);
                     Vector2 knockBack = (contactPoint - this.Rigid.position).normalized;
-                    other.transform.root.GetComponent<Rigidbody2D>().AddForce(knockBack * 5f, ForceMode2D.Impulse);
+                    other.transform.parent.GetComponent<Rigidbody2D>().AddForce(knockBack * 5f, ForceMode2D.Impulse);
                 }
-                Monster monster = other.transform.root.GetComponent<Monster>();
+                Monster monster = other.transform.parent.GetComponent<Monster>();
                 GetDamaged(monster.GetNormalDamageValue());
                 PlayerPresenter.ModifyPlayerHPRatio(_playerData.MaxHp, _playerData.CurHp);
+                _playerSoundManager.PlayHitSound();
                 OnHit();
             }
         }
