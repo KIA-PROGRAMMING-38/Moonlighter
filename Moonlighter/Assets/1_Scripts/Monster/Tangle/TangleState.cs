@@ -13,7 +13,7 @@ public class TangleState : StateMachineBehaviour
     {
         tangle = animator.gameObject.GetComponent<Tangle>();
         rigid = animator.gameObject.GetComponent<Rigidbody2D>();
-        target = GameObject.Find(ObjectLiteral.PLAYER).transform;
+        target = GameManager.Inctance.transform;
     }
 
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)

@@ -29,11 +29,6 @@ public class MonsterHealthBar : MonoBehaviour
         _baseImage = transform.GetChild(2).GetComponent<Image>();
     }
 
-    private void Start()
-    {
-        
-    }
-
     public void Initialized()
     {
         _monsterPresenter = transform.parent.GetComponent<Monster>().MonsterPresenter;

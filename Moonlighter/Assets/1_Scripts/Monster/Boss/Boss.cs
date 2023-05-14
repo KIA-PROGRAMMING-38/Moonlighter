@@ -4,7 +4,8 @@ using EnumValue;
 
 public class Boss : Monster
 {
-    public Transform Player { get; private set; }
+    [SerializeField]
+    public Transform Player;
     public GameObject StoneArmAttack { get; private set; }
     public GameObject RocksGenerator { get; private set; }
 
@@ -15,18 +16,20 @@ public class Boss : Monster
     public AudioClip BossAwakeSound;
     public AudioClip BossDeathSound;
 
+    public const int StoneArmNum = 1;
+    public const int RocksGeneratorNum = 4;
+
     public override void Awake()
     {
         base.Awake();
-        Player = GameObject.FindGameObjectWithTag(ObjectLiteral.PLAYER).transform;
-        StoneArmAttack = transform.GetChild(1).gameObject;
-        RocksGenerator = transform.GetChild(4).gameObject;
+        StoneArmAttack = transform.GetChild(StoneArmNum).gameObject;
+        RocksGenerator = transform.GetChild(RocksGeneratorNum).gameObject;
         bossAttackState = new Queue<BossAttackAction>();
-        bossAttackState.Enqueue(BossAttackAction.StickyArmAction);
-        bossAttackState.Enqueue(BossAttackAction.Wave);
         bossAttackState.Enqueue(BossAttackAction.StoneArmPunch);
         bossAttackState.Enqueue(BossAttackAction.Wave);
         bossAttackState.Enqueue(BossAttackAction.StoneArmStamp);
+        bossAttackState.Enqueue(BossAttackAction.Wave);
+        bossAttackState.Enqueue(BossAttackAction.StickyArmAction);
         bossAttackState.Enqueue(BossAttackAction.Wave);
     }
 

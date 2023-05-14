@@ -26,7 +26,7 @@ public class GolemTurretBroken : Monster
         _anim = GetComponent<Animator>();
 
 
-        _target = GameObject.Find(ObjectLiteral.PLAYER).gameObject;
+        _target = GameManager.Inctance.Player;
     }
 
     private void Shoot()

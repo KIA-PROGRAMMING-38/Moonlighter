@@ -11,7 +11,6 @@ public class BossIdleState : BossIdleActionState
 
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-
         if (animHandler.IsAnimationEnded)
         {
             BossAttackAction nextAction = boss.bossAttackState.Dequeue();
