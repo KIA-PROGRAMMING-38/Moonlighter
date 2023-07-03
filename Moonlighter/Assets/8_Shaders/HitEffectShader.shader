@@ -3,7 +3,6 @@ Shader "Custom/2D/HitEffect-Unlit-Default"
     Properties
     {
         _MainTex("Sprite Texture", 2D) = "white" {}
-
     // Legacy properties. They're here so that materials using this shader can gracefully fallback to the legacy sprite shader.
     _HitColor("HitColor", Color) = (1,1,1,1)
     _HitBlend("HitEffectBlend", Range(0, 1)) = 1
@@ -14,19 +13,15 @@ Shader "Custom/2D/HitEffect-Unlit-Default"
     [HideInInspector] _AlphaTex("External Alpha", 2D) = "white" {}
     [HideInInspector] _EnableExternalAlpha("Enable External Alpha", Float) = 0
     }
-
         SubShader
     {
         Tags {"Queue" = "Transparent" "RenderType" = "Transparent" "RenderPipeline" = "UniversalPipeline" }
-
         Blend SrcAlpha OneMinusSrcAlpha
         Cull Off
         ZWrite Off
-
         Pass
         {
             Tags { "LightMode" = "Universal2D" }
-
             HLSLPROGRAM
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
             #if defined(DEBUG_DISPLAY)
@@ -34,12 +29,9 @@ Shader "Custom/2D/HitEffect-Unlit-Default"
             #include "Packages/com.unity.render-pipelines.universal/Shaders/2D/Include/SurfaceData2D.hlsl"
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Debug/Debugging2D.hlsl"
             #endif
-
             #pragma vertex UnlitVertex
             #pragma fragment UnlitFragment
-
             #pragma multi_compile _ DEBUG_DISPLAY
-
             struct Attributes
             {
                 float3 positionOS   : POSITION;
@@ -47,7 +39,6 @@ Shader "Custom/2D/HitEffect-Unlit-Default"
                 float2 uv           : TEXCOORD0;
                 UNITY_VERTEX_INPUT_INSTANCE_ID
             };
-
             struct Varyings
             {
                 float4  positionCS  : SV_POSITION;
@@ -58,7 +49,6 @@ Shader "Custom/2D/HitEffect-Unlit-Default"
                 #endif
                 UNITY_VERTEX_OUTPUT_STEREO
             };
-
             TEXTURE2D(_MainTex);
             SAMPLER(sampler_MainTex);
             half4 _MainTex_ST;
@@ -66,13 +56,11 @@ Shader "Custom/2D/HitEffect-Unlit-Default"
             float _HitBlend;
             half4 _RendererColor;
             float4 _HitColor;
-
             Varyings UnlitVertex(Attributes v)
             {
                 Varyings o = (Varyings)0;
                 UNITY_SETUP_INSTANCE_ID(v);
                 UNITY_INITIALIZE_VERTEX_OUTPUT_STEREO(o);
-
                 o.positionCS = TransformObjectToHClip(v.positionOS);
                 #if defined(DEBUG_DISPLAY)
                 o.positionWS = TransformObjectToWorld(v.positionOS);
@@ -81,7 +69,6 @@ Shader "Custom/2D/HitEffect-Unlit-Default"
                 o.color = v.color * _Color * _RendererColor;
                 return o;
             }
-
             half4 UnlitFragment(Varyings i) : SV_Target
             {
                 float4 mainTex = i.color * SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, i.uv);
@@ -90,26 +77,21 @@ Shader "Custom/2D/HitEffect-Unlit-Default"
                 SurfaceData2D surfaceData;
                 InputData2D inputData;
                 half4 debugColor = 0;
-
                 InitializeSurfaceData(mainTex.rgb, mainTex.a, surfaceData);
                 InitializeInputData(i.uv, inputData);
                 SETUP_DEBUG_DATA_2D(inputData, i.positionWS);
-
                 if (CanDebugOverrideOutputColor(surfaceData, inputData, debugColor))
                 {
                     return debugColor;
                 }
                 #endif
-
                 return mainTex;
             }
             ENDHLSL
         }
-
         Pass
         {
             Tags { "LightMode" = "UniversalForward" "Queue" = "Transparent" "RenderType" = "Transparent"}
-
             HLSLPROGRAM
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
             #if defined(DEBUG_DISPLAY)
@@ -117,12 +99,9 @@ Shader "Custom/2D/HitEffect-Unlit-Default"
             #include "Packages/com.unity.render-pipelines.universal/Shaders/2D/Include/SurfaceData2D.hlsl"
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Debug/Debugging2D.hlsl"
             #endif
-
             #pragma vertex UnlitVertex
             #pragma fragment UnlitFragment
-
             #pragma multi_compile_fragment _ DEBUG_DISPLAY
-
             struct Attributes
             {
                 float3 positionOS   : POSITION;
@@ -130,7 +109,6 @@ Shader "Custom/2D/HitEffect-Unlit-Default"
                 float2 uv           : TEXCOORD0;
                 UNITY_VERTEX_INPUT_INSTANCE_ID
             };
-
             struct Varyings
             {
                 float4  positionCS      : SV_POSITION;
@@ -141,19 +119,16 @@ Shader "Custom/2D/HitEffect-Unlit-Default"
                 #endif
                 UNITY_VERTEX_OUTPUT_STEREO
             };
-
             TEXTURE2D(_MainTex);
             SAMPLER(sampler_MainTex);
             float4 _MainTex_ST;
             float4 _Color;
             half4 _RendererColor;
-
             Varyings UnlitVertex(Attributes attributes)
             {
                 Varyings o = (Varyings)0;
                 UNITY_SETUP_INSTANCE_ID(attributes);
                 UNITY_INITIALIZE_VERTEX_OUTPUT_STEREO(o);
-
                 o.positionCS = TransformObjectToHClip(attributes.positionOS);
                 #if defined(DEBUG_DISPLAY)
                 o.positionWS = TransformObjectToWorld(attributes.positionOS);
@@ -162,31 +137,25 @@ Shader "Custom/2D/HitEffect-Unlit-Default"
                 o.color = attributes.color * _Color * _RendererColor;
                 return o;
             }
-
             float4 UnlitFragment(Varyings i) : SV_Target
             {
                 float4 mainTex = i.color * SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, i.uv);
-
                 #if defined(DEBUG_DISPLAY)
                 SurfaceData2D surfaceData;
                 InputData2D inputData;
                 half4 debugColor = 0;
-
                 InitializeSurfaceData(mainTex.rgb, mainTex.a, surfaceData);
                 InitializeInputData(i.uv, inputData);
                 SETUP_DEBUG_DATA_2D(inputData, i.positionWS);
-
                 if (CanDebugOverrideOutputColor(surfaceData, inputData, debugColor))
                 {
                     return debugColor;
                 }
                 #endif
-
                 return mainTex;
             }
             ENDHLSL
         }
     }
-
         Fallback "Sprites/Default"
 }
