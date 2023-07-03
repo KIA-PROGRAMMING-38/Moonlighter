@@ -1,9 +1,17 @@
-using UnityEngine;
+using CsvHelper.Configuration.Attributes;
 
 public class CharacterStat
 {
-    public int MaxHp = 100;
-    public int Atk = 100;
-    public int Def = 5;
-    public float MoveSpeed = 1;
+    [Name("Name")]
+    public string Name { get; set; }
+    [Name("MaxHp")]
+    public int MaxHp { get; set; }
+    [Name("Atk")]
+    public int Atk { get; set; }
+    [Name("Def")]
+    public int Def { get; set; }
+    [Name("MoveSpeed")]
+    public float MoveSpeed { get; set; }
+    [Name("RollSpeed")]
+    public float RollSpeed { get; set; }
 }
