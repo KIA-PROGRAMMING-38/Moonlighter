@@ -12,13 +12,13 @@ public abstract class Character : MonoBehaviour
     private Material _originMaterial;
     private Material _hitMaterial;
     private float _hitTweenDuration = 0.35f;
-    private bool _isHitTweening = false;
+    private bool _isHitTweening;
 
-    private void Awake()
+    protected virtual void Awake()
     {
         sr = transform.Find(ObjectLiteral.Body).GetComponent<SpriteRenderer>();
         _originMaterial = sr.material;
-        _hitMaterial = Resources.Load<Material>("Materials/HitMaterial");
+        _hitMaterial = Managers.Resource.Load<Material>(PathLiteral.HitMaterial);
         _onDamagedTween = OnDamagedTween();
     }
 
