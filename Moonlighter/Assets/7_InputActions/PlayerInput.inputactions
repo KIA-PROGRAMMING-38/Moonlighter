@@ -15,18 +15,18 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "Roll",
+                    "name": "ComboAttack",
                     "type": "Button",
-                    "id": "3862b10c-3a49-44f8-9f63-996c1a995bbc",
+                    "id": "22972b0b-3f5e-49f1-9903-89155d3acbe1",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
                 },
                 {
-                    "name": "ComboAttack",
+                    "name": "Roll",
                     "type": "Button",
-                    "id": "22972b0b-3f5e-49f1-9903-89155d3acbe1",
+                    "id": "3862b10c-3a49-44f8-9f63-996c1a995bbc",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -118,17 +118,6 @@
                 },
                 {
                     "name": "",
-                    "id": "9e941e7a-9a0c-4a07-aacb-217a1af0856a",
-                    "path": "<Keyboard>/space",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "PC",
-                    "action": "Roll",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "4cf5b58e-8db0-4fb6-8f23-1a51bb884bd7",
                     "path": "<Keyboard>/j",
                     "interactions": "",
@@ -170,6 +159,17 @@
                     "action": "QuickSlot",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "9e941e7a-9a0c-4a07-aacb-217a1af0856a",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "PC",
+                    "action": "Roll",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         },
@@ -177,15 +177,6 @@
             "name": "UI",
             "id": "ded3bbae-d917-49cf-b11b-c089d206175b",
             "actions": [
-                {
-                    "name": "InventoryKey",
-                    "type": "Button",
-                    "id": "123a8525-21e7-4694-80dc-b0ad8d9c0cda",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
                 {
                     "name": "CursorMove",
                     "type": "Value",
@@ -205,6 +196,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "InventoryKey",
+                    "type": "Button",
+                    "id": "123a8525-21e7-4694-80dc-b0ad8d9c0cda",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "QuickEquipKey",
                     "type": "Button",
                     "id": "7571ee52-0ba6-4482-987c-ce51e5f6110b",
@@ -216,18 +216,7 @@
             ],
             "bindings": [
                 {
-                    "name": "",
-                    "id": "f1a8b17c-3c51-4883-9bf5-654144345cd1",
-                    "path": "<Keyboard>/i",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "PC",
-                    "action": "InventoryKey",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "2D Vector",
+                    "name": "WASD",
                     "id": "cd14738a-24cb-49ec-8fa1-1fa54eb92142",
                     "path": "2DVector",
                     "interactions": "",
@@ -300,6 +289,17 @@
                     "processors": "",
                     "groups": "PC",
                     "action": "QuickEquipKey",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f1a8b17c-3c51-4883-9bf5-654144345cd1",
+                    "path": "<Keyboard>/i",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "PC",
+                    "action": "InventoryKey",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

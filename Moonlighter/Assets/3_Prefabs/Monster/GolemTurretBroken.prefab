@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7155812110694357164}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FirePosition_Right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -40,7 +40,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8401525472464532896}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FirePosition_Up
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -147,7 +147,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1426842548763427610}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FirePosition_Down
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -178,7 +178,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8250380508626261435}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FIrePosition_Left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -485,7 +485,7 @@ GameObject:
   - component: {fileID: 494732856}
   - component: {fileID: 6486245096927768109}
   - component: {fileID: 552976451}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: GolemTurretBroken
   m_TagString: Monster
   m_Icon: {fileID: 0}
@@ -629,8 +629,8 @@ MonoBehaviour:
   _item: {fileID: 7437134985554496240, guid: 5616884f6fd984e428bf94f2b8c68d7c, type: 3}
   monsterData: {fileID: 11400000, guid: 0beec8bd970b55946b0746796032ed1b, type: 2}
   _hitMaterial: {fileID: 2100000, guid: a6ff9b35b0f84884eb0e4c7a5a091447, type: 2}
+  CurrentHp: 0
   _projectile: {fileID: 2009639315, guid: d18bf8397c1006f488603c88013499ff, type: 3}
-  _target: {fileID: 0}
   FirePositions:
   - {fileID: 1426842548763427610}
   - {fileID: 8250380508626261435}
