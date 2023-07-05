@@ -160,7 +160,7 @@ MonoBehaviour:
   m_Intensity: 1
   m_LightVolumeIntensity: 1
   m_LightVolumeIntensityEnabled: 0
-  m_ApplyToSortingLayers: 000000000527251cdde174da
+  m_ApplyToSortingLayers: 0000000097efefe831b16f260527251cdde174da
   m_LightCookieSprite: {fileID: 0}
   m_DeprecatedPointLightCookieSprite: {fileID: 0}
   m_LightOrder: 0
@@ -407,9 +407,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: -10
+  m_SortingLayerID: -386928745
+  m_SortingLayer: 1
+  m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 638e2d34851be664ab8558889988eb9b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -443,9 +443,29 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 283416143, guid: 68e84a15f1576884c93485ce6b0f9486, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4208795709859744676, guid: 68e84a15f1576884c93485ce6b0f9486, type: 3}
+      propertyPath: m_SortingLayer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4208795709859744676, guid: 68e84a15f1576884c93485ce6b0f9486, type: 3}
+      propertyPath: m_SortingOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4208795709859744676, guid: 68e84a15f1576884c93485ce6b0f9486, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 472196869
+      objectReference: {fileID: 0}
     - target: {fileID: 4208795711362996788, guid: 68e84a15f1576884c93485ce6b0f9486, type: 3}
       propertyPath: m_Name
       value: PlayerCharacter
+      objectReference: {fileID: 0}
+    - target: {fileID: 4208795711362996788, guid: 68e84a15f1576884c93485ce6b0f9486, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4208795711362996791, guid: 68e84a15f1576884c93485ce6b0f9486, type: 3}
       propertyPath: m_RootOrder

@@ -7,9 +7,11 @@ public class Managers : MonoBehaviour
 
     private static DataManager s_dataManager = new DataManager();
     private static ResourceManager s_resourceManager = new ResourceManager();
+    private static EffectManager s_effectManager = new EffectManager();
 
     public static DataManager Data { get { Init(); return s_dataManager; } }
     public static ResourceManager Resource { get { Init(); return s_resourceManager; } }
+    public static EffectManager Effect { get { Init(); return s_effectManager; } }
 
     private void Start()
     {
@@ -31,6 +33,7 @@ public class Managers : MonoBehaviour
 
             Data.Init();
             Resource.Init();
+            Effect.Init();
         }
     }
 }
