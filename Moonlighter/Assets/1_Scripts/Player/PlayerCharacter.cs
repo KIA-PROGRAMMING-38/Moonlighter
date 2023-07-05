@@ -19,7 +19,7 @@ public class PlayerCharacter : Character
     protected override void Awake()
     {
         base.Awake();
-        stat = Managers.Data.CharacterStatDataTable["Player"];
+        stat = Managers.Data.CharacterStatDataTable[(int)CharacterStatId.Player];
         Input = transform.GetComponent<PlayerInputHandler>();
         Anim = transform.Find(ObjectLiteral.Body).GetComponent<Animator>();
         Rigid = GetComponent<Rigidbody2D>();
