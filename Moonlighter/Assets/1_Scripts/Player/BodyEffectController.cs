@@ -1,25 +1,13 @@
-using DG.Tweening;
-using System.Collections;
-using UniRx.Toolkit;
-using UnityEditor.Animations;
+using Enums;
 using UnityEngine;
 
 public class BodyEffectController : MonoBehaviour
 {
-    private static readonly int _footCount = 2;
+    private PlayerCharacter _player;
 
-    #region MoveEffect Variables
-    private Transform[] _footPositions = new Transform[_footCount];
-    private Transform _moveEffects;
-    private Vector3 _moveEffectScale = new Vector3(0.3f, 0.3f, 1);
-    private Vector3 _moveEffeectRotation = new Vector3(0, 0, -90);
-    private Color _moveEffectColor = new Color(1, 1, 1, 0.5f);
-    private int _footNum = 0;
-    #endregion
-
-    #region RollEffect Variables
-    private Vector3 _rollEffectEndRotation = new Vector3(0, 0, 180);
-    #endregion
+    private Transform _moveEffectPos;
+    private Vector3 _footPosition;
+    private Vector3 _footPositionOffset;
 
     private void Awake()
     {
@@ -28,26 +16,47 @@ public class BodyEffectController : MonoBehaviour
 
     private void Init()
     {
-        _moveEffects = transform.Find("MoveEffectPos");
-
-        for (int i = 0; i < _footPositions.Length; ++i)
-        {
-            _footPositions[i] = _moveEffects.GetChild(i);
-        }
-
+        _player = transform.root.GetComponent<PlayerCharacter>();
+        _moveEffectPos = transform.Find("MoveEffectPosition");
     }
 
     private void PlayMoveEffect()
     {
-        Managers.Effect.PlayMoveEffect(_footPositions[_footNum].position, _moveEffeectRotation, _moveEffectScale);
-        ++_footNum;
-        _footNum %= _footCount;
+        SetFootPositionOffset();
+        Managers.Effect.PlayEffect(EffectId.MoveEffect, _footPosition);
     }
 
     private void PlayRollEffect()
     {
-        Managers.Effect.PlayRollEffect(_footPositions[_footNum].position, _rollEffectEndRotation);
-        ++_footNum;
-        _footNum %= _footCount;
+        SetFootPositionOffset();
+        Managers.Effect.PlayEffect(EffectId.RollEffect, _footPosition);
+    }
+
+    private void SetFootPositionOffset()
+    {
+        _footPositionOffset = Vector3.zero;
+        switch (_player.PlayerFacingDirection)
+        {
+            case FacingDirection.Down:
+                _footPositionOffset.y += 0.1f;
+                _footPositionOffset.x = Random.Range(-0.04f, 0.04f);
+                _footPosition = _moveEffectPos.position + _footPositionOffset;
+                break;
+            case FacingDirection.Up:
+                _footPositionOffset.x = Random.Range(-0.04f, 0.04f);
+                _footPosition = _moveEffectPos.position + _footPositionOffset;
+                break;
+            case FacingDirection.Left:
+                _footPositionOffset.y = Random.Range(-0.02f, 0.04f);
+                _footPosition = _moveEffectPos.position + _footPositionOffset;
+                break;
+            case FacingDirection.Right:
+                _footPositionOffset.y = Random.Range(-0.02f, 0.04f);
+                _footPosition = _moveEffectPos.position + _footPositionOffset;
+                break;
+            default:
+                Debug.Log($"Player Facing Direction Error{_player.PlayerFacingDirection}");
+                return;
+        }
     }
 }

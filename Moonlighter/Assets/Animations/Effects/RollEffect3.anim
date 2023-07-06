@@ -21,17 +21,17 @@ AnimationClip:
   - curve:
     - time: 0
       value: {fileID: 350582711, guid: 496dae1ac1f354d4a935c0b957de2e98, type: 3}
-    - time: 0.083333336
-      value: {fileID: 350582711, guid: 496dae1ac1f354d4a935c0b957de2e98, type: 3}
     - time: 0.16666667
       value: {fileID: 350582711, guid: 496dae1ac1f354d4a935c0b957de2e98, type: 3}
-    - time: 0.25
+    - time: 0.33333334
+      value: {fileID: 350582711, guid: 496dae1ac1f354d4a935c0b957de2e98, type: 3}
+    - time: 0.5
       value: {fileID: 350582711, guid: 496dae1ac1f354d4a935c0b957de2e98, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
     script: {fileID: 0}
-  m_SampleRate: 12
+  m_SampleRate: 6
   m_WrapMode: 0
   m_Bounds:
     m_Center: {x: 0, y: 0, z: 0}
@@ -55,7 +55,7 @@ AnimationClip:
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 0.33333334
+    m_StopTime: 0.6666667
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -75,10 +75,17 @@ AnimationClip:
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
   m_Events:
-  - time: 0.33333334
+  - time: 0
+    functionName: SetRollEffect
+    data: 
+    objectReferenceParameter: {fileID: 2380418020167982115, guid: 87bc709b3151bd945889b69660b81b97, type: 3}
+    floatParameter: 180
+    intParameter: 0
+    messageOptions: 0
+  - time: 0.6666667
     functionName: DeactiveEffect
     data: 
-    objectReferenceParameter: {fileID: 6172329090315350339, guid: 87bc709b3151bd945889b69660b81b97, type: 3}
+    objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0

@@ -1,10 +1,9 @@
-using DG.Tweening;
 using System.Collections;
 using UnityEngine;
 
 public abstract class Character : MonoBehaviour
 {
-    protected CharacterStat stat = new CharacterStat();
+    protected CharacterStatData stat = new CharacterStatData();
     protected int curHp;
     protected SpriteRenderer sr;
     

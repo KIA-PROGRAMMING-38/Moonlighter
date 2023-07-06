@@ -1,9 +1,9 @@
-using UnityEngine;
 using Enums;
+using UnityEngine;
 
 public class PlayerCharacter : Character
 {
-    public CharacterStat Stat
+    public CharacterStatData Stat
     {
         get
         {
@@ -15,6 +15,7 @@ public class PlayerCharacter : Character
     public Animator Anim { get; private set; }
     public Rigidbody2D Rigid { get; private set; }
     public PlayerState PrevState;
+    public FacingDirection PlayerFacingDirection { get; private set; }
 
     protected override void Awake()
     {
@@ -29,6 +30,32 @@ public class PlayerCharacter : Character
     {
         Anim.SetBool(PlayerAnimParameters.Idle, true);
         PrevState = PlayerState.Idle;
+        PlayerFacingDirection = FacingDirection.Down;
+    }
+
+    public void SetFacingDirection()
+    {
+        int DirX = Mathf.RoundToInt(Anim.GetFloat(PlayerAnimParameters.MoveX));
+        int DirY = Mathf.RoundToInt(Anim.GetFloat(PlayerAnimParameters.MoveY));
+        if(DirY > 0)
+        {
+            PlayerFacingDirection = FacingDirection.Up;
+        }
+        else if(DirY < 0)
+        {
+            PlayerFacingDirection = FacingDirection.Down;
+        }
+        else
+        {
+            if(DirX > 0)
+            {
+                PlayerFacingDirection = FacingDirection.Right;
+            }
+            else if(DirX < 0)
+            {
+                PlayerFacingDirection = FacingDirection.Left;
+            }
+        }
     }
 
     public override void Attack()

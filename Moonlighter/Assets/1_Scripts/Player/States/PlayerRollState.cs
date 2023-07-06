@@ -1,5 +1,5 @@
-using UnityEngine;
 using Enums;
+using UnityEngine;
 
 public class PlayerRollState : StateMachineBehaviour
 {
@@ -8,6 +8,7 @@ public class PlayerRollState : StateMachineBehaviour
     private AnimEventHandler _animEventHandler;
     private Vector2 _rollDir;
     private float _rollVelocityMultiplier;
+    private float _defaultRollSpeed;
 
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
@@ -16,6 +17,7 @@ public class PlayerRollState : StateMachineBehaviour
 
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        _player.SetFacingDirection();
         SetRollVelocity(stateInfo);
 
         if (_animEventHandler.IsAnimationFinsih)
@@ -40,6 +42,7 @@ public class PlayerRollState : StateMachineBehaviour
         _player = animator.transform.root.GetComponent<PlayerCharacter>();
         _input = animator.transform.root.GetComponent<PlayerInputHandler>();
         _animEventHandler = animator.transform.GetComponent<AnimEventHandler>();
+        _defaultRollSpeed = Managers.Data.CharacterStatDataTable[(int)CharacterStatId.Player].RollSpeed;
         _rollVelocityMultiplier = 1;
         SetRollDir();
         _animEventHandler.AnimationStart();
@@ -73,6 +76,10 @@ public class PlayerRollState : StateMachineBehaviour
     private void SetRollVelocity(AnimatorStateInfo stateInfo)
     {
         _rollVelocityMultiplier = EaseFunc.EaseOutCubic(_rollVelocityMultiplier, _player.Stat.RollSpeed, Time.deltaTime / stateInfo.normalizedTime);
-        _player.Rigid.velocity = _rollDir * _rollVelocityMultiplier;
+        if(stateInfo.normalizedTime >= 0.7f)
+        {
+            _rollVelocityMultiplier = 0.5f;
+        }
+        _player.Rigid.velocity = _defaultRollSpeed * _rollVelocityMultiplier * _rollDir;
     }
 }

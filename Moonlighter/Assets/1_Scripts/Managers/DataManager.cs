@@ -5,16 +5,19 @@ using System.IO;
 
 public class DataManager
 {
-    private string CharacterStatCsv = "Assets\\Data\\CharacterStatDataTable.csv";
+    private readonly string CharacterStatDataCsv = "Assets\\Data\\CharacterStatDataTable.csv";
+    private readonly string EffectAnimatorControllerDataCsv = "Assets\\Data\\EffectAnimatorControllerDataTable.csv";
 
-    public Dictionary<int, CharacterStat> CharacterStatDataTable = new Dictionary<int, CharacterStat>();
+    public Dictionary<int, CharacterStatData> CharacterStatDataTable = new Dictionary<int, CharacterStatData>();
+    public Dictionary<int, EffectAnimatorControllerData> EffectAnimatorControllerDataTable = new Dictionary<int, EffectAnimatorControllerData>();
 
     public void Init()
     {
-        Parsing(CharacterStatCsv, CharacterStatDataTable);
+        Parse(CharacterStatDataCsv, CharacterStatDataTable);
+        Parse(EffectAnimatorControllerDataCsv, EffectAnimatorControllerDataTable);
     }
 
-    public void Parsing<T>(string path, Dictionary<int, T> dic) where T : Data
+    public void Parse<T>(string path, Dictionary<int, T> dic) where T : Data
     {
         using (var reader = new StreamReader(path))
         using (var csv = new CsvReader(reader, CultureInfo.InvariantCulture))
@@ -26,4 +29,6 @@ public class DataManager
             }
         }
     }
+
+    
 }

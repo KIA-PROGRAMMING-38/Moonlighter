@@ -1,6 +1,6 @@
 using CsvHelper.Configuration.Attributes;
 
-public class CharacterStat : Data
+public class CharacterStatData : Data
 {
     [Name("Name")]
     public string Name { get; set; }
