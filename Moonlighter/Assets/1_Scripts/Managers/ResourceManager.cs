@@ -1,54 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEditor.Animations;
 using UnityEngine;
 
 public class ResourceManager
 {
-    private Dictionary<Type, Func<string, UnityEngine.Object>> _loadStrategies;
-
-    private Dictionary<string, Material> _materials = new Dictionary<string, Material>();
-    private Dictionary<string, AnimatorController> _effects = new Dictionary<string, AnimatorController>();
+    public Dictionary<string, Material> Material { get; private set; }
+    
 
     public void Init()
     {
-        _loadStrategies = new Dictionary<Type, Func<string, UnityEngine.Object>>
-        {
-            { typeof(Material),  LoadMaterial },
-            { typeof(AnimatorController), LoadAnimatorController }
-        };
+        Material = new Dictionary<string, Material>();
+        
     }
 
     public T Load<T>(string path) where T : UnityEngine.Object
     {
-        if (_loadStrategies.TryGetValue(typeof(T), out var strategy))
-        {
-            return (T)strategy(path);
-        }
-
         return Resources.Load<T>(path);
-    }
-
-    private Material LoadMaterial(string path)
-    {
-        if (!_materials.ContainsKey(path))
-        {
-            Material material = Resources.Load<Material>(path);
-            _materials.Add(path, material);
-        }
-
-        return _materials[path];
-    }
-
-    private AnimatorController LoadAnimatorController(string path)
-    {
-        if (!_effects.ContainsKey(path))
-        {
-            AnimatorController animatorController = Resources.Load<AnimatorController>(path);
-            _effects.Add(path, animatorController);
-        }
-
-        return _effects[path];
     }
 
     public GameObject Instantiate(string path, Transform parent = null)

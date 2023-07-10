@@ -1,5 +1,6 @@
 using DG.Tweening;
 using Enums;
+using System.Collections.Generic;
 using UnityEditor.Animations;
 using UnityEngine;
 using UnityEngine.Pool;
@@ -7,17 +8,18 @@ using UnityEngine.Pool;
 public class EffectManager
 {
     private GameObject _baseEffectPrefab;
-    private Color _originColor;
 
+    private const string _effectPath = "EffectAC/";
 
-    public ObjectPool<GameObject> EffectPool { get; set; }
+    public Dictionary<string, AnimatorController> Effects { get; private set; }
+
+    public ObjectPool<GameObject> EffectPool { get; private set; }
 
     public void Init()
     {
-        _baseEffectPrefab = Managers.Resource.Load<GameObject>("Prefabs/Effect");
-        _originColor = Color.white;
+        _baseEffectPrefab = Managers.Resource.Load<GameObject>("Prefabs/Effect/BaseEffect");
+        Effects = new Dictionary<string, AnimatorController>();
         EffectPool = new ObjectPool<GameObject>(GenerateEffect, ActiveEffect);
-        
     }
 
     public GameObject GenerateEffect()
@@ -25,26 +27,12 @@ public class EffectManager
         GameObject go = Managers.Resource.Instantiate(_baseEffectPrefab);
 
         EffectController effect = go.GetComponent<EffectController>();
-        effect.Pool = EffectPool;
         return go;
     }
 
     public void ActiveEffect(GameObject effect)
     {
-        ResetPrefabInfo(effect);
         effect.SetActive(true);
-    }
-
-    private void ResetPrefabInfo(GameObject prefab)
-    {
-        prefab.GetComponent<Animator>().runtimeAnimatorController = null;
-
-        SpriteRenderer sr = prefab.GetComponent<SpriteRenderer>();
-        sr.DOColor(_originColor, 0);
-
-        prefab.transform.localScale = Vector3.one;
-        prefab.transform.rotation = Quaternion.Euler(Vector3.zero);
-
     }
 
     public void PlayEffect(EffectId effectId, Vector3 position)
@@ -52,8 +40,8 @@ public class EffectManager
         GameObject effect = EffectPool.Get();
 
         Animator anim = effect.GetComponent<Animator>();
-        string effectAnimController = Managers.Data.EffectAnimatorControllerDataTable[(int)effectId].AnimatorControllerPath;
-        anim.runtimeAnimatorController = Managers.Resource.Load<AnimatorController >(effectAnimController);
+        string effectAnimController = Managers.Data.EffectDataTable[(int)effectId].Name;
+        anim.runtimeAnimatorController = Effects.Load<AnimatorController>($"{_effectPath}{effectAnimController}");
 
         effect.transform.position = position;
     }

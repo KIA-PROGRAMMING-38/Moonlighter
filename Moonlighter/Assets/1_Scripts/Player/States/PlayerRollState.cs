@@ -1,3 +1,4 @@
+using DG.Tweening;
 using Enums;
 using UnityEngine;
 
@@ -5,32 +6,36 @@ public class PlayerRollState : StateMachineBehaviour
 {
     private PlayerCharacter _player;
     private PlayerInputHandler _input;
-    private AnimEventHandler _animEventHandler;
-    private Vector2 _rollDir;
-    private float _rollVelocityMultiplier;
+
+    private Vector3 _rollDir;
+    private Vector3[] _directions =
+    {
+        Vector3.up,
+        Vector3.down,
+        Vector3.left,
+        Vector3.right
+    };
+
     private float _defaultRollSpeed;
+    private float _rollDirModifier = 0.5f;
 
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         Init(animator);
+        SetRollVelocity(stateInfo);
     }
 
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        _player.SetFacingDirection();
-        SetRollVelocity(stateInfo);
-
-        if (_animEventHandler.IsAnimationFinsih)
+        if (stateInfo.normalizedTime >= 1)
         {
             if(_input.MoveInput != Vector2.zero)
             {
-                _player.PrevState = PlayerState.Roll;
                 _player.Anim.SetBool(PlayerAnimParameters.Roll, false);
                 _player.Anim.SetBool(PlayerAnimParameters.Move, true);
             }
             else if(_input.MoveInput == Vector2.zero)
             {
-                _player.PrevState = PlayerState.Roll;
                 _player.Anim.SetBool(PlayerAnimParameters.Roll, false);
                 _player.Anim.SetBool(PlayerAnimParameters.Idle, true);
             }
@@ -41,45 +46,23 @@ public class PlayerRollState : StateMachineBehaviour
     {
         _player = animator.transform.root.GetComponent<PlayerCharacter>();
         _input = animator.transform.root.GetComponent<PlayerInputHandler>();
-        _animEventHandler = animator.transform.GetComponent<AnimEventHandler>();
-        _defaultRollSpeed = Managers.Data.CharacterStatDataTable[(int)CharacterStatId.Player].RollSpeed;
-        _rollVelocityMultiplier = 1;
-        SetRollDir();
-        _animEventHandler.AnimationStart();
-    }
 
-    private void SetRollDir()
-    {
-        if(_player.PrevState == PlayerState.Idle)
+        _defaultRollSpeed = _player.Stat.RollSpeed;
+
+        if (_input.MoveInput == Vector2.zero)
         {
-            int dirX = Mathf.RoundToInt(_player.Anim.GetFloat(PlayerAnimParameters.MoveX));
-            int dirY = Mathf.RoundToInt(_player.Anim.GetFloat(PlayerAnimParameters.MoveY));
-            if(dirY > 0)
-            {
-                _rollDir = Vector2.up;
-            }
-            else if(dirY < 0)
-            {
-                _rollDir = Vector2.down;
-            }
-            else
-            {
-                _rollDir.Set(dirX, dirY);
-            }
+            _rollDir = _directions[(int)_player.PlayerFacingDirection] * _rollDirModifier;
         }
         else
         {
-            _rollDir.Set(_player.Anim.GetFloat(PlayerAnimParameters.MoveX), _player.Anim.GetFloat(PlayerAnimParameters.MoveY));
+            _rollDir.Set(_player.Anim.GetFloat(PlayerAnimParameters.MoveX), _player.Anim.GetFloat(PlayerAnimParameters.MoveY), 0);
+            _rollDir.Normalize();
+            _rollDir *= _rollDirModifier;
         }
     }
 
     private void SetRollVelocity(AnimatorStateInfo stateInfo)
     {
-        _rollVelocityMultiplier = EaseFunc.EaseOutCubic(_rollVelocityMultiplier, _player.Stat.RollSpeed, Time.deltaTime / stateInfo.normalizedTime);
-        if(stateInfo.normalizedTime >= 0.7f)
-        {
-            _rollVelocityMultiplier = 0.5f;
-        }
-        _player.Rigid.velocity = _defaultRollSpeed * _rollVelocityMultiplier * _rollDir;
+        _player.Rigid.DOMove((Vector2)(_player.transform.position + _rollDir * _defaultRollSpeed), stateInfo.length).SetEase(Ease.OutSine);
     }
 }

@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Player_Roll_Left
+  m_Name: PlayerRollRight
   serializedVersion: 6
   m_Legacy: 0
   m_Compressed: 0
@@ -20,21 +20,21 @@ AnimationClip:
   m_PPtrCurves:
   - curve:
     - time: 0
-      value: {fileID: 407991669, guid: cf21526d7b3df7246bb210c0f8667449, type: 3}
+      value: {fileID: -1671546794, guid: cf21526d7b3df7246bb210c0f8667449, type: 3}
     - time: 0.05
-      value: {fileID: 2117259502, guid: cf21526d7b3df7246bb210c0f8667449, type: 3}
+      value: {fileID: -524563881, guid: cf21526d7b3df7246bb210c0f8667449, type: 3}
     - time: 0.1
-      value: {fileID: 1970450403, guid: cf21526d7b3df7246bb210c0f8667449, type: 3}
+      value: {fileID: 2110137156, guid: cf21526d7b3df7246bb210c0f8667449, type: 3}
+    - time: 0.15
+      value: {fileID: 383347460, guid: cf21526d7b3df7246bb210c0f8667449, type: 3}
     - time: 0.2
-      value: {fileID: 1005498569, guid: cf21526d7b3df7246bb210c0f8667449, type: 3}
+      value: {fileID: 1828394360, guid: cf21526d7b3df7246bb210c0f8667449, type: 3}
     - time: 0.25
-      value: {fileID: -504667903, guid: cf21526d7b3df7246bb210c0f8667449, type: 3}
+      value: {fileID: -897697174, guid: cf21526d7b3df7246bb210c0f8667449, type: 3}
     - time: 0.3
-      value: {fileID: 1750630454, guid: cf21526d7b3df7246bb210c0f8667449, type: 3}
+      value: {fileID: 1764329106, guid: cf21526d7b3df7246bb210c0f8667449, type: 3}
     - time: 0.35
-      value: {fileID: -1114357617, guid: cf21526d7b3df7246bb210c0f8667449, type: 3}
-    - time: 0.4
-      value: {fileID: -459316348, guid: cf21526d7b3df7246bb210c0f8667449, type: 3}
+      value: {fileID: -499593686, guid: cf21526d7b3df7246bb210c0f8667449, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
@@ -54,20 +54,20 @@ AnimationClip:
       customType: 23
       isPPtrCurve: 1
     pptrCurveMapping:
-    - {fileID: 407991669, guid: cf21526d7b3df7246bb210c0f8667449, type: 3}
-    - {fileID: 2117259502, guid: cf21526d7b3df7246bb210c0f8667449, type: 3}
-    - {fileID: 1970450403, guid: cf21526d7b3df7246bb210c0f8667449, type: 3}
-    - {fileID: 1005498569, guid: cf21526d7b3df7246bb210c0f8667449, type: 3}
-    - {fileID: -504667903, guid: cf21526d7b3df7246bb210c0f8667449, type: 3}
-    - {fileID: 1750630454, guid: cf21526d7b3df7246bb210c0f8667449, type: 3}
-    - {fileID: -1114357617, guid: cf21526d7b3df7246bb210c0f8667449, type: 3}
-    - {fileID: -459316348, guid: cf21526d7b3df7246bb210c0f8667449, type: 3}
+    - {fileID: -1671546794, guid: cf21526d7b3df7246bb210c0f8667449, type: 3}
+    - {fileID: -524563881, guid: cf21526d7b3df7246bb210c0f8667449, type: 3}
+    - {fileID: 2110137156, guid: cf21526d7b3df7246bb210c0f8667449, type: 3}
+    - {fileID: 383347460, guid: cf21526d7b3df7246bb210c0f8667449, type: 3}
+    - {fileID: 1828394360, guid: cf21526d7b3df7246bb210c0f8667449, type: 3}
+    - {fileID: -897697174, guid: cf21526d7b3df7246bb210c0f8667449, type: 3}
+    - {fileID: 1764329106, guid: cf21526d7b3df7246bb210c0f8667449, type: 3}
+    - {fileID: -499593686, guid: cf21526d7b3df7246bb210c0f8667449, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 0.45000002
+    m_StopTime: 0.4
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -87,6 +87,27 @@ AnimationClip:
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
   m_Events:
+  - time: 0.15
+    functionName: PlayRollEffect
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 0.15
+    functionName: PlayRollEffect
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 0.2
+    functionName: PlayRollEffect
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
   - time: 0.2
     functionName: PlayRollEffect
     data: 
@@ -115,13 +136,6 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 0.25
-    functionName: PlayRollEffect
-    data: 
-    objectReferenceParameter: {fileID: 0}
-    floatParameter: 0
-    intParameter: 0
-    messageOptions: 0
   - time: 0.3
     functionName: PlayRollEffect
     data: 
@@ -130,13 +144,6 @@ AnimationClip:
     intParameter: 0
     messageOptions: 0
   - time: 0.3
-    functionName: PlayRollEffect
-    data: 
-    objectReferenceParameter: {fileID: 0}
-    floatParameter: 0
-    intParameter: 0
-    messageOptions: 0
-  - time: 0.35
     functionName: PlayRollEffect
     data: 
     objectReferenceParameter: {fileID: 0}
@@ -151,13 +158,6 @@ AnimationClip:
     intParameter: 0
     messageOptions: 0
   - time: 0.4
-    functionName: PlayRollEffect
-    data: 
-    objectReferenceParameter: {fileID: 0}
-    floatParameter: 0
-    intParameter: 0
-    messageOptions: 0
-  - time: 0.45
     functionName: AnimationFinishTrigger
     data: 
     objectReferenceParameter: {fileID: 0}

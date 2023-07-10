@@ -14,8 +14,14 @@ public class PlayerCharacter : Character
     
     public Animator Anim { get; private set; }
     public Rigidbody2D Rigid { get; private set; }
-    public PlayerState PrevState;
     public FacingDirection PlayerFacingDirection { get; private set; }
+
+    private FacingDirection[,] _facingDirections =
+    {
+        {FacingDirection.Down, FacingDirection.Down, FacingDirection.Down },
+        {FacingDirection.Left, FacingDirection.Down, FacingDirection.Right },
+        {FacingDirection.Up, FacingDirection.Up, FacingDirection.Up }
+    };
 
     protected override void Awake()
     {
@@ -29,33 +35,14 @@ public class PlayerCharacter : Character
     private void Start()
     {
         Anim.SetBool(PlayerAnimParameters.Idle, true);
-        PrevState = PlayerState.Idle;
         PlayerFacingDirection = FacingDirection.Down;
     }
 
     public void SetFacingDirection()
     {
-        int DirX = Mathf.RoundToInt(Anim.GetFloat(PlayerAnimParameters.MoveX));
-        int DirY = Mathf.RoundToInt(Anim.GetFloat(PlayerAnimParameters.MoveY));
-        if(DirY > 0)
-        {
-            PlayerFacingDirection = FacingDirection.Up;
-        }
-        else if(DirY < 0)
-        {
-            PlayerFacingDirection = FacingDirection.Down;
-        }
-        else
-        {
-            if(DirX > 0)
-            {
-                PlayerFacingDirection = FacingDirection.Right;
-            }
-            else if(DirX < 0)
-            {
-                PlayerFacingDirection = FacingDirection.Left;
-            }
-        }
+        int dirX = Mathf.RoundToInt(Anim.GetFloat(PlayerAnimParameters.MoveX));
+        int dirY = Mathf.RoundToInt(Anim.GetFloat(PlayerAnimParameters.MoveY));
+        PlayerFacingDirection = _facingDirections[++dirY, ++dirX];
     }
 
     public override void Attack()

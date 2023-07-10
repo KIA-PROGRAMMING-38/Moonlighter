@@ -1,13 +1,12 @@
 using Enums;
+using System;
 using UnityEngine;
 
 public class BodyEffectController : MonoBehaviour
 {
     private PlayerCharacter _player;
 
-    private Transform _moveEffectPos;
-    private Vector3 _footPosition;
-    private Vector3 _footPositionOffset;
+    private Transform _moveEffectTransform;
 
     private void Awake()
     {
@@ -17,46 +16,41 @@ public class BodyEffectController : MonoBehaviour
     private void Init()
     {
         _player = transform.root.GetComponent<PlayerCharacter>();
-        _moveEffectPos = transform.Find("MoveEffectPosition");
+        _moveEffectTransform = transform.Find("MoveEffectPosition");
     }
 
     private void PlayMoveEffect()
     {
-        SetFootPositionOffset();
-        Managers.Effect.PlayEffect(EffectId.MoveEffect, _footPosition);
+        Vector3 footEffectSpawnPosition = GetFootEffectSpawnPosition(_player.PlayerFacingDirection);
+        Managers.Effect.PlayEffect(EffectId.MoveEffect, footEffectSpawnPosition);
     }
 
     private void PlayRollEffect()
     {
-        SetFootPositionOffset();
-        Managers.Effect.PlayEffect(EffectId.RollEffect, _footPosition);
+        Vector3 footEffectSpawnPosition = GetFootEffectSpawnPosition(_player.PlayerFacingDirection);
+        Managers.Effect.PlayEffect(EffectId.RollEffect, footEffectSpawnPosition);
     }
 
-    private void SetFootPositionOffset()
+    private Vector3 GetFootEffectSpawnPosition(FacingDirection dir)
     {
-        _footPositionOffset = Vector3.zero;
-        switch (_player.PlayerFacingDirection)
+        Vector3 offset = GetOffset(dir);
+
+        return _moveEffectTransform.position + offset;
+        static Vector3 GetOffset(FacingDirection dir)
         {
-            case FacingDirection.Down:
-                _footPositionOffset.y += 0.1f;
-                _footPositionOffset.x = Random.Range(-0.04f, 0.04f);
-                _footPosition = _moveEffectPos.position + _footPositionOffset;
-                break;
-            case FacingDirection.Up:
-                _footPositionOffset.x = Random.Range(-0.04f, 0.04f);
-                _footPosition = _moveEffectPos.position + _footPositionOffset;
-                break;
-            case FacingDirection.Left:
-                _footPositionOffset.y = Random.Range(-0.02f, 0.04f);
-                _footPosition = _moveEffectPos.position + _footPositionOffset;
-                break;
-            case FacingDirection.Right:
-                _footPositionOffset.y = Random.Range(-0.02f, 0.04f);
-                _footPosition = _moveEffectPos.position + _footPositionOffset;
-                break;
-            default:
-                Debug.Log($"Player Facing Direction Error{_player.PlayerFacingDirection}");
-                return;
+            switch (dir)
+            {
+                case FacingDirection.Down:
+                    return new Vector3(UnityEngine.Random.Range(-0.04f, 0.04f), 0.1f);
+                case FacingDirection.Up:
+                    return new Vector3(UnityEngine.Random.Range(-0.04f, 0.04f), 0f);
+                case FacingDirection.Left:
+                    return new Vector3(0f, UnityEngine.Random.Range(-0.02f, 0.04f));
+                case FacingDirection.Right:
+                    return new Vector3(0f, UnityEngine.Random.Range(-0.02f, 0.04f));
+                default:
+                    throw new NotImplementedException();
+            }
         }
     }
 }

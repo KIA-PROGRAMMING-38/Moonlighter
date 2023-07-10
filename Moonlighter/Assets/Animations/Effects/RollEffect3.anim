@@ -75,13 +75,6 @@ AnimationClip:
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
   m_Events:
-  - time: 0
-    functionName: SetRollEffect
-    data: 
-    objectReferenceParameter: {fileID: 2380418020167982115, guid: 87bc709b3151bd945889b69660b81b97, type: 3}
-    floatParameter: 180
-    intParameter: 0
-    messageOptions: 0
   - time: 0.6666667
     functionName: DeactiveEffect
     data: 

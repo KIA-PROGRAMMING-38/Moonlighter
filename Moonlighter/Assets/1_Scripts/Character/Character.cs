@@ -3,7 +3,7 @@ using UnityEngine;
 
 public abstract class Character : MonoBehaviour
 {
-    protected CharacterStatData stat = new CharacterStatData();
+    protected CharacterStatData stat;
     protected int curHp;
     protected SpriteRenderer sr;
     

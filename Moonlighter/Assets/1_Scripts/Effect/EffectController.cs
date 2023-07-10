@@ -4,38 +4,36 @@ using UnityEngine.Pool;
 
 public class EffectController : MonoBehaviour
 {
-    public ObjectPool<GameObject> Pool;
+    private ObjectPool<GameObject> _pool;
 
-    #region MoveEffect Variables
-    private Vector3 _moveEffectScale = new Vector3(0.3f, 0.3f, 1);
-    private Vector3 _moveEffeectRotation = new Vector3(0, 0, -90);
-    #endregion
+    private SpriteRenderer _spriteRenderer;
+
+    private Color _originColor = Color.white;
+    private Vector3 _originScale = Vector3.one;
+    private Quaternion _originRotation = Quaternion.Euler(Vector3.zero);
+
+    private void Awake()
+    {
+        _spriteRenderer = GetComponent<SpriteRenderer>();
+        _pool = Managers.Effect.EffectPool;
+    }
+
+    private void OnEnable()
+    {
+        SetOriginColor();
+
+        transform.localScale = _originScale;
+        transform.rotation = _originRotation;
+    }
 
     private void DeactiveEffect()
     {
-        Pool.Release(this.gameObject);
+        _pool.Release(this.gameObject);
         this.gameObject.SetActive(false);
     }
 
-    private void SetMoveEffect()
+    private void SetOriginColor()
     {
-        SpriteRenderer spriteRenderer = this.gameObject.GetComponent<SpriteRenderer>();
-        spriteRenderer.DOFade(0.5f, 0.3f);
-
-        this.transform.localScale = _moveEffectScale;
-        this.transform.rotation = Quaternion.Euler(_moveEffeectRotation);
+        _spriteRenderer.DOColor(_originColor, 0);
     }
-
-    private void SetRollEffect(float ZAixsRotation)
-    {
-        SpriteRenderer spriteRenderer = this.gameObject.GetComponent<SpriteRenderer>();
-        spriteRenderer.DOFade(0, 0.6f);
-
-        int rollEffectIndex = Random.Range(0, 4);
-        Animator anim = this.GetComponent<Animator>();
-        anim.Play($"RollEffect{rollEffectIndex}");
-
-        this.transform.DOLocalRotate(new Vector3(0, 0, ZAixsRotation), 0.6f);
-    }
-
 }

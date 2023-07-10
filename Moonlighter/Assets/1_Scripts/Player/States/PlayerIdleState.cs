@@ -13,16 +13,13 @@ public class PlayerIdleState : StateMachineBehaviour
 
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        _player.SetFacingDirection();
         if(_input.MoveInput != Vector2.zero)
         {
-            _player.PrevState = PlayerState.Idle;
             _player.Anim.SetBool(PlayerAnimParameters.Idle, false);
             _player.Anim.SetBool(PlayerAnimParameters.Move, true);
         }
         else if(_input.RollInput)
         {
-            _player.PrevState = PlayerState.Idle;
             _player.Anim.SetBool(PlayerAnimParameters.Idle, false);
             _player.Anim.SetBool(PlayerAnimParameters.Roll, true);
         }
@@ -34,6 +31,4 @@ public class PlayerIdleState : StateMachineBehaviour
         _input = animator.transform.root.GetComponent<PlayerInputHandler>();
         _player.Rigid.velocity = Vector2.zero;
     }
-
-
 }
