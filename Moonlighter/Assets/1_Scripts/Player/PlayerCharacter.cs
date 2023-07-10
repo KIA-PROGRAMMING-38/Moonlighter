@@ -10,12 +10,11 @@ public class PlayerCharacter : Character
             return stat;
         }
     }
-    public PlayerInputHandler Input { get; private set; }
     
     public Animator Anim { get; private set; }
     public Rigidbody2D Rigid { get; private set; }
     public FacingDirection PlayerFacingDirection { get; private set; }
-
+    
     private FacingDirection[,] _facingDirections =
     {
         {FacingDirection.Down, FacingDirection.Down, FacingDirection.Down },
@@ -27,7 +26,6 @@ public class PlayerCharacter : Character
     {
         base.Awake();
         stat = Managers.Data.CharacterStatDataTable[(int)CharacterStatId.Player];
-        Input = transform.GetComponent<PlayerInputHandler>();
         Anim = transform.Find(ObjectLiteral.Body).GetComponent<Animator>();
         Rigid = GetComponent<Rigidbody2D>();
     }
@@ -40,9 +38,9 @@ public class PlayerCharacter : Character
 
     public void SetFacingDirection()
     {
-        int dirX = Mathf.RoundToInt(Anim.GetFloat(PlayerAnimParameters.MoveX));
-        int dirY = Mathf.RoundToInt(Anim.GetFloat(PlayerAnimParameters.MoveY));
-        PlayerFacingDirection = _facingDirections[++dirY, ++dirX];
+        int dirX = 1 + Mathf.RoundToInt(Anim.GetFloat(PlayerAnimParameters.MoveX));
+        int dirY = 1 + Mathf.RoundToInt(Anim.GetFloat(PlayerAnimParameters.MoveY));
+        PlayerFacingDirection = _facingDirections[dirY, dirX];
     }
 
     public override void Attack()

@@ -11,6 +11,18 @@ public class PlayerInputHandler : MonoBehaviour
         }
     }
     public bool RollInput { get; private set; }
+    public bool IsMoving
+    {
+        get
+        {
+            if(_moveInput == Vector2.zero)
+            {
+                return false;
+            }
+
+            return true;
+        }
+    }
 
     private void Start()
     {

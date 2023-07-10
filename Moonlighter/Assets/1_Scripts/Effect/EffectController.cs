@@ -4,8 +4,6 @@ using UnityEngine.Pool;
 
 public class EffectController : MonoBehaviour
 {
-    private ObjectPool<GameObject> _pool;
-
     private SpriteRenderer _spriteRenderer;
 
     private Color _originColor = Color.white;
@@ -15,12 +13,11 @@ public class EffectController : MonoBehaviour
     private void Awake()
     {
         _spriteRenderer = GetComponent<SpriteRenderer>();
-        _pool = Managers.Effect.EffectPool;
     }
 
     private void OnEnable()
     {
-        SetOriginColor();
+        _spriteRenderer.DOColor(_originColor, 0);
 
         transform.localScale = _originScale;
         transform.rotation = _originRotation;
@@ -28,12 +25,11 @@ public class EffectController : MonoBehaviour
 
     private void DeactiveEffect()
     {
-        _pool.Release(this.gameObject);
+        Managers.Effect.ReleaseToPool(this);
         this.gameObject.SetActive(false);
     }
 
-    private void SetOriginColor()
-    {
-        _spriteRenderer.DOColor(_originColor, 0);
-    }
+    public void FadeOut(float alpha, float duration) => _spriteRenderer.DOFade(alpha, duration);
+
+    public void RotateEffect(Vector3 endRotationValue, float duration, RotateMode mode) => transform.DORotate(endRotationValue, duration, mode);
 }

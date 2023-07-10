@@ -1,19 +1,28 @@
 ﻿using System.Collections.Generic;
-using UnityEditor.Animations;
 using UnityEngine;
 
 public class ResourceManager
 {
     public Dictionary<string, Material> Material { get; private set; }
-    
 
     public void Init()
     {
         Material = new Dictionary<string, Material>();
-        
     }
 
-    public T Load<T>(string path) where T : UnityEngine.Object
+    public T Load<T>(Dictionary<string, T> dic, string path) where T : Object
+    {
+        if (false == dic.ContainsKey(path))
+        {
+            T resource = Resources.Load<T>(path);
+            dic.Add(path, resource);
+            return dic[path];
+        }
+
+        return dic[path];
+    }
+
+    public T Load<T>(string path) where T : Object
     {
         return Resources.Load<T>(path);
     }
@@ -42,6 +51,6 @@ public class ResourceManager
         if (go == null)
             return;
 
-        UnityEngine.Object.Destroy(go);
+        Object.Destroy(go);
     }
 }

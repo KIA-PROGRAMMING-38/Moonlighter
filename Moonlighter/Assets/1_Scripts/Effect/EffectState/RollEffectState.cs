@@ -1,10 +1,9 @@
 using DG.Tweening;
 using UnityEngine;
 
-public class RollEffectState : StateMachineBehaviour
+public class RollEffectState : EffectState
 {
-    private const int _rollEffectCount = 4;
-
+    [SerializeField]
     private int[] AnimationClipHash =
     {
         AnimationNameToHash.RollEffect1, 
@@ -13,31 +12,20 @@ public class RollEffectState : StateMachineBehaviour
         AnimationNameToHash.RollEffect4
     };
 
-    private SpriteRenderer _spriteRenderer;
-
+    [SerializeField]
     private Vector3 _endRotationValue = new Vector3(0, 0, 180);
+    [SerializeField]
     private float _endAlphaValue = 0;
+    [SerializeField]
     private float _rollEffectDuration = 0.6f;
 
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        _spriteRenderer = animator.GetComponent<SpriteRenderer>();
+        base.OnStateEnter(animator, stateInfo, layerIndex);
 
-        int rollEffectIndex = Random.Range(0, _rollEffectCount);
-        animator.Play(AnimationClipHash[rollEffectIndex]);
+        animator.Play(AnimationClipHash.GetRandomValue());
 
-        DoFadeOut(_endAlphaValue, _rollEffectDuration);
-
-        DoRatateEffect(animator, _endRotationValue, _rollEffectDuration);
-    }
-
-    private void DoRatateEffect(Animator animator, Vector3 endRotationValue, float duration)
-    {
-        animator.transform.DOLocalRotate(endRotationValue, duration);
-    }
-
-    private void DoFadeOut(float alpha, float duration)
-    {
-        _spriteRenderer.DOFade(alpha, duration);
+        effectController.FadeOut(_endAlphaValue, _rollEffectDuration);
+        effectController.RotateEffect(_endRotationValue, _rollEffectDuration, RotateMode.Fast);
     }
 }

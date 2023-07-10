@@ -1,17 +1,22 @@
-﻿using System.Collections.Generic;
+﻿using Enums;
+using System.Collections.Generic;
 using UnityEngine;
 
 public static class Extensions
 {
-    public static T Load<T>(this Dictionary<string, T> dic, string path) where T : Object
-    {
-        if(false == dic.ContainsKey(path))
-        {
-            T resource = Resources.Load<T>(path);
-            dic.Add(path, resource);
-            return dic[path];
-        }
+    private static Vector2[] _directions = { Vector2.up, Vector2.down, Vector2.left, Vector2.right };
 
-        return dic[path];
+    
+
+    public static T GetRandomValue<T>(this T[] arr)
+    {
+        int randomIndex = Random.Range(0, arr.Length);
+
+        return arr[randomIndex];
+    }
+
+    public static Vector2 ToVec2(this FacingDirection fd)
+    {
+        return _directions[(int)fd];
     }
 }

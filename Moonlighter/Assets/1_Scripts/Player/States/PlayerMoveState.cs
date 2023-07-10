@@ -1,43 +1,31 @@
-using Enums;
 using UnityEngine;
 
-public class PlayerMoveState : StateMachineBehaviour
+public class PlayerMoveState : PlayerState
 {
-    private PlayerCharacter _player;
-    private PlayerInputHandler _input;
-    private float _defaultMoveSpeed;
-
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        Init(animator);
+        base.OnStateEnter(animator, stateInfo, layerIndex);
     }
 
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        _player.SetFacingDirection();
+        player.SetFacingDirection();
 
-        if(_input.MoveInput == Vector2.zero)
+        if(false == input.IsMoving)
         {
-            _player.Anim.SetBool(PlayerAnimParameters.Move, false);
-            _player.Anim.SetBool(PlayerAnimParameters.Idle, true);
+            ExitCurrentState(PlayerAnimParameters.Move);
+            ChangeToNextState(PlayerAnimParameters.Idle);
         }
-        else if (_input.RollInput)
+        else if (input.RollInput)
         {
-            _player.Anim.SetBool(PlayerAnimParameters.Move, false);
-            _player.Anim.SetBool(PlayerAnimParameters.Roll, true);
+            ExitCurrentState(PlayerAnimParameters.Move);
+            ChangeToNextState(PlayerAnimParameters.Roll);
         }
         else
         {
-            _player.Anim.SetFloat(PlayerAnimParameters.MoveX, _input.MoveInput.x);
-            _player.Anim.SetFloat(PlayerAnimParameters.MoveY, _input.MoveInput.y);
-            _player.Rigid.velocity = _input.MoveInput * _defaultMoveSpeed;
+            player.Anim.SetFloat(PlayerAnimParameters.MoveX, input.MoveInput.x);
+            player.Anim.SetFloat(PlayerAnimParameters.MoveY, input.MoveInput.y);
+            player.Rigid.velocity = input.MoveInput * player.Stat.MoveSpeed;
         }
-    }
-
-    private void Init(Animator animator)
-    {
-        _player = animator.transform.root.GetComponent<PlayerCharacter>();
-        _input = animator.transform.root.GetComponent<PlayerInputHandler>();
-        _defaultMoveSpeed = _player.Stat.MoveSpeed;
     }
 }
