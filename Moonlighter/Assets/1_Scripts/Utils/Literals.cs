@@ -1,7 +1,7 @@
 ﻿public static class ObjectLiteral
 {
-    public static string Body = "Body";
-    public static string Managers = "Managers";
+    public static readonly string Body = "Body";
+    public static readonly string Managers = "Managers";
 }
 
 public static class PathLiteral

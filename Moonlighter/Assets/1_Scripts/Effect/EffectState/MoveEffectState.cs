@@ -17,5 +17,4 @@ public class MoveEffectState : EffectState
         animator.transform.localScale = _moveEffectScale;
         animator.transform.rotation = Quaternion.Euler(_moveEffectRotation);
     }
-
 }

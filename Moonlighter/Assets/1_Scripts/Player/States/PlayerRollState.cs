@@ -20,11 +20,11 @@ public class PlayerRollState : PlayerState
 
             if(input.IsMoving)
             {
-                ChangeToNextState(PlayerAnimParameters.Move);
+                EnterNextState(PlayerAnimParameters.Move);
             }
             else
             {
-                ChangeToNextState(PlayerAnimParameters.Idle);
+                EnterNextState(PlayerAnimParameters.Idle);
             }
         }
                 
@@ -48,11 +48,11 @@ public class PlayerRollState : PlayerState
             {
                 float newX = playerCharacter.Anim.GetFloat(PlayerAnimParameters.MoveX);
                 float newY = playerCharacter.Anim.GetFloat(PlayerAnimParameters.MoveY);
-                return new Vector2(newX, newY);
+                return new Vector2(newX, newY).normalized;
             }
             else
             {
-                return playerCharacter.PlayerFacingDirection.ToVec2();
+                return playerCharacter.PlayerFacingDirection.ToVec2().normalized;
             }
         }
     }

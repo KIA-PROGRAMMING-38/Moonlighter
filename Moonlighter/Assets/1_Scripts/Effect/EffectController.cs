@@ -1,6 +1,5 @@
 using DG.Tweening;
 using UnityEngine;
-using UnityEngine.Pool;
 
 public class EffectController : MonoBehaviour
 {
@@ -21,12 +20,6 @@ public class EffectController : MonoBehaviour
 
         transform.localScale = _originScale;
         transform.rotation = _originRotation;
-    }
-
-    private void DeactiveEffect()
-    {
-        Managers.Effect.ReleaseToPool(this);
-        this.gameObject.SetActive(false);
     }
 
     public void FadeOut(float alpha, float duration) => _spriteRenderer.DOFade(alpha, duration);

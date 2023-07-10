@@ -13,13 +13,11 @@ public class PlayerMoveState : PlayerState
 
         if(false == input.IsMoving)
         {
-            ExitCurrentState(PlayerAnimParameters.Move);
-            ChangeToNextState(PlayerAnimParameters.Idle);
+            ChangeNextState(PlayerAnimParameters.Move, PlayerAnimParameters.Idle);
         }
         else if (input.RollInput)
         {
-            ExitCurrentState(PlayerAnimParameters.Move);
-            ChangeToNextState(PlayerAnimParameters.Roll);
+            ChangeNextState(PlayerAnimParameters.Move, PlayerAnimParameters.Roll);
         }
         else
         {

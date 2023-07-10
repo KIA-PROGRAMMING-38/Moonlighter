@@ -16,8 +16,14 @@ public class PlayerState : StateMachineBehaviour
         player.Anim.SetBool(currentState, false);
     }
 
-    protected void ChangeToNextState(int nextState)
+    protected void EnterNextState(int nextState)
     {
         player.Anim.SetBool(nextState, true);
+    }
+
+    protected void ChangeNextState(int current, int next)
+    {
+        ExitCurrentState(current);
+        EnterNextState(next);
     }
 }

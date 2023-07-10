@@ -33,6 +33,7 @@ public class PlayerCharacter : Character
     private void Start()
     {
         Anim.SetBool(PlayerAnimParameters.Idle, true);
+        Anim.SetFloat(PlayerAnimParameters.MoveY, -1);
         PlayerFacingDirection = FacingDirection.Down;
     }
 

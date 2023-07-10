@@ -1,6 +1,7 @@
 using DG.Tweening;
 using Enums;
 using System.Collections.Generic;
+using System.IO;
 using UnityEditor.Animations;
 using UnityEngine;
 using UnityEngine.Pool;
@@ -11,14 +12,14 @@ public class EffectManager
 
     private const string EFFECT_PATH = "EffectAC/";
 
-    private Dictionary<string, AnimatorController> _effectTable;
+    private DataCache<AnimatorController> _effectTable;
 
     private ObjectPool<EffectController> _effectPool;
 
     public void Init()
     {
         _baseEffectPrefab = Managers.Resource.Load<GameObject>("Prefabs/Effect/BaseEffect");
-        _effectTable = new Dictionary<string, AnimatorController>();
+        _effectTable = new DataCache<AnimatorController>();
         _effectPool = new ObjectPool<EffectController>(GenerateEffect, ActiveEffect);
     }
 
@@ -33,7 +34,7 @@ public class EffectManager
         return effectController;
     }
 
-    public void ActiveEffect(EffectController effect) => effect.gameObject.SetActive(true);
+    private void ActiveEffect(EffectController effect) => effect.gameObject.SetActive(true);
 
     public void ReleaseToPool(EffectController effect) => _effectPool.Release(effect);
 
@@ -43,7 +44,7 @@ public class EffectManager
 
         Animator anim = effect.GetComponent<Animator>();
         string effectAnimController = Managers.Data.EffectDataTable[(int)effectId].AnimationControllerName;
-        anim.runtimeAnimatorController = Managers.Resource.Load<AnimatorController>(_effectTable, $"{EFFECT_PATH}{effectAnimController}");
+        anim.runtimeAnimatorController = _effectTable.Load(Path.Combine(EFFECT_PATH, effectAnimController));
 
         effect.transform.position = position;
     }

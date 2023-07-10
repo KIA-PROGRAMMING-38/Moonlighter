@@ -21,14 +21,14 @@ public class BodyEffectController : MonoBehaviour
 
     private void PlayMoveEffect()
     {
-        Vector3 footEffectSpawnPosition = GetFootEffectSpawnPosition(_player.PlayerFacingDirection);
-        Managers.Effect.PlayEffect(EffectId.MoveEffect, footEffectSpawnPosition);
+        Vector3 spawnPosition = GetFootEffectSpawnPosition(_player.PlayerFacingDirection);
+        Managers.Effect.PlayEffect(EffectId.MoveEffect, spawnPosition);
     }
 
     private void PlayRollEffect()
     {
-        Vector3 footEffectSpawnPosition = GetFootEffectSpawnPosition(_player.PlayerFacingDirection);
-        Managers.Effect.PlayEffect(EffectId.RollEffect, footEffectSpawnPosition);
+        Vector3 spawnPosition = GetFootEffectSpawnPosition(_player.PlayerFacingDirection);
+        Managers.Effect.PlayEffect(EffectId.RollEffect, spawnPosition);
     }
 
     private Vector3 GetFootEffectSpawnPosition(FacingDirection dir)

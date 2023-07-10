@@ -12,13 +12,11 @@ public class PlayerIdleState : PlayerState
     {
         if(input.MoveInput != Vector2.zero)
         {
-            ExitCurrentState(PlayerAnimParameters.Idle);
-            ChangeToNextState(PlayerAnimParameters.Move);
+            ChangeNextState(PlayerAnimParameters.Idle, PlayerAnimParameters.Move);
         }
         else if(input.RollInput)
         {
-            ExitCurrentState(PlayerAnimParameters.Idle);
-            ChangeToNextState(PlayerAnimParameters.Roll);
+            ChangeNextState(PlayerAnimParameters.Idle, PlayerAnimParameters.Roll);
         }
     }
 }
