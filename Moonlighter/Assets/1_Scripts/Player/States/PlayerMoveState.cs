@@ -1,42 +1,29 @@
-using Enums;
 using UnityEngine;
 
-public class PlayerMoveState : StateMachineBehaviour
+public class PlayerMoveState : PlayerState
 {
-    private PlayerCharacter _player;
-    private PlayerInputHandler _input;
-
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        Init(animator);
+        base.OnStateEnter(animator, stateInfo, layerIndex);
     }
 
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        if(_input.MoveInput == Vector2.zero)
+        player.SetFacingDirection();
+
+        if(false == input.IsMoving)
         {
-            _player.PrevState = PlayerState.Move;
-            _player.Anim.SetBool(PlayerAnimParameters.Move, false);
-            _player.Anim.SetBool(PlayerAnimParameters.Idle, true);
+            ChangeNextState(PlayerAnimParameters.Move, PlayerAnimParameters.Idle);
         }
-        else if (_input.RollInput)
+        else if (input.RollInput)
         {
-            _player.PrevState = PlayerState.Move;
-            _player.Anim.SetBool(PlayerAnimParameters.Move, false);
-            _player.Anim.SetBool(PlayerAnimParameters.Roll, true);
+            ChangeNextState(PlayerAnimParameters.Move, PlayerAnimParameters.Roll);
         }
         else
         {
-            _player.PrevState = PlayerState.Move;
-            _player.Anim.SetFloat(PlayerAnimParameters.MoveX, _input.MoveInput.x);
-            _player.Anim.SetFloat(PlayerAnimParameters.MoveY, _input.MoveInput.y);
-            _player.Rigid.velocity = _input.MoveInput;
+            player.Anim.SetFloat(PlayerAnimParameters.MoveX, input.MoveInput.x);
+            player.Anim.SetFloat(PlayerAnimParameters.MoveY, input.MoveInput.y);
+            player.Rigid.velocity = input.MoveInput * player.Stat.MoveSpeed;
         }
-    }
-
-    private void Init(Animator animator)
-    {
-        _player = animator.transform.root.GetComponent<PlayerCharacter>();
-        _input = animator.transform.root.GetComponent<PlayerInputHandler>();
     }
 }

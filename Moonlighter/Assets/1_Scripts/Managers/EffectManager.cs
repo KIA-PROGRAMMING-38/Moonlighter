@@ -1,87 +1,49 @@
-using DG.Tweening;
-using System.Collections.Generic;
+using Enums;
+using System.IO;
 using UnityEditor.Animations;
 using UnityEngine;
 using UnityEngine.Pool;
 
 public class EffectManager
 {
-    private Dictionary<string, AnimatorController> _effects = new Dictionary<string, AnimatorController>();
+    private GameObject _baseEffectPrefab;
 
-    public ObjectPool<GameObject> EffectPool { get; set; }
+    private const string EFFECT_PATH = "EffectAC/";
+
+    private DataCache<AnimatorController> _effectTable;
+
+    private ObjectPool<EffectController> _effectPool;
 
     public void Init()
     {
-        EffectPool = new ObjectPool<GameObject>(GenerateEffect, ActiveEffect);
+        _baseEffectPrefab = Managers.Resource.Load<GameObject>("Prefabs/Effect/BaseEffect");
+        _effectTable = new DataCache<AnimatorController>();
+        _effectPool = new ObjectPool<EffectController>(GenerateEffect, ActiveEffect);
     }
 
-    public GameObject GenerateEffect()
+    public EffectController GenerateEffect()
     {
-        GameObject go = Managers.Resource.Instantiate("Effect");
-        Effect effect = go.GetComponent<Effect>();
-        effect.Pool = EffectPool;
-        return go;
+        GameObject go = Managers.Resource.Instantiate(_baseEffectPrefab);
+        
+        EffectController effectController = go.GetComponent<EffectController>();
+
+        Debug.Assert(effectController is not null);
+
+        return effectController;
     }
 
-    public void ActiveEffect(GameObject effect)
+    private void ActiveEffect(EffectController effect) => effect.gameObject.SetActive(true);
+
+    public void ReleaseToPool(EffectController effect) => _effectPool.Release(effect);
+
+    public void PlayEffect(EffectId effectId, Vector3 position)
     {
-        effect.SetActive(true);
+        EffectController effect = _effectPool.Get();
+
+        Animator anim = effect.GetComponent<Animator>();
+        string effectAnimController = Managers.Data.EffectDataTable[(int)effectId].AnimationControllerName;
+        anim.runtimeAnimatorController = _effectTable.Load(Path.Combine(EFFECT_PATH, effectAnimController));
+
+        effect.transform.position = position;
     }
-
-    private AnimatorController GetEffectAnim(string path)
-    {
-        AnimatorController animController = null;
-        if (_effects.TryGetValue(path, out animController))
-            return animController;
-
-        animController = Managers.Resource.Load<AnimatorController>(path);
-        _effects.Add(path, animController);
-        return animController;
-    }
-
-    private void ResetPrefabInfo(GameObject prefab)
-    {
-        SpriteRenderer sr = prefab.GetComponent<SpriteRenderer>();
-        sr.material.color = new Color(1, 1, 1, 1);
-
-        prefab.transform.localScale = new Vector3(1, 1, 1);
-        prefab.transform.rotation = Quaternion.Euler(Vector3.zero);
-
-    }
-
-    public void PlayMoveEffect(Vector3 position, Vector3 rotation, Vector3 scale)
-    {
-        GameObject moveEffect = EffectPool.Get();
-        ResetPrefabInfo(moveEffect);
-
-        Animator anim = moveEffect.GetComponent<Animator>();
-        anim.runtimeAnimatorController = GetEffectAnim("EffectAC/MoveEffectAC");
-
-        SpriteRenderer sr = moveEffect.GetComponent<SpriteRenderer>();
-        sr.material.color = new Color(1, 1, 1, 0.5f);
-
-        moveEffect.transform.position = position;
-        moveEffect.transform.rotation = Quaternion.Euler(rotation);
-        moveEffect.transform.localScale = scale;
-    }
-
-    public void PlayRollEffect(Vector3 position, Vector3 rotation)
-    {
-        GameObject rollEffect = EffectPool.Get();
-        ResetPrefabInfo(rollEffect);
-
-        Animator anim = rollEffect.GetComponent<Animator>();
-        anim.runtimeAnimatorController = GetEffectAnim("EffectAC/RollEffectAC");
-        int rollEffectIndex = Random.Range(0, 4);
-        Debug.Log(rollEffectIndex);
-        anim.SetInteger("effectNum", rollEffectIndex);
-
-        SpriteRenderer sr = rollEffect.GetComponent<SpriteRenderer>();
-        sr.material.DOColor(new Color(1, 1, 1, 0), 0.5f);
-
-        rollEffect.transform.position = position;
-        rollEffect.transform.DOLocalRotate(rotation, 0.4f);
-
-    }
-
 }

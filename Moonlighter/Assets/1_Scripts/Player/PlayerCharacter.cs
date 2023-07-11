@@ -1,26 +1,31 @@
-using UnityEngine;
 using Enums;
+using UnityEngine;
 
 public class PlayerCharacter : Character
 {
-    public CharacterStat Stat
+    public CharacterStatData Stat
     {
         get
         {
             return stat;
         }
     }
-    public PlayerInputHandler Input { get; private set; }
     
     public Animator Anim { get; private set; }
     public Rigidbody2D Rigid { get; private set; }
-    public PlayerState PrevState;
+    public FacingDirection PlayerFacingDirection { get; private set; }
+    
+    private FacingDirection[,] _facingDirections =
+    {
+        {FacingDirection.Down, FacingDirection.Down, FacingDirection.Down },
+        {FacingDirection.Left, FacingDirection.Down, FacingDirection.Right },
+        {FacingDirection.Up, FacingDirection.Up, FacingDirection.Up }
+    };
 
     protected override void Awake()
     {
         base.Awake();
         stat = Managers.Data.CharacterStatDataTable[(int)CharacterStatId.Player];
-        Input = transform.GetComponent<PlayerInputHandler>();
         Anim = transform.Find(ObjectLiteral.Body).GetComponent<Animator>();
         Rigid = GetComponent<Rigidbody2D>();
     }
@@ -28,7 +33,15 @@ public class PlayerCharacter : Character
     private void Start()
     {
         Anim.SetBool(PlayerAnimParameters.Idle, true);
-        PrevState = PlayerState.Idle;
+        Anim.SetFloat(PlayerAnimParameters.MoveY, -1);
+        PlayerFacingDirection = FacingDirection.Down;
+    }
+
+    public void SetFacingDirection()
+    {
+        int dirX = 1 + Mathf.RoundToInt(Anim.GetFloat(PlayerAnimParameters.MoveX));
+        int dirY = 1 + Mathf.RoundToInt(Anim.GetFloat(PlayerAnimParameters.MoveY));
+        PlayerFacingDirection = _facingDirections[dirY, dirX];
     }
 
     public override void Attack()

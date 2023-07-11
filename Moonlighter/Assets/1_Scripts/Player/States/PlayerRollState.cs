@@ -1,78 +1,59 @@
+using DG.Tweening;
 using UnityEngine;
-using Enums;
 
-public class PlayerRollState : StateMachineBehaviour
+public class PlayerRollState : PlayerState
 {
-    private PlayerCharacter _player;
-    private PlayerInputHandler _input;
-    private AnimEventHandler _animEventHandler;
-    private Vector2 _rollDir;
-    private float _rollVelocityMultiplier;
+    [SerializeField]
+    private float _rollDirModifier = 0.5f;
 
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        Init(animator);
+        base.OnStateEnter(animator, stateInfo, layerIndex);
+        DoRoll(stateInfo.length);
     }
 
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        SetRollVelocity(stateInfo);
-
-        if (_animEventHandler.IsAnimationFinsih)
+        if (IsStateEnd(stateInfo))
         {
-            if(_input.MoveInput != Vector2.zero)
-            {
-                _player.PrevState = PlayerState.Roll;
-                _player.Anim.SetBool(PlayerAnimParameters.Roll, false);
-                _player.Anim.SetBool(PlayerAnimParameters.Move, true);
-            }
-            else if(_input.MoveInput == Vector2.zero)
-            {
-                _player.PrevState = PlayerState.Roll;
-                _player.Anim.SetBool(PlayerAnimParameters.Roll, false);
-                _player.Anim.SetBool(PlayerAnimParameters.Idle, true);
-            }
-        }
-    }
+            ExitCurrentState(PlayerAnimParameters.Roll);
 
-    private void Init(Animator animator)
-    {
-        _player = animator.transform.root.GetComponent<PlayerCharacter>();
-        _input = animator.transform.root.GetComponent<PlayerInputHandler>();
-        _animEventHandler = animator.transform.GetComponent<AnimEventHandler>();
-        _rollVelocityMultiplier = 1;
-        SetRollDir();
-        _animEventHandler.AnimationStart();
-    }
-
-    private void SetRollDir()
-    {
-        if(_player.PrevState == PlayerState.Idle)
-        {
-            int dirX = Mathf.RoundToInt(_player.Anim.GetFloat(PlayerAnimParameters.MoveX));
-            int dirY = Mathf.RoundToInt(_player.Anim.GetFloat(PlayerAnimParameters.MoveY));
-            if(dirY > 0)
+            if(input.IsMoving)
             {
-                _rollDir = Vector2.up;
-            }
-            else if(dirY < 0)
-            {
-                _rollDir = Vector2.down;
+                EnterNextState(PlayerAnimParameters.Move);
             }
             else
             {
-                _rollDir.Set(dirX, dirY);
+                EnterNextState(PlayerAnimParameters.Idle);
             }
         }
-        else
-        {
-            _rollDir.Set(_player.Anim.GetFloat(PlayerAnimParameters.MoveX), _player.Anim.GetFloat(PlayerAnimParameters.MoveY));
-        }
+                
+        static bool IsStateEnd(AnimatorStateInfo stateInfo) => stateInfo.normalizedTime >= 1;
     }
 
-    private void SetRollVelocity(AnimatorStateInfo stateInfo)
+
+    private void DoRoll(float duration)
     {
-        _rollVelocityMultiplier = EaseFunc.EaseOutCubic(_rollVelocityMultiplier, _player.Stat.RollSpeed, Time.deltaTime / stateInfo.normalizedTime);
-        _player.Rigid.velocity = _rollDir * _rollVelocityMultiplier;
+        Vector2 _rollDir = GetRollDirection(player, input);
+        _rollDir *= _rollDirModifier;
+        _rollDir *= player.Stat.RollSpeed;
+
+        Vector2 destination = player.Rigid.position + _rollDir;
+
+        player.Rigid.DOMove(destination, duration).SetEase(Ease.OutSine);
+
+        static Vector2 GetRollDirection(PlayerCharacter playerCharacter, PlayerInputHandler playerInput)
+        {
+            if (playerInput.IsMoving)
+            {
+                float newX = playerCharacter.Anim.GetFloat(PlayerAnimParameters.MoveX);
+                float newY = playerCharacter.Anim.GetFloat(PlayerAnimParameters.MoveY);
+                return new Vector2(newX, newY).normalized;
+            }
+            else
+            {
+                return playerCharacter.PlayerFacingDirection.ToVec2().normalized;
+            }
+        }
     }
 }

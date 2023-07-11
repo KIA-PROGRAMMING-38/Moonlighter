@@ -1,36 +1,22 @@
 using UnityEngine;
-using Enums;
 
-public class PlayerIdleState : StateMachineBehaviour
+public class PlayerIdleState : PlayerState
 {
-    private PlayerCharacter _player;
-    private PlayerInputHandler _input;
-
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        Init(animator);
+        base.OnStateEnter(animator, stateInfo, layerIndex);
+        player.Rigid.velocity = Vector2.zero;
     }
 
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        if(_input.MoveInput != Vector2.zero)
+        if(input.MoveInput != Vector2.zero)
         {
-            _player.PrevState = PlayerState.Idle;
-            _player.Anim.SetBool(PlayerAnimParameters.Idle, false);
-            _player.Anim.SetBool(PlayerAnimParameters.Move, true);
+            ChangeNextState(PlayerAnimParameters.Idle, PlayerAnimParameters.Move);
         }
-        else if(_input.RollInput)
+        else if(input.RollInput)
         {
-            _player.PrevState = PlayerState.Idle;
-            _player.Anim.SetBool(PlayerAnimParameters.Idle, false);
-            _player.Anim.SetBool(PlayerAnimParameters.Roll, true);
+            ChangeNextState(PlayerAnimParameters.Idle, PlayerAnimParameters.Roll);
         }
-    }
-
-    private void Init(Animator animator)
-    {
-        _player = animator.transform.root.GetComponent<PlayerCharacter>();
-        _input = animator.transform.root.GetComponent<PlayerInputHandler>();
-        _player.Rigid.velocity = Vector2.zero;
     }
 }

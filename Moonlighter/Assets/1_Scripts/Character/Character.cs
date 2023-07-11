@@ -1,10 +1,9 @@
-using DG.Tweening;
 using System.Collections;
 using UnityEngine;
 
 public abstract class Character : MonoBehaviour
 {
-    protected CharacterStat stat = new CharacterStat();
+    protected CharacterStatData stat;
     protected int curHp;
     protected SpriteRenderer sr;
     
@@ -18,7 +17,7 @@ public abstract class Character : MonoBehaviour
     {
         sr = transform.Find(ObjectLiteral.Body).GetComponent<SpriteRenderer>();
         _originMaterial = sr.material;
-        _hitMaterial = Managers.Resource.Load<Material>(PathLiteral.HitMaterial);
+        _hitMaterial = Managers.Resource.MaterialTable.Load(PathLiteral.HitMaterial);
         _onDamagedTween = OnDamagedTween();
     }
 

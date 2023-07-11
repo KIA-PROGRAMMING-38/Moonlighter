@@ -1,8 +1,11 @@
 ﻿namespace Enums
 {
-    public enum CharacterStatId
+    public enum FacingDirection
     {
-        Player = 1,
+        Up,
+        Down,
+        Left,
+        Right,
         Count
     }
 
@@ -14,9 +17,16 @@
         Count
     }
 
+    public enum CharacterStatId
+    {
+        Player = 1,
+        Count
+    }
+
     public enum EffectId
     {
         MoveEffect = 1,
+        RollEffect,
         Count
     }
 }

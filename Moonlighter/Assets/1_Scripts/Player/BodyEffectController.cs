@@ -1,25 +1,12 @@
-using DG.Tweening;
-using System.Collections;
-using UniRx.Toolkit;
-using UnityEditor.Animations;
+using Enums;
+using System;
 using UnityEngine;
 
 public class BodyEffectController : MonoBehaviour
 {
-    private static readonly int _footCount = 2;
+    private PlayerCharacter _player;
 
-    #region MoveEffect Variables
-    private Transform[] _footPositions = new Transform[_footCount];
-    private Transform _moveEffects;
-    private Vector3 _moveEffectScale = new Vector3(0.3f, 0.3f, 1);
-    private Vector3 _moveEffeectRotation = new Vector3(0, 0, -90);
-    private Color _moveEffectColor = new Color(1, 1, 1, 0.5f);
-    private int _footNum = 0;
-    #endregion
-
-    #region RollEffect Variables
-    private Vector3 _rollEffectEndRotation = new Vector3(0, 0, 180);
-    #endregion
+    private Transform _moveEffectTransform;
 
     private void Awake()
     {
@@ -28,26 +15,42 @@ public class BodyEffectController : MonoBehaviour
 
     private void Init()
     {
-        _moveEffects = transform.Find("MoveEffectPos");
-
-        for (int i = 0; i < _footPositions.Length; ++i)
-        {
-            _footPositions[i] = _moveEffects.GetChild(i);
-        }
-
+        _player = transform.root.GetComponent<PlayerCharacter>();
+        _moveEffectTransform = transform.Find("MoveEffectPosition");
     }
 
     private void PlayMoveEffect()
     {
-        Managers.Effect.PlayMoveEffect(_footPositions[_footNum].position, _moveEffeectRotation, _moveEffectScale);
-        ++_footNum;
-        _footNum %= _footCount;
+        Vector3 spawnPosition = GetFootEffectSpawnPosition(_player.PlayerFacingDirection);
+        Managers.Effect.PlayEffect(EffectId.MoveEffect, spawnPosition);
     }
 
     private void PlayRollEffect()
     {
-        Managers.Effect.PlayRollEffect(_footPositions[_footNum].position, _rollEffectEndRotation);
-        ++_footNum;
-        _footNum %= _footCount;
+        Vector3 spawnPosition = GetFootEffectSpawnPosition(_player.PlayerFacingDirection);
+        Managers.Effect.PlayEffect(EffectId.RollEffect, spawnPosition);
+    }
+
+    private Vector3 GetFootEffectSpawnPosition(FacingDirection dir)
+    {
+        Vector3 offset = GetOffset(dir);
+
+        return _moveEffectTransform.position + offset;
+        static Vector3 GetOffset(FacingDirection dir)
+        {
+            switch (dir)
+            {
+                case FacingDirection.Down:
+                    return new Vector3(UnityEngine.Random.Range(-0.04f, 0.04f), 0.1f);
+                case FacingDirection.Up:
+                    return new Vector3(UnityEngine.Random.Range(-0.04f, 0.04f), 0f);
+                case FacingDirection.Left:
+                    return new Vector3(0f, UnityEngine.Random.Range(0, 0.04f));
+                case FacingDirection.Right:
+                    return new Vector3(0f, UnityEngine.Random.Range(0, 0.04f));
+                default:
+                    throw new NotImplementedException();
+            }
+        }
     }
 }

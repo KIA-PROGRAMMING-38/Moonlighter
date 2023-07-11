@@ -3,24 +3,15 @@ using UnityEngine;
 
 public class ResourceManager
 {
-    private Dictionary<string, Material> _materials = new Dictionary<string, Material>();
+    public DataCache<Material> MaterialTable { get; private set; }
 
-    public void Init() { }
+    public void Init()
+    {
+        MaterialTable = new DataCache<Material>();
+    }
 
     public T Load<T>(string path) where T : Object
     {
-        if(typeof(T) == typeof(Material))
-        {
-            if(false == _materials.ContainsKey(path))
-            {
-                Material material = Resources.Load<Material>(path);
-                _materials.Add(path, material);
-                return material as T;
-            }
-
-            return _materials[path] as T;
-        }
-
         return Resources.Load<T>(path);
     }
 
@@ -38,7 +29,7 @@ public class ResourceManager
 
     public GameObject Instantiate(GameObject prefab, Transform parent = null)
     {
-        GameObject go = Object.Instantiate(prefab, parent);
+        GameObject go = UnityEngine.Object.Instantiate(prefab, parent);
         go.name = prefab.name;
         return go;
     }
