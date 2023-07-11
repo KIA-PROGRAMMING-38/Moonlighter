@@ -12,8 +12,7 @@ AnimatorState:
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 5228055873731249263}
-  m_StateMachineBehaviours:
-  - {fileID: 5887209546843414234}
+  m_StateMachineBehaviours: []
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -176,8 +175,7 @@ AnimatorState:
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: -5289281692749918134}
-  m_StateMachineBehaviours:
-  - {fileID: 1871934115186356787}
+  m_StateMachineBehaviours: []
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -192,22 +190,6 @@ AnimatorState:
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
---- !u!114 &1871934115186356787
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 804c2fcc66f2baf4493290e0af1e4149, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  AnimationClipHash: 44b7a2d4fee6ab4d68d6ac3acb43c8a4
-  _endRotationValue: {x: 0, y: 0, z: 180}
-  _endAlphaValue: 0
-  _rollEffectDuration: 0.6
 --- !u!1102 &2080733449239437539
 AnimatorState:
   serializedVersion: 6
@@ -220,8 +202,7 @@ AnimatorState:
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: -7116751806624603668}
-  m_StateMachineBehaviours:
-  - {fileID: 7947671433767791913}
+  m_StateMachineBehaviours: []
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -314,22 +295,6 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
---- !u!114 &5887209546843414234
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 804c2fcc66f2baf4493290e0af1e4149, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  AnimationClipHash: 44b7a2d4fee6ab4d68d6ac3acb43c8a4
-  _endRotationValue: {x: 0, y: 0, z: 180}
-  _endAlphaValue: 0
-  _rollEffectDuration: 0.6
 --- !u!1102 &7530237403871054776
 AnimatorState:
   serializedVersion: 6
@@ -357,19 +322,3 @@ AnimatorState:
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
---- !u!114 &7947671433767791913
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 804c2fcc66f2baf4493290e0af1e4149, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  AnimationClipHash: 44b7a2d4fee6ab4d68d6ac3acb43c8a4
-  _endRotationValue: {x: 0, y: 0, z: 180}
-  _endAlphaValue: 0
-  _rollEffectDuration: 0.6
