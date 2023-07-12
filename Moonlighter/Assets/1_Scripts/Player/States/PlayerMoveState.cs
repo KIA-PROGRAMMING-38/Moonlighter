@@ -19,6 +19,10 @@ public class PlayerMoveState : PlayerState
         {
             ChangeNextState(PlayerAnimParameters.Move, PlayerAnimParameters.Roll);
         }
+        else if (input.NormalAttackInput)
+        {
+            ChangeNextState(PlayerAnimParameters.Move, PlayerAnimParameters.NormalAttack1);
+        }
         else
         {
             player.Anim.SetFloat(PlayerAnimParameters.MoveX, input.MoveInput.x);

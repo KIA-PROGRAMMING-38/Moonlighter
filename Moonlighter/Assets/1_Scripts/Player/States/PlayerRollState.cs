@@ -27,10 +27,7 @@ public class PlayerRollState : PlayerState
                 EnterNextState(PlayerAnimParameters.Idle);
             }
         }
-                
-        static bool IsStateEnd(AnimatorStateInfo stateInfo) => stateInfo.normalizedTime >= 1;
     }
-
 
     private void DoRoll(float duration)
     {
