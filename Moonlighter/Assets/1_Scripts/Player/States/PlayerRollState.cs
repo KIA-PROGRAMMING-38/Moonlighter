@@ -9,24 +9,8 @@ public class PlayerRollState : PlayerState
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         base.OnStateEnter(animator, stateInfo, layerIndex);
+
         DoRoll(stateInfo.length);
-    }
-
-    public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    {
-        if (IsStateEnd(stateInfo))
-        {
-            ExitCurrentState(PlayerAnimParameters.Roll);
-
-            if(input.IsMoving)
-            {
-                EnterNextState(PlayerAnimParameters.Move);
-            }
-            else
-            {
-                EnterNextState(PlayerAnimParameters.Idle);
-            }
-        }
     }
 
     private void DoRoll(float duration)

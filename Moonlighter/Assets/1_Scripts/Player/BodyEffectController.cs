@@ -45,7 +45,6 @@ public class BodyEffectController : MonoBehaviour
                 case FacingDirection.Up:
                     return new Vector3(UnityEngine.Random.Range(-0.04f, 0.04f), 0f);
                 case FacingDirection.Left:
-                    return new Vector3(0f, UnityEngine.Random.Range(0, 0.06f));
                 case FacingDirection.Right:
                     return new Vector3(0f, UnityEngine.Random.Range(0, 0.06f));
                 default:
