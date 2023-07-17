@@ -5,7 +5,6 @@ public class ShortSword : Weapon
 {
     public override void Init(WeaponId weaponId)
     {
-        base.Init(weaponId);
         data = Managers.Data.WeaponDataTable[(int)weaponId];
     }
 

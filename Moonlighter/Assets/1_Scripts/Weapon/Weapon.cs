@@ -12,10 +12,7 @@ public abstract class Weapon : MonoBehaviour
         Player = transform.root.GetComponent<PlayerCharacter>();
     }
 
-    public virtual void Init(WeaponId weaponId) 
-    {
-        transform.position = Vector3.zero;
-    }
+    public virtual void Init(WeaponId weaponId) { }
 
     public abstract void NormalAttack();
     
