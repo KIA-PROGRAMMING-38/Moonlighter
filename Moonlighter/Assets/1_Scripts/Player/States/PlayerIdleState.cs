@@ -2,21 +2,18 @@ using UnityEngine;
 
 public class PlayerIdleState : PlayerState
 {
-    override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    protected override void OnMove(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        base.OnStateEnter(animator, stateInfo, layerIndex);
-        player.Rigid.velocity = Vector2.zero;
+        ChangeNextState(PlayerAnimParameters.Move);
     }
 
-    override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    protected override void OnRoll(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        if(input.MoveInput != Vector2.zero)
-        {
-            ChangeNextState(PlayerAnimParameters.Idle, PlayerAnimParameters.Move);
-        }
-        else if(input.RollInput)
-        {
-            ChangeNextState(PlayerAnimParameters.Idle, PlayerAnimParameters.Roll);
-        }
+        ChangeNextState(PlayerAnimParameters.Roll);
+    }
+
+    protected override void OnNormalAttack(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    {
+        ChangeNextState(PlayerAnimParameters.NormalAttack);
     }
 }

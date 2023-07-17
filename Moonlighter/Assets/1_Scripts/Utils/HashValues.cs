@@ -15,4 +15,5 @@ public static class PlayerAnimParameters
     public static readonly int Idle = Animator.StringToHash("Idle");
     public static readonly int Move = Animator.StringToHash("Move");
     public static readonly int Roll = Animator.StringToHash("Roll");
+    public static readonly int NormalAttack = Animator.StringToHash("NormalAttack");
 }

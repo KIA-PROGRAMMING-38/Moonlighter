@@ -5,25 +5,44 @@ public class PlayerState : StateMachineBehaviour
     protected PlayerCharacter player;
     protected PlayerInputHandler input;
 
+    protected Vector2 zeroVelocity = Vector2.zero;
+
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         player = animator.transform.root.GetComponent<PlayerCharacter>();
         input = animator.transform.root.GetComponent<PlayerInputHandler>();
+        player.Rigid.velocity = zeroVelocity;
     }
 
-    protected void ExitCurrentState(int currentState)
+    public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        player.Anim.SetBool(currentState, false);
+        if (input.IsMoving)
+        {
+            OnMove(animator, stateInfo, layerIndex);
+        }
+        else
+        {
+            OnIdle(animator, stateInfo, layerIndex);
+        }
+
+        if (input.RollInput)
+        {
+            OnRoll(animator, stateInfo, layerIndex);
+        }
+
+        if (input.NormalAttackInput)
+        {
+            OnNormalAttack(animator, stateInfo, layerIndex);
+        }
     }
 
-    protected void EnterNextState(int nextState)
-    {
-        player.Anim.SetBool(nextState, true);
-    }
+    protected virtual void OnIdle(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) { }
+    protected virtual void OnMove(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) { }
+    protected virtual void OnRoll(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) { }
+    protected virtual void OnNormalAttack(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) { }
 
-    protected void ChangeNextState(int current, int next)
+    protected void ChangeNextState(int next)
     {
-        ExitCurrentState(current);
-        EnterNextState(next);
+        player.Anim.SetTrigger(next);
     }
 }
