@@ -16,4 +16,9 @@ public class PlayerIdleState : PlayerState
     {
         ChangeNextState(PlayerAnimParameters.NormalAttack);
     }
+
+    protected override void OnSpecialAttack(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    {
+        ChangeNextState(PlayerAnimParameters.SpecialAttack);
+    }
 }

@@ -15,4 +15,12 @@ public class WeaponInvisibleState : WeaponState
             ChangeNextState(PlayerAnimParameters.NormalAttack);
         }
     }
+
+    protected override void OnSpecialAttack(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    {
+        if (player.CanAttack)
+        {
+            ChangeNextState(PlayerAnimParameters.SpecialAttack);
+        }
+    }
 }
