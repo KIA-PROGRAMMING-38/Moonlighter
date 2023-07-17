@@ -10,6 +10,9 @@ public class WeaponInvisibleState : WeaponState
 
     protected override void OnNormalAttack(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        ChangeNextState(PlayerAnimParameters.NormalAttack);
+        if (player.CanAttack)
+        {
+            ChangeNextState(PlayerAnimParameters.NormalAttack);
+        }
     }
 }

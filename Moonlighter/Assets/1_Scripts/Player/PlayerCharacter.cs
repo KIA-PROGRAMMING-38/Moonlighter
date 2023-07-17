@@ -1,4 +1,3 @@
-using Cysharp.Threading.Tasks.Triggers;
 using Enums;
 using UnityEngine;
 
@@ -19,6 +18,8 @@ public class PlayerCharacter : Character
 
     public Weapon CurrentWeapon { get; private set; }
 
+    public bool CanAttack;
+
     private FacingDirection[,] _facingDirections =
     {
         {FacingDirection.Down, FacingDirection.Down, FacingDirection.Down },
@@ -36,6 +37,8 @@ public class PlayerCharacter : Character
         Transform WeaponPosition = transform.Find("Weapon");
         CurrentWeapon = Managers.Resource.Instantiate("TrainShortSword", WeaponPosition).GetComponent<Weapon>();
         CurrentWeapon.Init(WeaponId.TrainShortSword);
+
+        CanAttack = true;
     }
 
     private void Start()
