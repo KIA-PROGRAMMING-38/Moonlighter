@@ -38,18 +38,13 @@ public class BodyEffectController : MonoBehaviour
         return _moveEffectTransform.position + offset;
         static Vector3 GetOffset(FacingDirection dir)
         {
-            switch (dir)
+            return dir switch
             {
-                case FacingDirection.Down:
-                    return new Vector3(UnityEngine.Random.Range(-0.04f, 0.04f), 0.1f);
-                case FacingDirection.Up:
-                    return new Vector3(UnityEngine.Random.Range(-0.04f, 0.04f), 0f);
-                case FacingDirection.Left:
-                case FacingDirection.Right:
-                    return new Vector3(0f, UnityEngine.Random.Range(0, 0.06f));
-                default:
-                    throw new NotImplementedException();
-            }
+                FacingDirection.Down => new Vector3(UnityEngine.Random.Range(-0.04f, 0.04f), 0.1f),
+                FacingDirection.Up => new Vector3(UnityEngine.Random.Range(-0.04f, 0.04f), 0),
+                FacingDirection.Left or FacingDirection.Right => new Vector3(0, UnityEngine.Random.Range(0, 0.06f)),
+                _ => throw new NotImplementedException(nameof(GetOffset))
+            };
         }
     }
 }
