@@ -12,6 +12,7 @@ public class PlayerInputHandler : MonoBehaviour
     }
     public bool RollInput { get; private set; }
     public bool NormalAttackInput { get; private set; }
+    public bool SpecialAttackInput { get; private set; }
     public bool IsMoving
     {
         get
@@ -35,6 +36,6 @@ public class PlayerInputHandler : MonoBehaviour
         _moveInput.Set(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
         RollInput = Input.GetButtonDown("Roll");
         NormalAttackInput = Input.GetButtonDown("NormalAttack");
-        
+        SpecialAttackInput = Input.GetButton("SpecialAttack");
     }
 }
