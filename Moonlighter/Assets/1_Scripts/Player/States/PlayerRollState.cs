@@ -11,13 +11,6 @@ public class PlayerRollState : PlayerState
         base.OnStateEnter(animator, stateInfo, layerIndex);
 
         DoRoll(stateInfo.length);
-
-        player.CanAttack = false;
-    }
-
-    public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    {
-        player.CanAttack = true;
     }
 
     private void DoRoll(float duration)

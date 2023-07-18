@@ -40,9 +40,4 @@ public class PlayerState : StateMachineBehaviour
     protected virtual void OnMove(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) { }
     protected virtual void OnRoll(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) { }
     protected virtual void OnNormalAttack(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) { }
-
-    protected void ChangeNextState(int next)
-    {
-        player.Anim.SetTrigger(next);
-    }
 }

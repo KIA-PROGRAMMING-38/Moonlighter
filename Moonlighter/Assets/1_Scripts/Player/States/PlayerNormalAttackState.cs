@@ -28,15 +28,14 @@ public class PlayerNormalAttackState : PlayerState
             return;
         }
 
-        ChangeNextState(PlayerAnimParameters.NormalAttack);
+        animator.SetTrigger(PlayerAnimParameters.NormalAttack);
     }
 
     [SerializeField][Range(0.1f, 0.3f)] private float _rushDistanceModifier = 0.15f;
     [SerializeField][Range(0, 0.2f)] private float _rushTime = 0.1f;
     private void MoveForwardWhileAttacking(AnimatorStateInfo stateInfo)
     {
-        player.Anim.SetFloat(PlayerAnimParameters.MoveX, input.MoveInput.x);
-        player.Anim.SetFloat(PlayerAnimParameters.MoveY, input.MoveInput.y);
+        player.Anim.SetMovementParameters(PlayerAnimParameters.MoveX, PlayerAnimParameters.MoveY, input.MoveInput);
 
         player.SetFacingDirection();
 
