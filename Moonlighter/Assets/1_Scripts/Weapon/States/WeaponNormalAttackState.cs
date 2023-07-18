@@ -5,10 +5,10 @@ public class WeaponNormalAttackState : WeaponState
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         base.OnStateEnter(animator, stateInfo, layerIndex);
+
         if (input.IsMoving)
         {
-            animator.SetFloat(PlayerAnimParameters.MoveX, player.Anim.GetFloat(PlayerAnimParameters.MoveX));
-            animator.SetFloat(PlayerAnimParameters.MoveY, player.Anim.GetFloat(PlayerAnimParameters.MoveY));
+            animator.SetMovementParametersFromSource(player.Anim, PlayerAnimParameters.MoveX, PlayerAnimParameters.MoveY);
         }
     }
 
@@ -26,6 +26,6 @@ public class WeaponNormalAttackState : WeaponState
             return;
         }
 
-        ChangeNextState(PlayerAnimParameters.NormalAttack);
+        animator.SetTrigger(PlayerAnimParameters.NormalAttack);
     }
 }
