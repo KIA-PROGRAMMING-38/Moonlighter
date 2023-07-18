@@ -8,7 +8,7 @@ public class WeaponNormalAttackState : WeaponState
 
         if (input.IsMoving)
         {
-            animator.SetMovementParametersFromSource(player.Anim, PlayerAnimParameters.MoveX, PlayerAnimParameters.MoveY);
+            animator.SetMovementParametersFromSource(player.Anim, AnimParameters.MoveX, AnimParameters.MoveY);
         }
     }
 
@@ -26,6 +26,6 @@ public class WeaponNormalAttackState : WeaponState
             return;
         }
 
-        animator.SetTrigger(PlayerAnimParameters.NormalAttack);
+        animator.SetTrigger(AnimParameters.NormalAttack);
     }
 }

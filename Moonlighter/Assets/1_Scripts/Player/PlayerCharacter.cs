@@ -39,15 +39,15 @@ public class PlayerCharacter : Character
 
     private void Start()
     {
-        Anim.SetBool(PlayerAnimParameters.Idle, true);
-        Anim.SetFloat(PlayerAnimParameters.MoveY, -1);
+        Anim.SetBool(AnimParameters.Idle, true);
+        Anim.SetFloat(AnimParameters.MoveY, -1);
         PlayerFacingDirection = FacingDirection.Down;
     }
 
     public void SetFacingDirection()
     {
-        int dirX = 1 + Mathf.RoundToInt(Anim.GetFloat(PlayerAnimParameters.MoveX));
-        int dirY = 1 + Mathf.RoundToInt(Anim.GetFloat(PlayerAnimParameters.MoveY));
+        int dirX = 1 + Mathf.RoundToInt(Anim.GetFloat(AnimParameters.MoveX));
+        int dirY = 1 + Mathf.RoundToInt(Anim.GetFloat(AnimParameters.MoveY));
         PlayerFacingDirection = _facingDirections[dirY, dirX];
     }
 

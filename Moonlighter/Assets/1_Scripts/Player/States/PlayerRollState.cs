@@ -27,8 +27,8 @@ public class PlayerRollState : PlayerState
         {
             if (playerInput.IsMoving)
             {
-                float newX = playerCharacter.Anim.GetFloat(PlayerAnimParameters.MoveX);
-                float newY = playerCharacter.Anim.GetFloat(PlayerAnimParameters.MoveY);
+                float newX = playerCharacter.Anim.GetFloat(AnimParameters.MoveX);
+                float newY = playerCharacter.Anim.GetFloat(AnimParameters.MoveY);
                 return new Vector2(newX, newY).normalized;
             }
             else

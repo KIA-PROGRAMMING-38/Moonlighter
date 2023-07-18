@@ -8,7 +8,7 @@ public static class AnimationNameToHash
     public static readonly int RollEffect4 = Animator.StringToHash("RollEffect4");
 }
 
-public static class PlayerAnimParameters
+public static class AnimParameters
 {
     public static readonly int MoveX = Animator.StringToHash("MoveX");
     public static readonly int MoveY = Animator.StringToHash("MoveY");

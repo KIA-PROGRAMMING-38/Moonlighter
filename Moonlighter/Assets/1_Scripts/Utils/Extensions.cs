@@ -16,6 +16,13 @@ public static class Extensions
         return _directions[(int)fd];
     }
 
+    public static void SetBlendTreeParameter(this Animator animator, int idx, int idy, FacingDirection dir, float modifier = 1)
+    {
+        Vector2 directionParameter = dir.ToVec2() * modifier;
+
+        animator.SetMovementParameters(idx, idy, directionParameter);
+    }
+
     public static void SetMovementParameters(this Animator animator, int idx, int idy, Vector2 value)
     {
         animator.SetFloat(idx, value.x);

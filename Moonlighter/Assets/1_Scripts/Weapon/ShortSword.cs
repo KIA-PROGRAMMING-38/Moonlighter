@@ -10,29 +10,22 @@ public class ShortSword : Weapon
         data = Managers.Data.WeaponDataTable[(int)weaponId];
     }
 
-    public override void NormalAttack()
+    public override void PerformNormalAttack()
     {
         Debug.Log("NormalAttack");
     }
 
-    public override void PerformMoveInputWhileCharging(PlayerInputHandler input)
+    public override void PerformMoveInputOnSpecialAttack(PlayerInputHandler input)
     {
-        Vector2 moveInput = input.MoveInput;
-
-        player.Rigid.velocity = moveInput * _shieldedMovementSpeed;
-    }
-
-    public override void PerformMoveInputWhileChargeEnd(PlayerInputHandler input)
-    {
-        Vector2 moveInput = input.MoveInput;
-
-        Vector2 animParams = player.PlayerFacingDirection.ToVec2();
-
-        player.Anim.SetFloat(PlayerAnimParameters.MoveX, animParams.x);
-        player.Anim.SetFloat(PlayerAnimParameters.MoveY, animParams.y);
-
-        player.Rigid.velocity = moveInput * _shieldedMovementSpeed;
+        SetShieldedMovement(input);
     }
 
     public override void PerformWhileSpecialAttackFinish() { }
+
+    private void SetShieldedMovement(PlayerInputHandler input)
+    {
+        Vector2 moveInput = input.MoveInput;
+
+        player.Rigid.velocity = moveInput * _shieldedMovementSpeed;
+    }
 }
