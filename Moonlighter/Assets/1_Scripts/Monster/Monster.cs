@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Monster : MonoBehaviour
+public class Monster : Character
 {
-    
+    public override void Die() { }
 }

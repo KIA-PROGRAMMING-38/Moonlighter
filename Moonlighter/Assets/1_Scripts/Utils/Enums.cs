@@ -20,6 +20,7 @@
     public enum CharacterStatId
     {
         Player = 1,
+        Tangle = 2,
         Count
     }
 
