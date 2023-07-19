@@ -10,7 +10,7 @@ public class MonsterState : StateMachineBehaviour
     {
         monster = animator.transform.root.GetComponent<Monster>();
         controller = animator.transform.root.GetComponent<MonsterController>();
-        target = PlayerCharacter.Instance.Rigid;
+        target = Managers.Dungeon.Player.Rigid;
     }
 
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)

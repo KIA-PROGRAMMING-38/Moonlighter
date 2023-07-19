@@ -19,8 +19,8 @@ public abstract class Character : MonoBehaviour
     protected virtual void Awake()
     {
         Rigid = GetComponent<Rigidbody2D>();
-        Anim = transform.Find(ObjectLiteral.Body).GetComponent<Animator>();
-        sr = transform.Find(ObjectLiteral.Body).GetComponent<SpriteRenderer>();
+        Anim = transform.Find("Body").GetComponent<Animator>();
+        sr = transform.Find("Body").GetComponent<SpriteRenderer>();
         _originMaterial = sr.material;
         _hitMaterial = Managers.Resource.MaterialTable.Load(PathLiteral.HitMaterial);
         _onDamagedTween = OnDamagedTween();

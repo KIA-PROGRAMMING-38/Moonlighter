@@ -8,10 +8,12 @@ public class Managers : MonoBehaviour
     private static DataManager s_dataManager = new DataManager();
     private static ResourceManager s_resourceManager = new ResourceManager();
     private static EffectManager s_effectManager = new EffectManager();
+    private static DungeonManager s_dungeonManager = new DungeonManager();
 
     public static DataManager Data { get { Init(); return s_dataManager; } }
     public static ResourceManager Resource { get { Init(); return s_resourceManager; } }
     public static EffectManager Effect { get { Init(); return s_effectManager; } }
+    public static DungeonManager Dungeon { get { Init(); return s_dungeonManager; } }
 
     private void Start()
     {
@@ -22,10 +24,10 @@ public class Managers : MonoBehaviour
     {
         if(s_instance == null)
         {
-            GameObject go = GameObject.Find(ObjectLiteral.Managers);
+            GameObject go = GameObject.Find("Managers");
             if (go == null)
             {
-                go = new GameObject { name = ObjectLiteral.Managers };
+                go = new GameObject { name = "Managers" };
                 go.AddComponent<Managers>();
             }
             s_instance = go.GetComponent<Managers>();
@@ -34,6 +36,7 @@ public class Managers : MonoBehaviour
             Data.Init();
             Resource.Init();
             Effect.Init();
+            Dungeon.Init();
         }
     }
 }
