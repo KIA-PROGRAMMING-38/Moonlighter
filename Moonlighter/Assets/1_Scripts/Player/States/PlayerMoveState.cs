@@ -11,7 +11,7 @@ public class PlayerMoveState : PlayerState
     {
         player.SetFacingDirection();
 
-        player.Anim.SetMovementParameters(PlayerAnimParameters.MoveX, PlayerAnimParameters.MoveY, input.MoveInput);
+        player.Anim.SetVector2(PlayerAnimParameters.MoveX, PlayerAnimParameters.MoveY, input.MoveInput);
 
         player.Rigid.velocity = input.MoveInput * player.Stat.MoveSpeed;
     }
@@ -23,6 +23,7 @@ public class PlayerMoveState : PlayerState
 
     protected override void OnNormalAttack(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        animator.SetTriggerWithWeapon(player.CurrentWeapon.Anim, PlayerAnimParameters.NormalAttack);
+        animator.SetTrigger(PlayerAnimParameters.NormalAttack);
+        player.CurrentWeapon.Anim.SetTrigger(PlayerAnimParameters.NormalAttack);
     }
 }

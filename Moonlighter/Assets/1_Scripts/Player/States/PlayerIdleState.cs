@@ -14,6 +14,7 @@ public class PlayerIdleState : PlayerState
 
     protected override void OnNormalAttack(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        animator.SetTriggerWithWeapon(player.CurrentWeapon.Anim, PlayerAnimParameters.NormalAttack);
+        animator.SetTrigger(PlayerAnimParameters.NormalAttack);
+        player.CurrentWeapon.Anim.SetTrigger(PlayerAnimParameters.NormalAttack);
     }
 }
