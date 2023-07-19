@@ -16,36 +16,15 @@ public static class Extensions
         return _directions[(int)fd];
     }
 
-    public static void SetBlendTreeParameter(this Animator animator, int idx, int idy, FacingDirection dir, float modifier = 1)
+    public static void SetVector2(this Animator animator, int idX, int idY, Vector2 value)
     {
-        Vector2 directionParameter = dir.ToVec2() * modifier;
-
-        animator.SetMovementParameters(idx, idy, directionParameter);
+        animator.SetFloat(idX, value.x);
+        animator.SetFloat(idY, value.y);
     }
 
-    public static void SetMovementParameters(this Animator animator, int idx, int idy, Vector2 value)
+    public static void SetVector2(this Animator animator, int idX, int idY, float moveX, float moveY)
     {
-        animator.SetFloat(idx, value.x);
-        animator.SetFloat(idy, value.y);
-    }
-
-    public static void SetMovementParameters(this Animator animator, int idx, int idy, float moveX, float moveY)
-    {
-        animator.SetFloat(idx, moveX);
-        animator.SetFloat(idy, moveY);
-    }
-
-    public static void SetMovementParametersFromSource(this Animator animator, Animator source, int idx, int idy)
-    {
-        float moveX = source.GetFloat(idx);
-        float moveY = source.GetFloat(idy);
-
-        animator.SetMovementParameters(idx, idy, moveX, moveY);
-    }
-
-    public static void SetTriggerWithWeapon(this Animator animator, Animator weaponAnimator, int nextState)
-    {
-        animator.SetTrigger(nextState);
-        weaponAnimator.SetTrigger(nextState);
+        animator.SetFloat(idX, moveX);
+        animator.SetFloat(idY, moveY);
     }
 }

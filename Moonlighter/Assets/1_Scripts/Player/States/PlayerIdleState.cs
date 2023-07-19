@@ -14,11 +14,13 @@ public class PlayerIdleState : PlayerState
 
     protected override void OnNormalAttack(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        animator.SetTriggerWithWeapon(player.CurrentWeapon.Anim, AnimParameters.NormalAttack);
+        animator.SetTrigger(AnimParameters.NormalAttack);
+        player.CurrentWeapon.Anim.SetTrigger(AnimParameters.NormalAttack);
     }
 
     protected override void OnSpecialAttack(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        animator.SetTriggerWithWeapon(player.CurrentWeapon.Anim, AnimParameters.SpecialAttack);
+        animator.SetTrigger(AnimParameters.SpecialAttack);
+        player.CurrentWeapon.Anim.SetTrigger(AnimParameters.SpecialAttack);
     }
 }
