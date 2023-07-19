@@ -8,12 +8,18 @@ public class PlayerSpecialAttackChargeEndState : PlayerState
     {
         player.Rigid.velocity = zeroVelocity;
 
-        animator.SetBlendTreeParameter(AnimParameters.MoveX, AnimParameters.MoveY, player.PlayerFacingDirection, _idleParamModifier);
+        Vector2 blendTreeParameters = player.PlayerFacingDirection.ToVec2() * _idleParamModifier;
+
+        animator.SetVector2(AnimParameters.MoveX, AnimParameters.MoveY, blendTreeParameters);
+        player.CurrentWeapon.Anim.SetVector2(AnimParameters.MoveX, AnimParameters.MoveY, blendTreeParameters);
     }
 
     protected override void OnMove(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        animator.SetBlendTreeParameter(AnimParameters.MoveX, AnimParameters.MoveY, player.PlayerFacingDirection);
+        Vector2 blendTreeParameters = player.PlayerFacingDirection.ToVec2();
+
+        animator.SetVector2(AnimParameters.MoveX, AnimParameters.MoveY, blendTreeParameters);
+        player.CurrentWeapon.Anim.SetVector2(AnimParameters.MoveX, AnimParameters.MoveY, blendTreeParameters);
     }
 
     protected override void ExitSpecialAttack(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
