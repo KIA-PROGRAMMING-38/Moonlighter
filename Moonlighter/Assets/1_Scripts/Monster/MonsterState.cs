@@ -9,20 +9,20 @@ public class MonsterState : StateMachineBehaviour
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         monster = animator.transform.root.GetComponent<Monster>();
+        monster.Rigid.velocity = Vector2.zero;
         controller = animator.transform.root.GetComponent<MonsterController>();
         target = Managers.Dungeon.Player.Rigid;
     }
 
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        if (controller.IsIdle)
-        {
-            OnIdle(animator, stateInfo, layerIndex);
-        }
-
         if (controller.IsMoving)
         {
             OnMove(animator, stateInfo, layerIndex);
+        }
+        else
+        {
+            OnIdle(animator, stateInfo, layerIndex);
         }
 
         if (controller.IsAttack)
