@@ -11,13 +11,6 @@ public class PlayerRollState : PlayerState
         base.OnStateEnter(animator, stateInfo, layerIndex);
 
         DoRoll(stateInfo.length);
-
-        player.CanAttack = false;
-    }
-
-    public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    {
-        player.CanAttack = true;
     }
 
     private void DoRoll(float duration)
@@ -34,8 +27,8 @@ public class PlayerRollState : PlayerState
         {
             if (playerInput.IsMoving)
             {
-                float newX = playerCharacter.Anim.GetFloat(PlayerAnimParameters.MoveX);
-                float newY = playerCharacter.Anim.GetFloat(PlayerAnimParameters.MoveY);
+                float newX = playerCharacter.Anim.GetFloat(AnimParameters.MoveX);
+                float newY = playerCharacter.Anim.GetFloat(AnimParameters.MoveY);
                 return new Vector2(newX, newY).normalized;
             }
             else

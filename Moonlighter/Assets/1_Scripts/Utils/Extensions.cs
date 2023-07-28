@@ -15,4 +15,16 @@ public static class Extensions
     {
         return _directions[(int)fd];
     }
+
+    public static void SetVector2(this Animator animator, int idX, int idY, Vector2 value)
+    {
+        animator.SetFloat(idX, value.x);
+        animator.SetFloat(idY, value.y);
+    }
+
+    public static void SetVector2(this Animator animator, int idX, int idY, float moveX, float moveY)
+    {
+        animator.SetFloat(idX, moveX);
+        animator.SetFloat(idY, moveY);
+    }
 }

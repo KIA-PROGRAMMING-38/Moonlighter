@@ -34,15 +34,21 @@ public class PlayerState : StateMachineBehaviour
         {
             OnNormalAttack(animator, stateInfo, layerIndex);
         }
+
+        if (input.SpecialAttackInput)
+        {
+            OnSpecialAttack(animator, stateInfo, layerIndex);
+        }
+        else
+        {
+            ExitSpecialAttack(animator, stateInfo, layerIndex);
+        }
     }
 
     protected virtual void OnIdle(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) { }
     protected virtual void OnMove(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) { }
     protected virtual void OnRoll(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) { }
     protected virtual void OnNormalAttack(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) { }
-
-    protected void ChangeNextState(int next)
-    {
-        player.Anim.SetTrigger(next);
-    }
+    protected virtual void OnSpecialAttack(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) { }
+    protected virtual void ExitSpecialAttack(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) { }
 }
