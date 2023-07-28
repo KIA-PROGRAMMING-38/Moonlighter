@@ -3,17 +3,6 @@ using UnityEngine;
 
 public class PlayerCharacter : Character
 {
-    public CharacterStatData Stat
-    {
-        get
-        {
-            return stat;
-        }
-    }
-    
-    public Animator Anim { get; private set; }
-    public Rigidbody2D Rigid { get; private set; }
-    
     public FacingDirection PlayerFacingDirection { get; private set; }
 
     public Weapon CurrentWeapon { get; private set; }
