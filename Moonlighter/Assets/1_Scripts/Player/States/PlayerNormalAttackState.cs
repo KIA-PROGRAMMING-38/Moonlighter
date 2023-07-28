@@ -8,6 +8,7 @@ public class PlayerNormalAttackState : PlayerState
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         base.OnStateEnter(animator, stateInfo, layerIndex);
+
         if (input.IsMoving)
         {
             MoveForwardWhileAttacking(stateInfo);
@@ -28,14 +29,15 @@ public class PlayerNormalAttackState : PlayerState
             return;
         }
 
-        animator.SetTrigger(PlayerAnimParameters.NormalAttack);
+        animator.SetTrigger(AnimParameters.NormalAttack);
     }
 
     [SerializeField][Range(0.1f, 0.3f)] private float _rushDistanceModifier = 0.15f;
     [SerializeField][Range(0, 0.2f)] private float _rushTime = 0.1f;
     private void MoveForwardWhileAttacking(AnimatorStateInfo stateInfo)
     {
-        player.Anim.SetMovementParameters(PlayerAnimParameters.MoveX, PlayerAnimParameters.MoveY, input.MoveInput);
+        player.Anim.SetVector2(AnimParameters.MoveX, AnimParameters.MoveY, input.MoveInput);
+        player.CurrentWeapon.Anim.SetVector2(AnimParameters.MoveX, AnimParameters.MoveY, input.MoveInput);
 
         player.SetFacingDirection();
 

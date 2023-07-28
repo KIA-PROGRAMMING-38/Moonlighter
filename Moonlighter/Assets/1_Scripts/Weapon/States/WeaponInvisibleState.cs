@@ -4,6 +4,9 @@ public class WeaponInvisibleState : WeaponState
 {
     protected override void OnMove(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        animator.SetMovementParametersFromSource(player.Anim, PlayerAnimParameters.MoveX, PlayerAnimParameters.MoveY);
+        float moveX = player.Anim.GetFloat(AnimParameters.MoveX);
+        float moveY = player.Anim.GetFloat(AnimParameters.MoveY);
+
+        animator.SetVector2(AnimParameters.MoveX, AnimParameters.MoveY, moveX, moveY);
     }
 }

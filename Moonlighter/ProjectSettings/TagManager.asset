@@ -18,16 +18,16 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Character
   - Water
   - UI
-  - Monster
-  - MonsterWeapon
-  - PlayerWeapon
-  - Player
-  - PlayerMovement
-  - Wall
-  - BossStickyArm
+  - Detector
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
   - 
   - 
   - 
@@ -57,8 +57,8 @@ TagManager:
   - name: Effect
     uniqueID: 644854065
     locked: 0
-  - name: Player
-    uniqueID: 472196869
+  - name: Character
+    uniqueID: 910076913
     locked: 0
   - name: Weapon
     uniqueID: 3665093085
