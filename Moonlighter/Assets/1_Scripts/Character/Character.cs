@@ -3,9 +3,12 @@ using UnityEngine;
 
 public abstract class Character : MonoBehaviour
 {
-    protected CharacterStatData stat;
-    protected int curHp;
+    public CharacterStatData Stat { get; protected set; }
     protected SpriteRenderer sr;
+    protected int curHp;
+
+    public Rigidbody2D Rigid { get; private set; }
+    public Animator Anim { get; private set; }
     
     private IEnumerator _onDamagedTween;
     private Material _originMaterial;
@@ -15,7 +18,9 @@ public abstract class Character : MonoBehaviour
 
     protected virtual void Awake()
     {
-        sr = transform.Find(ObjectLiteral.Body).GetComponent<SpriteRenderer>();
+        Rigid = GetComponent<Rigidbody2D>();
+        Anim = transform.Find("Body").GetComponent<Animator>();
+        sr = transform.Find("Body").GetComponent<SpriteRenderer>();
         _originMaterial = sr.material;
         _hitMaterial = Managers.Resource.MaterialTable.Load(PathLiteral.HitMaterial);
         _onDamagedTween = OnDamagedTween();
@@ -23,10 +28,8 @@ public abstract class Character : MonoBehaviour
 
     private void OnEnable()
     {
-        curHp = stat.MaxHp;
+        curHp = Stat.MaxHp;
     }
-
-    public abstract void Attack();
 
     public virtual void OnDamaged(int damage)
     {
@@ -34,7 +37,7 @@ public abstract class Character : MonoBehaviour
         {
             StartCoroutine(_onDamagedTween);
         }
-        int trueDamage = damage - stat.Def;
+        int trueDamage = damage - Stat.Def;
         if(trueDamage <= 0)
         {
             trueDamage = 1;
