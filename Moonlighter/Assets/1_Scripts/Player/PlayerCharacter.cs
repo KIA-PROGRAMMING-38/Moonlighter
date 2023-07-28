@@ -13,8 +13,11 @@ public class PlayerCharacter : Character
     
     public Animator Anim { get; private set; }
     public Rigidbody2D Rigid { get; private set; }
-    public FacingDirection PlayerFacingDirection { get; private set; }
     
+    public FacingDirection PlayerFacingDirection { get; private set; }
+
+    public Weapon CurrentWeapon { get; private set; }
+
     private FacingDirection[,] _facingDirections =
     {
         {FacingDirection.Down, FacingDirection.Down, FacingDirection.Down },
@@ -28,6 +31,10 @@ public class PlayerCharacter : Character
         stat = Managers.Data.CharacterStatDataTable[(int)CharacterStatId.Player];
         Anim = transform.Find(ObjectLiteral.Body).GetComponent<Animator>();
         Rigid = GetComponent<Rigidbody2D>();
+
+        Transform WeaponPosition = transform.Find("Weapon");
+        CurrentWeapon = Managers.Resource.Instantiate("TrainShortSword", WeaponPosition).GetComponent<Weapon>();
+        CurrentWeapon.Init(WeaponId.TrainShortSword);
     }
 
     private void Start()

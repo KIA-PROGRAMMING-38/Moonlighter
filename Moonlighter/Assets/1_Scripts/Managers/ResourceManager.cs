@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class ResourceManager
 {
@@ -29,7 +28,7 @@ public class ResourceManager
 
     public GameObject Instantiate(GameObject prefab, Transform parent = null)
     {
-        GameObject go = UnityEngine.Object.Instantiate(prefab, parent);
+        GameObject go = Object.Instantiate(prefab, parent);
         go.name = prefab.name;
         return go;
     }

@@ -29,4 +29,10 @@
         RollEffect,
         Count
     }
+
+    public enum WeaponId
+    {
+        TrainShortSword = 1,
+        Count
+    }
 }

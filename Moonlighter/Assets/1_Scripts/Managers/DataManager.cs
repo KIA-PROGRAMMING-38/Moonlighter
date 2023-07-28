@@ -10,14 +10,17 @@ public class DataManager
 {
     private readonly string CharacterStatDataCsv = "Assets\\Data\\CharacterStatDataTable.csv";
     private readonly string EffectDataCsv = "Assets\\Data\\EffectDataTable.csv";
+    private readonly string WeaponDataCsv = "Assets\\Data\\WeaponDataTable.csv";
 
     public Dictionary<int, CharacterStatData> CharacterStatDataTable { get; private set; }
     public Dictionary<int, EffectData> EffectDataTable { get; private set; }
+    public Dictionary<int, WeaponData> WeaponDataTable { get; private set; }
 
     public void Init()
     {
         CharacterStatDataTable = ParseToDict<int, CharacterStatData>(CharacterStatDataCsv, data => data.Id);
         EffectDataTable = ParseToDict<int, EffectData>(EffectDataCsv, data => data.Id);
+        WeaponDataTable = ParseToDict<int, WeaponData>(WeaponDataCsv, data => data.Id);
     }
 
     public List<T> ParseToList<T>([NotNull] string path)

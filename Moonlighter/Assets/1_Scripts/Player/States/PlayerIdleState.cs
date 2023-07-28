@@ -4,16 +4,16 @@ public class PlayerIdleState : PlayerState
 {
     protected override void OnMove(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        ChangeNextState(PlayerAnimParameters.Move);
+        animator.SetTrigger(PlayerAnimParameters.Move);
     }
 
     protected override void OnRoll(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        ChangeNextState(PlayerAnimParameters.Roll);
+        animator.SetTrigger(PlayerAnimParameters.Roll);
     }
 
     protected override void OnNormalAttack(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        ChangeNextState(PlayerAnimParameters.NormalAttack);
+        animator.SetTriggerWithWeapon(player.CurrentWeapon.Anim, PlayerAnimParameters.NormalAttack);
     }
 }

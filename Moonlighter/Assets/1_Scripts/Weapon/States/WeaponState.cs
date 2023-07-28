@@ -1,17 +1,14 @@
 using UnityEngine;
 
-public class PlayerState : StateMachineBehaviour
+public class WeaponState : StateMachineBehaviour
 {
-    protected PlayerCharacter player;
     protected PlayerInputHandler input;
-
-    protected Vector2 zeroVelocity = Vector2.zero;
+    protected PlayerCharacter player;
 
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         player = animator.transform.root.GetComponent<PlayerCharacter>();
         input = animator.transform.root.GetComponent<PlayerInputHandler>();
-        player.Rigid.velocity = zeroVelocity;
     }
 
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -20,15 +17,6 @@ public class PlayerState : StateMachineBehaviour
         {
             OnMove(animator, stateInfo, layerIndex);
         }
-        else
-        {
-            OnIdle(animator, stateInfo, layerIndex);
-        }
-
-        if (input.RollInput)
-        {
-            OnRoll(animator, stateInfo, layerIndex);
-        }
 
         if (input.NormalAttackInput)
         {
@@ -36,8 +24,6 @@ public class PlayerState : StateMachineBehaviour
         }
     }
 
-    protected virtual void OnIdle(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) { }
     protected virtual void OnMove(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) { }
-    protected virtual void OnRoll(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) { }
     protected virtual void OnNormalAttack(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) { }
 }

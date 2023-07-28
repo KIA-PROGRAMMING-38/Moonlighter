@@ -18,7 +18,7 @@ public class EffectManager
     {
         _baseEffectPrefab = Managers.Resource.Load<GameObject>("Prefabs/Effect/BaseEffect");
         _effectTable = new DataCache<AnimatorController>();
-        _effectPool = new ObjectPool<EffectController>(GenerateEffect, ActiveEffect);
+        _effectPool = new ObjectPool<EffectController>(GenerateEffect, ActivateEffect);
     }
 
     public EffectController GenerateEffect()
@@ -32,7 +32,7 @@ public class EffectManager
         return effectController;
     }
 
-    private void ActiveEffect(EffectController effect) => effect.gameObject.SetActive(true);
+    private void ActivateEffect(EffectController effect) => effect.gameObject.SetActive(true);
 
     public void ReleaseToPool(EffectController effect) => _effectPool.Release(effect);
 
