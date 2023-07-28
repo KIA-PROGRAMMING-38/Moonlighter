@@ -1,3 +1,6 @@
+using System.IO;
+using UnityEngine;
+
 public class DungeonManager
 {
     private const string PLAYER_PATH = "PlayerCharacter/PlayerCharacter";
@@ -8,7 +11,12 @@ public class DungeonManager
     {
         if(Player == null)
         {
-            Player = Managers.Resource.Instantiate(PLAYER_PATH).GetComponent<PlayerCharacter>();
+            GameObject go = GameObject.Find("PlayerCharacter");
+            if(go == null)
+            {
+                go = Managers.Resource.Instantiate(Path.Combine(PLAYER_PATH));
+            }
+            Player = go.GetComponent<PlayerCharacter>();
         }
     }
 }

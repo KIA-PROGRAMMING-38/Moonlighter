@@ -21,6 +21,7 @@
     {
         Player = 1,
         Tangle = 2,
+        GolemSoldier = 3,
         Count
     }
 
